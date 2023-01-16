@@ -17,6 +17,7 @@ public class RuralGovSeed : ICustomSeeder
 
     private readonly ISerializerService _serializerService;
     private readonly ApplicationDbContext _db;
+
     private readonly ILogger<RuralGovSeed> _logger;
 
     public RuralGovSeed(ISerializerService serializerService, ILogger<RuralGovSeed> logger, ApplicationDbContext db)
