@@ -1,3 +1,4 @@
+using FSH.WebApi.Domain.Catalog.Fund;
 using FSH.WebApi.Domain.Common.Events;
 using FSH.WebApi.Domain.Identity;
 using FSH.WebApi.Shared.Events;
@@ -6,7 +7,9 @@ namespace FSH.WebApi.Application.Dashboard;
 
 public class SendStatsChangedNotificationHandler :
     IEventNotificationHandler<EntityCreatedEvent<Brand>>,
+    IEventNotificationHandler<EntityCreatedEvent<RuralGov>>,
     IEventNotificationHandler<EntityDeletedEvent<Brand>>,
+    IEventNotificationHandler<EntityDeletedEvent<RuralGov>>,
     IEventNotificationHandler<EntityCreatedEvent<Product>>,
     IEventNotificationHandler<EntityDeletedEvent<Product>>,
     IEventNotificationHandler<ApplicationRoleCreatedEvent>,
@@ -21,7 +24,11 @@ public class SendStatsChangedNotificationHandler :
 
     public Task Handle(EventNotification<EntityCreatedEvent<Brand>> notification, CancellationToken cancellationToken) =>
         SendStatsChangedNotification(notification.Event, cancellationToken);
+    public Task Handle(EventNotification<EntityCreatedEvent<RuralGov>> notification, CancellationToken cancellationToken) =>
+    SendStatsChangedNotification(notification.Event, cancellationToken);
     public Task Handle(EventNotification<EntityDeletedEvent<Brand>> notification, CancellationToken cancellationToken) =>
+        SendStatsChangedNotification(notification.Event, cancellationToken);
+    public Task Handle(EventNotification<EntityDeletedEvent<RuralGov>> notification, CancellationToken cancellationToken) =>
         SendStatsChangedNotification(notification.Event, cancellationToken);
     public Task Handle(EventNotification<EntityCreatedEvent<Product>> notification, CancellationToken cancellationToken) =>
         SendStatsChangedNotification(notification.Event, cancellationToken);

@@ -1,0 +1,334 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=4; plural=((n%10==1 && n%100!=11) ? 0 : ((n%10 >= 2 && n%10 <=4 && (n%100 < 12 || n%100 > 14)) ? 1 : ((n%10 == 0 || (n%10 >= 5 && n%10 <=9)) || (n%100 >= 11 && n%100 <= 14)) ? 2 : 3));\n"
+"X-Crowdin-Project: countrymenfund\n"
+"X-Crowdin-Project-ID: 561755\n"
+"X-Crowdin-Language: ru\n"
+"X-Crowdin-File: Infrastructure.pot\n"
+"X-Crowdin-File-ID: 1\n"
+"Project-Id-Version: countrymenfund\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Russian\n"
+"Language: ru_RU\n"
+"PO-Revision-Date: 2023-01-16 12:12\n"
+
+#. : throw new NotFoundException(_t["Role Not Found"]);
+#. _ = role ?? throw new NotFoundException(_t["Role Not Found"]);
+#. _ = role ?? throw new NotFoundException(_t["Role Not Found"]);
+#. _ = role ?? throw new NotFoundException(_t["Role Not Found"]);
+#: Infrastructure\Identity\RoleService.cs:61
+#: Infrastructure\Identity\RoleService.cs:97
+#: Infrastructure\Identity\RoleService.cs:123
+#: Infrastructure\Identity\RoleService.cs:172
+msgctxt "FSH.WebApi.Infrastructure.Identity.RoleService"
+msgid "Role Not Found"
+msgstr "Роль не найдена"
+
+#. throw new InternalServerException(_t["Register role failed"], result.GetErrors(_t));
+#: Infrastructure\Identity\RoleService.cs:85
+msgctxt "FSH.WebApi.Infrastructure.Identity.RoleService"
+msgid "Register role failed"
+msgstr "Не удалось зарегистрировать роль"
+
+#. return string.Format(_t["Role {0} Created."], request.Name);
+#: Infrastructure\Identity\RoleService.cs:90
+msgctxt "FSH.WebApi.Infrastructure.Identity.RoleService"
+msgid "Role {0} Created."
+msgstr "Роль {0} создана."
+
+#. throw new ConflictException(string.Format(_t["Not allowed to modify {0} Role."], role.Name));
+#: Infrastructure\Identity\RoleService.cs:101
+msgctxt "FSH.WebApi.Infrastructure.Identity.RoleService"
+msgid "Not allowed to modify {0} Role."
+msgstr "Не разрешено изменять {0} роль."
+
+#. throw new InternalServerException(_t["Update role failed"], result.GetErrors(_t));
+#: Infrastructure\Identity\RoleService.cs:111
+msgctxt "FSH.WebApi.Infrastructure.Identity.RoleService"
+msgid "Update role failed"
+msgstr "Не удалось обновить роль"
+
+#. return string.Format(_t["Role {0} Updated."], role.Name);
+#: Infrastructure\Identity\RoleService.cs:116
+msgctxt "FSH.WebApi.Infrastructure.Identity.RoleService"
+msgid "Role {0} Updated."
+msgstr "Роль {0} обновлена."
+
+#. throw new ConflictException(_t["Not allowed to modify Permissions for this Role."]);
+#: Infrastructure\Identity\RoleService.cs:126
+msgctxt "FSH.WebApi.Infrastructure.Identity.RoleService"
+msgid "Not allowed to modify Permissions for this Role."
+msgstr "Не разрешено изменять права доступа для этой роли."
+
+#. throw new InternalServerException(_t["Update permissions failed."], removeResult.GetErrors(_t));
+#: Infrastructure\Identity\RoleService.cs:143
+msgctxt "FSH.WebApi.Infrastructure.Identity.RoleService"
+msgid "Update permissions failed."
+msgstr "Не удалось изменить права доступа."
+
+#. return _t["Permissions Updated."];
+#: Infrastructure\Identity\RoleService.cs:165
+msgctxt "FSH.WebApi.Infrastructure.Identity.RoleService"
+msgid "Permissions Updated."
+msgstr "Права доступа обновлены."
+
+#. throw new ConflictException(string.Format(_t["Not allowed to delete {0} Role."], role.Name));
+#: Infrastructure\Identity\RoleService.cs:176
+msgctxt "FSH.WebApi.Infrastructure.Identity.RoleService"
+msgid "Not allowed to delete {0} Role."
+msgstr "Не разрешено удалять {0} роль."
+
+#. throw new ConflictException(string.Format(_t["Not allowed to delete {0} Role as it is being used."], role.Name));
+#: Infrastructure\Identity\RoleService.cs:181
+msgctxt "FSH.WebApi.Infrastructure.Identity.RoleService"
+msgid "Not allowed to delete {0} Role as it is being used."
+msgstr "Не разрешено удалять роль {0} как она используется."
+
+#. return string.Format(_t["Role {0} Deleted."], role.Name);
+#: Infrastructure\Identity\RoleService.cs:188
+msgctxt "FSH.WebApi.Infrastructure.Identity.RoleService"
+msgid "Role {0} Deleted."
+msgstr "Роль {0} удалена."
+
+#. throw new UnauthorizedException(_t["Authentication Failed."]);
+#. throw new UnauthorizedException(_t["Authentication Failed."]);
+#: Infrastructure\Identity\TokenService.cs:50
+#: Infrastructure\Identity\TokenService.cs:86
+msgctxt "FSH.WebApi.Infrastructure.Identity.TokenService"
+msgid "Authentication Failed."
+msgstr "Ошибка авторизации."
+
+#. throw new UnauthorizedException(_t["User Not Active. Please contact the administrator."]);
+#: Infrastructure\Identity\TokenService.cs:55
+msgctxt "FSH.WebApi.Infrastructure.Identity.TokenService"
+msgid "User Not Active. Please contact the administrator."
+msgstr "Пользователь не активен. Пожалуйста, свяжитесь с администратором."
+
+#. throw new UnauthorizedException(_t["E-Mail not confirmed."]);
+#: Infrastructure\Identity\TokenService.cs:60
+msgctxt "FSH.WebApi.Infrastructure.Identity.TokenService"
+msgid "E-Mail not confirmed."
+msgstr "E-Mail не подтвержден."
+
+#. throw new UnauthorizedException(_t["Tenant is not Active. Please contact the Application Administrator."]);
+#: Infrastructure\Identity\TokenService.cs:67
+msgctxt "FSH.WebApi.Infrastructure.Identity.TokenService"
+msgid "Tenant is not Active. Please contact the Application Administrator."
+msgstr "Владелец не активен. Пожалуйста, свяжитесь с администратором приложения."
+
+#. throw new UnauthorizedException(_t["Tenant Validity Has Expired. Please contact the Application Administrator."]);
+#: Infrastructure\Identity\TokenService.cs:72
+msgctxt "FSH.WebApi.Infrastructure.Identity.TokenService"
+msgid "Tenant Validity Has Expired. Please contact the Application Administrator."
+msgstr "Срок годности владельца истек. Пожалуйста, свяжитесь с администратором приложения."
+
+#. throw new UnauthorizedException(_t["Invalid Refresh Token."]);
+#: Infrastructure\Identity\TokenService.cs:91
+msgctxt "FSH.WebApi.Infrastructure.Identity.TokenService"
+msgid "Invalid Refresh Token."
+msgstr "Неверный токен обновления."
+
+#. throw new UnauthorizedException(_t["Invalid Token."]);
+#: Infrastructure\Identity\TokenService.cs:168
+msgctxt "FSH.WebApi.Infrastructure.Identity.TokenService"
+msgid "Invalid Token."
+msgstr "Неверный токен."
+
+#. _ = user ?? throw new InternalServerException(_t["An error occurred while confirming E-Mail."]);
+#: Infrastructure\Identity\UserService.Confirm.cs:34
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "An error occurred while confirming E-Mail."
+msgstr "Произошла ошибка при подтверждении электронной почты."
+
+#. ? string.Format(_t["Account Confirmed for E-Mail {0}. You can now use the /api/tokens endpoint to generate JWT."], user.Email)
+#: Infrastructure\Identity\UserService.Confirm.cs:40
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "Account Confirmed for E-Mail {0}. You can now use the /api/tokens endpoint to generate JWT."
+msgstr "Аккаунт подтвержден для E-Mail {0}. Вы можете использовать /api/tokens для генерации JWT."
+
+#. : throw new InternalServerException(string.Format(_t["An error occurred while confirming {0}"], user.Email));
+#. : throw new InternalServerException(string.Format(_t["An error occurred while confirming {0}"], user.PhoneNumber));
+#: Infrastructure\Identity\UserService.Confirm.cs:41
+#: Infrastructure\Identity\UserService.Confirm.cs:58
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "An error occurred while confirming {0}"
+msgstr "Произошла ошибка при подтверждении {0}"
+
+#. _ = user ?? throw new InternalServerException(_t["An error occurred while confirming Mobile Phone."]);
+#: Infrastructure\Identity\UserService.Confirm.cs:50
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "An error occurred while confirming Mobile Phone."
+msgstr "Произошла ошибка при подтверждении мобильного телефона."
+
+#. ? string.Format(_t["Account Confirmed for Phone Number {0}. You can now use the /api/tokens endpoint to generate JWT."], user.PhoneNumber)
+#: Infrastructure\Identity\UserService.Confirm.cs:56
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "Account Confirmed for Phone Number {0}. You can now use the /api/tokens endpoint to generate JWT."
+msgstr "Аккаунт подтвержден на номер телефона {0}. Теперь вы можете использовать /api/tokens конечную точку для генерации JWT."
+
+#. : string.Format(_t["Account Confirmed for Phone Number {0}. You should confirm your E-mail before using the /api/tokens endpoint to generate JWT."], user.PhoneNumber)
+#: Infrastructure\Identity\UserService.Confirm.cs:57
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "Account Confirmed for Phone Number {0}. You should confirm your E-mail before using the /api/tokens endpoint to generate JWT."
+msgstr "Учетная запись подтверждена на номер телефона {0}. Вы должны подтвердить свой адрес электронной почты перед использованием точки конца /api/tokens для генерации JWT."
+
+#. throw new InternalServerException(_t["Invalid objectId"]);
+#: Infrastructure\Identity\UserService.CreateUpdate.cs:28
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "Invalid objectId"
+msgstr "Не правильный objectId"
+
+#. throw new InternalServerException(string.Format(_t["Username or Email not valid."]));
+#: Infrastructure\Identity\UserService.CreateUpdate.cs:50
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "Username or Email not valid."
+msgstr "Неверное имя пользователя или адрес электронной почты."
+
+#. throw new InternalServerException(string.Format(_t["Username {0} is already taken."], username));
+#: Infrastructure\Identity\UserService.CreateUpdate.cs:56
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "Username {0} is already taken."
+msgstr "Имя пользователя {0} уже занято."
+
+#. throw new InternalServerException(string.Format(_t["Email {0} is already taken."], email));
+#: Infrastructure\Identity\UserService.CreateUpdate.cs:64
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "Email {0} is already taken."
+msgstr "Email {0} уже используется."
+
+#. throw new InternalServerException(_t["Validation Errors Occurred."], result.GetErrors(_t));
+#. throw new InternalServerException(_t["Validation Errors Occurred."], result.GetErrors(_t));
+#: Infrastructure\Identity\UserService.CreateUpdate.cs:98
+#: Infrastructure\Identity\UserService.CreateUpdate.cs:119
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "Validation Errors Occurred."
+msgstr "Возникли ошибки проверки."
+
+#. var messages = new List<string> { string.Format(_t["User {0} Registered."], user.UserName) };
+#: Infrastructure\Identity\UserService.CreateUpdate.cs:124
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "User {0} Registered."
+msgstr "Пользователь {0} зарегистрирован."
+
+#. _t["Confirm Registration"],
+#: Infrastructure\Identity\UserService.CreateUpdate.cs:138
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "Confirm Registration"
+msgstr "Подтвердите регистрацию"
+
+#. _ = user ?? throw new NotFoundException(_t["User Not Found."]);
+#. _ = user ?? throw new NotFoundException(_t["User Not Found."]);
+#. _ = user ?? throw new NotFoundException(_t["User Not Found."]);
+#. _ = user ?? throw new NotFoundException(_t["User Not Found."]);
+#. _ = user ?? throw new NotFoundException(_t["User Not Found."]);
+#. _ = user ?? throw new NotFoundException(_t["User Not Found."]);
+#: Infrastructure\Identity\UserService.CreateUpdate.cs:153
+#: Infrastructure\Identity\UserService.cs:132
+#: Infrastructure\Identity\UserService.cs:141
+#: Infrastructure\Identity\UserService.Password.cs:54
+#: Infrastructure\Identity\UserService.Permissions.cs:14
+#: Infrastructure\Identity\UserService.Roles.cs:38
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "User Not Found."
+msgstr "Пользователь не найден."
+
+#. throw new InternalServerException(_t["Update profile failed"], result.GetErrors(_t));
+#: Infrastructure\Identity\UserService.CreateUpdate.cs:183
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "Update profile failed"
+msgstr "Не удалось обновить профиль"
+
+#. throw new UnauthorizedException(_t["Invalid Tenant."]);
+#: Infrastructure\Identity\UserService.cs:112
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "Invalid Tenant."
+msgstr "Неверный арендатор."
+
+#. throw new ConflictException(_t["Administrators Profile's Status cannot be toggled"]);
+#: Infrastructure\Identity\UserService.cs:146
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "Administrators Profile's Status cannot be toggled"
+msgstr "Статус профиля администратора не может быть переключен"
+
+#. throw new InternalServerException(_t["An Error has occurred!"]);
+#. _ = user ?? throw new InternalServerException(_t["An Error has occurred!"]);
+#. : throw new InternalServerException(_t["An Error has occurred!"]);
+#: Infrastructure\Identity\UserService.Password.cs:18
+#: Infrastructure\Identity\UserService.Password.cs:41
+#: Infrastructure\Identity\UserService.Password.cs:47
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "An Error has occurred!"
+msgstr "Произошла ошибка!"
+
+#. _t["Reset Password"],
+#: Infrastructure\Identity\UserService.Password.cs:29
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "Reset Password"
+msgstr "Сброс пароля"
+
+#. return _t["Password Reset Mail has been sent to your authorized Email."];
+#: Infrastructure\Identity\UserService.Password.cs:33
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "Password Reset Mail has been sent to your authorized Email."
+msgstr "Письмо для сброса пароля было отправлено на ваш авторизованный E-mail."
+
+#. ? _t["Password Reset Successful!"]
+#: Infrastructure\Identity\UserService.Password.cs:46
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "Password Reset Successful!"
+msgstr "Пароль успешно сброшен!"
+
+#. throw new InternalServerException(_t["Change password failed"], result.GetErrors(_t));
+#: Infrastructure\Identity\UserService.Password.cs:60
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "Change password failed"
+msgstr "Не удалось сменить пароль"
+
+#. throw new ConflictException(_t["Cannot Remove Admin Role From Root Tenant Admin."]);
+#: Infrastructure\Identity\UserService.Roles.cs:53
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "Cannot Remove Admin Role From Root Tenant Admin."
+msgstr "Невозможно удалить роль администратора от корневого администратора арендатора."
+
+#. throw new ConflictException(_t["Tenant should have at least 2 Admins."]);
+#: Infrastructure\Identity\UserService.Roles.cs:58
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "Tenant should have at least 2 Admins."
+msgstr "Владелец должен иметь не менее 2 Администраторов."
+
+#. return _t["User Roles Updated Successfully."];
+#: Infrastructure\Identity\UserService.Roles.cs:83
+msgctxt "FSH.WebApi.Infrastructure.Identity.UserService"
+msgid "User Roles Updated Successfully."
+msgstr "Пользовательские роли успешно обновлены."
+
+#. SupportMessage = _t["Provide the ErrorId {0} to the support team for further analysis.", errorId]
+#: Infrastructure\Middleware\ExceptionMiddleware.cs:50
+msgctxt "FSH.WebApi.Infrastructure.Middleware.ExceptionMiddleware"
+msgid "Provide the ErrorId {0} to the support team for further analysis."
+msgstr "Предоставьте в службу поддержки {0} ErrorId для дальнейшего анализа."
+
+#. throw new ConflictException(_t["Tenant is already Activated."]);
+#: Infrastructure\Multitenancy\TenantService.cs:80
+msgctxt "FSH.WebApi.Infrastructure.Multitenancy.TenantService"
+msgid "Tenant is already Activated."
+msgstr "Владелец уже активирован."
+
+#. return _t["Tenant {0} is now Activated.", id];
+#: Infrastructure\Multitenancy\TenantService.cs:87
+msgctxt "FSH.WebApi.Infrastructure.Multitenancy.TenantService"
+msgid "Tenant {0} is now Activated."
+msgstr "Владелец {0} активирован."
+
+#. throw new ConflictException(_t["Tenant is already Deactivated."]);
+#: Infrastructure\Multitenancy\TenantService.cs:96
+msgctxt "FSH.WebApi.Infrastructure.Multitenancy.TenantService"
+msgid "Tenant is already Deactivated."
+msgstr "Владелец уже деактивирован."
+
+#. ?? throw new NotFoundException(_t["{0} {1} Not Found.", typeof(FSHTenantInfo).Name, id]);
+#: Infrastructure\Multitenancy\TenantService.cs:119
+msgctxt "FSH.WebApi.Infrastructure.Multitenancy.TenantService"
+msgid "{0} {1} Not Found."
+msgstr "{0} {1} не найдено."
+
