@@ -51,6 +51,8 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Databases\Host\" />
+      <Folder Include="Localization\kg\" />
+      <Folder Include="Localization\ru\" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Update="Roslynator.Analyzers" Version="4.2.0">
