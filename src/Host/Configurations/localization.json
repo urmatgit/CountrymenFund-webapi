@@ -5,15 +5,8 @@
     "SupportedCultures": [
       "en-US",
       "en",
-      "fr",
-      "fr-FR",
-      "de",
-      "de-DE",
-      "it",
-      "it-IT",
-      "pt",
-      "nl",
-      "nl-NL"
+      "ru-RU",
+      "ru"
     ],
     "DefaultRequestCulture": "en",
     "FallbackToParent": true

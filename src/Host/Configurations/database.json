@@ -1,6 +1,8 @@
 {
   "DatabaseSettings": {
-    "DBProvider": "mssql",
-    "ConnectionString": "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=fullStackHeroDb;Integrated Security=True;MultipleActiveResultSets=True"
+    //"DBProvider": "mssql",
+    "DBProvider": "postgresql",
+    // "ConnectionString": "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=fullStackHeroDb;Integrated Security=True;MultipleActiveResultSets=True",
+    "ConnectionString": "Host=localhost;Database=fullStackHeroDb;Username=postgres;Password=IamAdmin1;Pooling=true;"
   }
 }

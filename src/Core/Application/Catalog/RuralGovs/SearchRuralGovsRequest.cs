@@ -25,6 +25,7 @@ public class SearchRuralGovsRequestHandler : IRequestHandler<SearchRuralGovsRequ
 
     public async Task<PaginationResponse<RuralGovDto>> Handle(SearchRuralGovsRequest request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var spec = new RuralBySearchRequestSpec(request);
+         return  await _repository.PaginatedListAsync(spec,request.PageNumber,request.PageSize,cancellationToken);
     }
 }
