@@ -39,6 +39,7 @@ public class UpdateRuralGovRequestHanlde : IRequestHandler<UpdateRuralGovRequest
         var ruralGov = await _repository.GetByIdAsync(request.Id, cancellationToken);
         _ = ruralGov ?? throw new NotFoundException(this.l["Rural goverment {0} Not Found.", request.Id]);
         ruralGov.Update(request.Name, request.Description,request.Coordinate);
+        await _repository.UpdateAsync(ruralGov, cancellationToken);
         return request.Id;
     }
 }

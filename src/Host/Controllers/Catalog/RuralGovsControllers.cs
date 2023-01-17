@@ -2,7 +2,7 @@
 
 namespace FSH.WebApi.Host.Controllers.Catalog;
 
-public class RuralGovsControllers: VersionedApiController
+public class RuralGovsController: VersionedApiController
 {
     [HttpPost("search")]
     [MustHavePermission(FSHAction.Search,FSHResource.RuralGovs)]
@@ -37,8 +37,8 @@ public class RuralGovsControllers: VersionedApiController
     [HttpDelete("{id:guid}")]
     [MustHavePermission(FSHAction.Delete,FSHResource.RuralGovs)]
     [OpenApiOperation("Delete a rural goverment","")]
-    public Task<DefaultIdType> DeleteAsync(DeleteRuralGovRequest request)
+    public Task<DefaultIdType> DeleteAsync(DefaultIdType id)
     {
-        return Mediator.Send(request);
+        return Mediator.Send(new DeleteRuralGovRequest(id));
     }
 }

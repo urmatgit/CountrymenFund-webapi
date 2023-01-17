@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FSH.WebApi.Application.Catalog.RuralGovs;
-public class DeleteRuralGovRequest: IRequest<DefaultIdType>
+public class DeleteRuralGovRequest : IRequest<DefaultIdType>
 {
     public DefaultIdType Id { get; set; }
     public DeleteRuralGovRequest(DefaultIdType id) => Id = id;
