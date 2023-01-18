@@ -1,4 +1,5 @@
 ﻿using FSH.WebApi.Domain.Catalog.Fund;
+using FSH.WebApi.Domain.Common.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ public class DeleteRuralGovRequestHandler : IRequestHandler<DeleteRuralGovReques
     {
         var ruralGov=await repository.GetByIdAsync(request.Id,cancellationToken);
         _ = ruralGov ?? throw new NotFoundException(_t["Rural goverment {0} Not Found."]);
+        
         await repository.DeleteAsync(ruralGov,cancellationToken);
         return request.Id;
     }
