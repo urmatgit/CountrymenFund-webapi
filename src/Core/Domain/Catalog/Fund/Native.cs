@@ -15,7 +15,7 @@ public class Native : AuditableEntity, IAggregateRoot
     public string Description { get; private set; }
     //Rating of person
     public byte Rate { get; private set; }
-    public DefaultIdType RuralGovId { private get; set; }
+    public DefaultIdType RuralGovId {  get; private set; }
     public virtual RuralGov RuralGov { get; private set; }
     public Native()
     {
