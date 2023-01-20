@@ -12,16 +12,16 @@ public class Native : AuditableEntity, IAggregateRoot
     public string? MiddleName { get; private set; }
     public DateTime? BirthDate { get; private set; }
     public string? ImagePath { get; private set; }
-    public string Description { get; private set; }
+    public string? Description { get; private set; }
     //Rating of person
-    public byte Rate { get; private set; }
+    public int? Rate { get; private set; }
     public DefaultIdType RuralGovId {  get; private set; }
     public virtual RuralGov RuralGov { get; private set; }
     public Native()
     {
 
     }
-    public Native(string name,string surname,string? middlename,DateTime? birthdate,string description,DefaultIdType ruralGovId )
+    public Native(string name,string surname,string? middlename,DateTime? birthdate,string description,int? rate, DefaultIdType ruralGovId )
     {
         Name= name;
         Surname= surname;
@@ -29,15 +29,17 @@ public class Native : AuditableEntity, IAggregateRoot
         BirthDate= birthdate;
         Description= description;
         RuralGovId= ruralGovId;
+        Rate= rate;
     }
 
-    public Native Update(string? name, string? surname, string? middlename, DateTime? birthdate, string? description, DefaultIdType? ruralGovId)
+    public Native Update(string? name, string? surname, string? middlename, DateTime? birthdate, string? description,int? rate,  DefaultIdType? ruralGovId)
     {
         if (name is not null && Name?.Equals(name) is not true) Name = name;
         if (surname is not null && Surname?.Equals(surname) is not true) Surname = surname;
         if (middlename is not null && MiddleName?.Equals(middlename) is not true) MiddleName= middlename;
         if (birthdate.HasValue && BirthDate?.Equals(birthdate) is not true) BirthDate = birthdate.Value;
         if (description is not null && Description?.Equals(description) is not true) Description= description;
+        if (rate is not null && Rate?.Equals(rate) is not true) Rate= rate.Value;
         if (ruralGovId.HasValue && ruralGovId.Value!=DefaultIdType.Empty && !RuralGovId.Equals(ruralGovId.Value)) RuralGovId= ruralGovId.Value;
 
         return this;

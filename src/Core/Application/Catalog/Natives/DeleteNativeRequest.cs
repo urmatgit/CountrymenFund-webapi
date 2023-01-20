@@ -24,6 +24,6 @@ public class DeleteNativeRequestHandler : IRequestHandler<DeleteNativeRequest, D
         var native=await _reposity.GetByIdAsync(request.Id);
         _=native ?? throw new NotFoundException(_t["Native {0} Not Found."]);
         await _reposity.DeleteAsync(native, cancellationToken);
-       return request.Id
+        return request.Id;
     }
 }

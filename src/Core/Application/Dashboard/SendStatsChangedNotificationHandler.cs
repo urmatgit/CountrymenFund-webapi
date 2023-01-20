@@ -12,6 +12,8 @@ public class SendStatsChangedNotificationHandler :
     IEventNotificationHandler<EntityDeletedEvent<RuralGov>>,
     IEventNotificationHandler<EntityCreatedEvent<Product>>,
     IEventNotificationHandler<EntityDeletedEvent<Product>>,
+    IEventNotificationHandler<EntityCreatedEvent<Native>>,
+    IEventNotificationHandler<EntityDeletedEvent<Native>>,
     IEventNotificationHandler<ApplicationRoleCreatedEvent>,
     IEventNotificationHandler<ApplicationRoleDeletedEvent>,
     IEventNotificationHandler<ApplicationUserCreatedEvent>
@@ -40,6 +42,12 @@ public class SendStatsChangedNotificationHandler :
         SendStatsChangedNotification(notification.Event, cancellationToken);
     public Task Handle(EventNotification<ApplicationUserCreatedEvent> notification, CancellationToken cancellationToken) =>
         SendStatsChangedNotification(notification.Event, cancellationToken);
+
+    public Task Handle(EventNotification<EntityCreatedEvent<Native>> notification, CancellationToken cancellationToken) =>
+        SendStatsChangedNotification(notification.Event, cancellationToken);
+    public Task Handle(EventNotification<EntityDeletedEvent<Native>> notification, CancellationToken cancellationToken) =>
+        SendStatsChangedNotification(notification.Event, cancellationToken);
+
 
     private Task SendStatsChangedNotification(IEvent @event, CancellationToken cancellationToken)
     {
