@@ -18,7 +18,9 @@ public   class CreateNativeRequestValidator: CustomValidator<CreateNativeRequest
              .WithMessage((_, x) => T["Native {0} already Exists.",$"{x.Name} {x.Surname } ({x.BirthDate}, {ruralGovRepo.GetByIdAsync(x.RuralGovId).Result?.Name})"]);
 
         RuleFor(p => p.Rate)
+            .InclusiveBetween(1,10)
             .GreaterThanOrEqualTo(1);
+        
         RuleFor(p => p.Image)
             .InjectValidator();
         RuleFor(p => p.RuralGovId)

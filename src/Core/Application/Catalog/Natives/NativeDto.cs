@@ -7,16 +7,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FSH.WebApi.Application.Catalog.Natives;
-public class NativeDto: IDto
+public class NativeDto : IDto
 {
-    public string Name { get; private set; }
-    public string Surname { get; private set; }
-    public string? MiddleName { get; private set; }
-    public DateTime? BirthDate { get; private set; }
-    public string? ImagePath { get; private set; }
-    public string Description { get; private set; }
+    public DefaultIdType Id { get; set; }
+    public string Name { get; set; }
+    public string Surname { get; set; }
+    public string? MiddleName { get; set; }
+    public DateTime? BirthDate { get; set; }
+    public string? ImagePath { get; set; }
+    public string? Description { get; set; }
     //Rating of person
-    public byte Rate { get; private set; }
     
-    public  RuralGovDto RuralGov { get; private set; }
+    public int Rate { get; set; }
+    public DefaultIdType RuralGovId { get; set; }
+    public string RuralGovName { get; set; }
 }

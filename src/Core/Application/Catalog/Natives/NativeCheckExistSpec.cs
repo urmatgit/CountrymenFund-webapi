@@ -13,7 +13,7 @@ public class NativeCheckExistSpec: Specification<Native,NativeDto>, ISingleResul
         Query.Where(p => p.Name.Equals(name)
             && p.Surname.Equals(surname)
             && p.BirthDate.HasValue && birchDate.HasValue && p.BirthDate == birchDate
-            && p.RuralGovId == ruralId)
-            .Include(n => n.RuralGov);
+            && p.RuralGovId == ruralId);
+            
     }
 }
