@@ -20,6 +20,9 @@ public class ApplicationDbContext : BaseDbContext
     public DbSet<Brand> Brands => Set<Brand>();
     public DbSet<RuralGov> RuralGovs => Set<RuralGov>();
     public DbSet<Native> Natives => Set<Native>();
+    public DbSet<Year> Years => Set<Year>();
+    public DbSet<Contribution> Contributions => Set<Contribution>();
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
