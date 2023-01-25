@@ -9,5 +9,5 @@ public class YearDto: IDto
 {
     public DefaultIdType Id { get; set; }
     public int year { get; set; }
-    public string Description { get; set; }
+    public string? Description { get; set; }
 }

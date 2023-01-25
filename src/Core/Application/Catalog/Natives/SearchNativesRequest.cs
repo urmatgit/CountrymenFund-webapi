@@ -9,6 +9,8 @@ namespace FSH.WebApi.Application.Catalog.Natives;
 public class SearchNativesRequest: PaginationFilter,IRequest<PaginationResponse<NativeDto>>
 {
     public Guid? RuralGovId { get; set; }
+    public decimal? MinimumRate { get; set; }
+    public decimal? MaximumRate { get; set; }
 }
 
 public class SearchNativesRequestHandle : IRequestHandler<SearchNativesRequest, PaginationResponse<NativeDto>>

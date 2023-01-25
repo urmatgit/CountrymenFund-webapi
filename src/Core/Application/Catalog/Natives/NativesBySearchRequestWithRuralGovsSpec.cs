@@ -11,5 +11,9 @@ public class NativesBySearchRequestWithRuralGovsSpec: EntitiesByPaginationFilter
     public NativesBySearchRequestWithRuralGovsSpec(SearchNativesRequest request) : base(request)
         => Query.Include(p => p.RuralGov)
         .OrderBy(p => p.Name)
-        .Where(p => p.RuralGovId.Equals(request.RuralGovId!.Value), request.RuralGovId.HasValue);
+        .Where(p => p.RuralGovId.Equals(request.RuralGovId!.Value), request.RuralGovId.HasValue)
+        .Where(p=>p.Rate>=request.MinimumRate!.Value,request.MinimumRate.HasValue)
+        .Where(p=>p.Rate<=request.MaximumRate!.Value,request.MaximumRate.HasValue);
+
+
 }
