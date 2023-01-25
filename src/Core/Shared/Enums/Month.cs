@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FSH.WebApi.Shared.Enums;
-public enum Months : byte
+public enum Months : int
 {
     January=1,
     February,

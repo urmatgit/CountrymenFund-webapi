@@ -11,6 +11,7 @@ public class Native : AuditableEntity, IAggregateRoot
     public string Surname { get; private set; }
     public string? MiddleName { get; private set; }
     public DateTime? BirthDate { get; private set; }
+    public string? Village { get; private set; }
     public string? ImagePath { get; private set; }
     public string? Description { get; private set; }
     //Rating of person
@@ -21,7 +22,7 @@ public class Native : AuditableEntity, IAggregateRoot
     {
 
     }
-    public Native(string name,string surname,string? middlename,DateTime? birthdate,string description,int? rate, DefaultIdType ruralGovId )
+    public Native(string name,string surname,string? middlename,DateTime? birthdate,string village, string description,int? rate, DefaultIdType ruralGovId )
     {
         Name= name;
         Surname= surname;
@@ -30,6 +31,7 @@ public class Native : AuditableEntity, IAggregateRoot
         Description= description;
         RuralGovId= ruralGovId;
         Rate= rate;
+        Village= village;
     }
 
     public Native Update(string? name, string? surname, string? middlename, DateTime? birthdate, string? description,int? rate,  DefaultIdType? ruralGovId)

@@ -15,6 +15,7 @@ public class NativeDto : IDto
     public string? MiddleName { get; set; }
     public DateTime? BirthDate { get; set; }
     public string? ImagePath { get; set; }
+    public string? Village { get; set; }
     public string? Description { get; set; }
     //Rating of person
     
