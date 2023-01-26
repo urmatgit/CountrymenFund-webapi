@@ -34,11 +34,12 @@ public class Native : AuditableEntity, IAggregateRoot
         Village= village;
     }
 
-    public Native Update(string? name, string? surname, string? middlename, DateTime? birthdate, string? description,int? rate,  DefaultIdType? ruralGovId)
+    public Native Update(string? name, string? surname, string? middlename, DateTime? birthdate,string? village, string? description,int? rate,  DefaultIdType? ruralGovId)
     {
         if (name is not null && Name?.Equals(name) is not true) Name = name;
         if (surname is not null && Surname?.Equals(surname) is not true) Surname = surname;
         if (middlename is not null && MiddleName?.Equals(middlename) is not true) MiddleName= middlename;
+        if (village is not null && Village?.Equals(village) is not true) Village = village;
         if (birthdate.HasValue && BirthDate?.Equals(birthdate) is not true) BirthDate = birthdate.Value;
         if (description is not null && Description?.Equals(description) is not true) Description= description;
         if (rate is not null && Rate?.Equals(rate) is not true) Rate= rate.Value;

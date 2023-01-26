@@ -9,7 +9,7 @@ namespace FSH.WebApi.Application.Catalog.Contributions;
 public class SearchContributionsRequest: PaginationFilter,IRequest<PaginationResponse<ContributionDto>>
 {
     public DefaultIdType? YearId { get; set; }
-    public string FIO { get; set; }
+    public string? FIO { get; set; }
 
 }
 public class SearchContributionsRequestHandler: IRequestHandler<SearchContributionsRequest, PaginationResponse<ContributionDto>>

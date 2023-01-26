@@ -16,8 +16,8 @@ public class CreateContributionRequestValidator: CustomValidator<CreateContribut
             .WithMessage(T["Summa must be greater than 0.00"]);
         RuleFor(p => p.Month)
             .IsInEnum();
-        RuleFor(p => p.Year)
-            .NotEmpty()
-            .InclusiveBetween(2000, 2100);
+        //RuleFor(p => p.Year)
+        //    .NotEmpty()
+        //    .InclusiveBetween(2000, 2100);
     }
 }

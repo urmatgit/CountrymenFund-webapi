@@ -13,7 +13,7 @@ public class UpdateNativeRequest : IRequest<DefaultIdType>
     public string Surname { get; set; }
     public string? MiddleName { get; set; }
     public DateTime? BirthDate { get; set; }
-
+    public string? Village { get; set; }
     public string Description { get; set; }
     //Rating of person
     public int? Rate { get; set; }
@@ -51,7 +51,7 @@ public class UpdateNativeRequestHandler : IRequestHandler<UpdateNativeRequest, D
         string? nativeImagePath = request.Image is not null
             ? await _file.UploadAsync<Native>(request.Image, FileType.Image, cancellationToken)
             : null;
-        var updateNative = native.Update(request.Name, request.Surname, request.MiddleName, request.BirthDate, request.Description, request.Rate, request.RuralGovId);
+        var updateNative = native.Update(request.Name, request.Surname, request.MiddleName, request.BirthDate!.Value.ToUniversalTime(),request.Village,  request.Description, request.Rate, request.RuralGovId);
         await _repository.UpdateAsync(updateNative, cancellationToken);
         return request.Id;
     }
