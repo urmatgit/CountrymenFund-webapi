@@ -2,6 +2,7 @@ using System.Net;
 using FSH.WebApi.Application.Common.Exceptions;
 using FSH.WebApi.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Localization;
 using Serilog;
 using Serilog.Context;
@@ -29,6 +30,7 @@ internal class ExceptionMiddleware : IMiddleware
         try
         {
             await next(context);
+            
         }
         catch (Exception exception)
         {

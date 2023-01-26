@@ -22,11 +22,11 @@ public class CreateContributionRequestHandler : IRequestHandler<CreateContributi
     public async Task<DefaultIdType> Handle(CreateContributionRequest request, CancellationToken cancellationToken)
     {
         var contribution = new Contribution() {
-            NativeId=request.NativeId,
-            YearId  =request.YearId,
-            Summa =request.Summa,
-            Month=request.Month,
-            Date=request.Date,
+            NativeId = request.NativeId,
+            YearId = request.YearId,
+            Summa = request.Summa,
+            Month = request.Month,
+            Date = request.Date.Value.ToUniversalTime(),
             Description=request.Description
         };
         await _repository.AddAsync(contribution,cancellationToken);
