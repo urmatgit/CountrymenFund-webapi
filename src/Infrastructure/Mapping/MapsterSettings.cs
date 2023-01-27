@@ -14,11 +14,11 @@ public class MapsterSettings
         // This one is actually not necessary as it's mapped by convention
         // TypeAdapterConfig<Product, ProductDto>.NewConfig().Map(dest => dest.BrandName, src => src.Brand.Name);
         TypeAdapterConfig<Contribution, ContributionDto>.NewConfig()
-            .Map(d => d.NativeFIO, s => $"{s.Native.Name} {s.Native.Surname} {s.Native.MiddleName}")
-            .Map(d => d.Rate, s => s.Native.Rate)
-            .Map(d => d.Year, s => s.Year.year)
-            .Map(d => d.Village, s => s.Native.Village);
+            .Map(d => d.NativeFIO, s => $"{s.Native!.Name} {s.Native!.Surname} {s.Native!.MiddleName}")
+            .Map(d => d.Rate, s => s.Native!.Rate)
+            .Map(d => d.Year, s => s.Year!.year)
+            .Map(d => d.Village, s => s.Native!.Village);
         TypeAdapterConfig<ContributionDto, Contribution>.NewConfig()
-            .Map(d => d.Date, s => s.Date.Value.ToUniversalTime());
+            .Map(d => d.Date, s => s.Date!.Value.ToUniversalTime());
     }
 }

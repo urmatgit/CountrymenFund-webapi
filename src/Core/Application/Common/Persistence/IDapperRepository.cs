@@ -1,4 +1,5 @@
 using System.Data;
+using System.Linq.Expressions;
 
 namespace FSH.WebApi.Application.Common.Persistence;
 
@@ -39,4 +40,8 @@ public interface IDapperRepository : ITransientService
     /// <returns>Returns <see cref="Task"/> of <typeparamref name="T"/>.</returns>
     Task<T> QuerySingleAsync<T>(string sql, object? param = null, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
     where T : class, IEntity;
+    Task<decimal> QuerySumValueAsync<T>(Expression<Func<T, bool>> predicate, Expression<Func<T, decimal>> selector, CancellationToken cancellationToken = default)
+        where T : class, IEntity;
+
+
 }
