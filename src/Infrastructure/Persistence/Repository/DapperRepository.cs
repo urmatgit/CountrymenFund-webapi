@@ -1,9 +1,11 @@
 using System.Data;
+using System.Linq.Expressions;
 using Dapper;
 using Finbuckle.MultiTenant.EntityFrameworkCore;
 using FSH.WebApi.Application.Common.Persistence;
 using FSH.WebApi.Domain.Common.Contracts;
 using FSH.WebApi.Infrastructure.Persistence.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace FSH.WebApi.Infrastructure.Persistence.Repository;
 
@@ -18,8 +20,8 @@ public class DapperRepository : IDapperRepository
         (await _dbContext.Connection.QueryAsync<T>(sql, param, transaction))
             .AsList();
 
-    public async Task<T?> QueryFirstOrDefaultAsync<T>(string sql, object? param = null, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
-    where T : class, IEntity
+    public async Task<T> QueryFirstOrDefaultAsync<T>(string sql, object? param = null, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
+        where T : class, IEntity
     {
         if (_dbContext.Model.GetMultiTenantEntityTypes().Any(t => t.ClrType == typeof(T)))
         {
@@ -39,4 +41,7 @@ public class DapperRepository : IDapperRepository
 
         return _dbContext.Connection.QuerySingleAsync<T>(sql, param, transaction);
     }
+
+    public async Task<decimal> QuerySumValueAsync<T>(Expression<Func<T, bool>> predicate, Expression<Func<T, decimal>> selector, CancellationToken cancellationToken = default)
+         where T : class, IEntity => await _dbContext.Set<T>().Where(predicate).SumAsync(selector, cancellationToken);//return _dbContext.Connection.QuerySingleAsync<T>(sql, param, transaction);
 }
