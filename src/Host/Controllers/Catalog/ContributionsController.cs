@@ -20,7 +20,13 @@ public class ContributionsController: VersionedApiController
     {
         return Mediator.Send(new GetContributionRequest(id));
     }
-
+    [HttpGet("")]
+    [MustHavePermission(FSHAction.View, FSHResource.Contributions)]
+    [OpenApiOperation("Get contribution default.", "")]
+    public Task<ContributionDto> GetDefaultAsync()
+    {
+        return Mediator.Send(new GetDefaultContributionRequest());
+    }
     [HttpPost]
     [MustHavePermission(FSHAction.Create, FSHResource.Contributions)]
     [OpenApiOperation("Create a new contribution.", "")]
