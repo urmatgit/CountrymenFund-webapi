@@ -13,7 +13,7 @@ public class SearchYearsRequest: PaginationFilter,IRequest<PaginationResponse<Ye
 public class YearsBySearchRequestSpec: EntitiesByPaginationFilterSpec<Year, YearDto>
 {
     public YearsBySearchRequestSpec(SearchYearsRequest request) : base(request)
-        => Query.OrderBy(c => c.year, !request.HasOrderBy());
+        => Query.OrderByDescending(c => c.year, !request.HasOrderBy());
 }
 public class SearchYearsRequestHandler : IRequestHandler<SearchYearsRequest, PaginationResponse<YearDto>>
 {
