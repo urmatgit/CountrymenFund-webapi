@@ -14,7 +14,7 @@ public class UpdateNativeRequest : IRequest<DefaultIdType>
     public string? MiddleName { get; set; }
     public DateTime? BirthDate { get; set; }
     public string? Village { get; set; }
-    public string Description { get; set; }
+    public string? Description { get; set; }
     //Rating of person
     public int Rate { get; set; }
     public DefaultIdType RuralGovId { get; set; }

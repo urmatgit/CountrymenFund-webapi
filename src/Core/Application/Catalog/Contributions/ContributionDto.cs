@@ -15,6 +15,9 @@ public  class ContributionDto: IDto
     public DateTime? Date { get; set; }= DateTime.Now;
     public DefaultIdType NativeId { get; set; }
     public string? NativeFIO { get; set; }
+    public DefaultIdType RuralGovId { get; set; }
+    public string? RuralGovName { get; set; }
+
     public int Rate { get; set; }
     public DefaultIdType YearId { get; set; }
     public int  Year { get; set; }
