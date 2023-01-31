@@ -17,7 +17,9 @@ public class MapsterSettings
             .Map(d => d.NativeFIO, s => $"{s.Native!.Name} {s.Native!.Surname} {s.Native!.MiddleName}")
             .Map(d => d.Rate, s => s.Native!.Rate)
             .Map(d => d.Year, s => s.Year!.year)
-            .Map(d => d.Village, s => s.Native!.Village);
+            .Map(d => d.Village, s => s.Native!.Village)
+            .Map(d=>d.RuralGovName,s=>s.Native!.RuralGov!.Name);
+
         TypeAdapterConfig<ContributionDto, Contribution>.NewConfig()
             .Map(d => d.Date, s => s.Date!.Value.ToUniversalTime());
     }
