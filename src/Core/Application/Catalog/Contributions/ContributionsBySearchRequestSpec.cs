@@ -13,7 +13,7 @@ public class ContributionsBySearchRequestSpec: EntitiesByPaginationFilterSpec<Co
         .Include(p => p.Year)
         .Include(p => p.Native)
         .ThenInclude(p=>p.RuralGov)
-        .OrderBy(p=>p.Native.RuralGov.Name)
+        //.OrderBy(p=>p.Native.RuralGov.Name)
         .OrderBy(p => p.Native.Name)
         .Where(p => p.YearId.Equals(request.YearId), request.YearId.HasValue)
         .Where(p=>p.NativeId.Equals(request.NativeId),request.NativeId.HasValue)
