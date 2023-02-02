@@ -10,8 +10,14 @@ public class CreateContributionRequestValidator: CustomValidator<CreateContribut
 {
     public CreateContributionRequestValidator(IStringLocalizer<CreateContributionRequestValidator> T)
     {
+        RuleFor(p => p.NativeId)
+            .NotEmpty()
+            .WithMessage(T["Native is not set"])
+            .NotEqual(Guid.Empty)
+            .WithMessage(T["Native is not set"]);
         RuleFor(p => p.Summa)
             .NotEmpty()
+            .WithMessage(T["Summa must be greater than 0.00"])
             .GreaterThan(0)
             .WithMessage(T["Summa must be greater than 0.00"]);
         RuleFor(p => p.Month)
