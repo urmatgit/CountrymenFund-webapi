@@ -22,7 +22,7 @@ public class Native : AuditableEntity, IAggregateRoot
     {
 
     }
-    public Native(string name,string surname,string? middlename,DateTime? birthdate,string village, string description,int rate, DefaultIdType ruralGovId )
+    public Native(string name,string surname,string? middlename,DateTime? birthdate,string village, string description,int rate, DefaultIdType ruralGovId,string imagepath )
     {
         Name= name;
         Surname= surname;
@@ -32,9 +32,10 @@ public class Native : AuditableEntity, IAggregateRoot
         RuralGovId= ruralGovId;
         Rate= rate;
         Village= village;
+        ImagePath= imagepath;
     }
 
-    public Native Update(string? name, string? surname, string? middlename, DateTime? birthdate,string? village, string? description,int rate,  DefaultIdType? ruralGovId)
+    public Native Update(string? name, string? surname, string? middlename, DateTime? birthdate,string? village, string? description,int rate,  DefaultIdType? ruralGovId,string imagepath)
     {
         if (name is not null && Name?.Equals(name) is not true) Name = name;
         if (surname is not null && Surname?.Equals(surname) is not true) Surname = surname;
@@ -44,7 +45,7 @@ public class Native : AuditableEntity, IAggregateRoot
         if (description is not null && Description?.Equals(description) is not true) Description= description;
         if (rate !=Rate) Rate= rate;
         if (ruralGovId.HasValue && ruralGovId.Value!=DefaultIdType.Empty && !RuralGovId.Equals(ruralGovId.Value)) RuralGovId= ruralGovId.Value;
-
+        if (imagepath!=ImagePath) ImagePath= imagepath;
         return this;
     }
     public Native ClearImagePath()

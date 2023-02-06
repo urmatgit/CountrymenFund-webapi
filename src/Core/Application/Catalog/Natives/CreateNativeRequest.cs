@@ -32,7 +32,7 @@ public class CreateNativeRequestHangler : IRequestHandler<CreateNativeRequest, D
     public async Task<DefaultIdType> Handle(CreateNativeRequest request, CancellationToken cancellationToken)
     {
         string nativeImage =await _file.UploadAsync<Native>(request.Image,FileType.Image,cancellationToken);
-        var native = new Native(request.Name, request.Surname, request.MiddleName, request.BirthDate!.Value.ToUniversalTime(),request.Village, request.Description,request.Rate,  request.RuralGovId);
+        var native = new Native(request.Name, request.Surname, request.MiddleName, request.BirthDate!.Value.ToUniversalTime(),request.Village, request.Description,request.Rate,  request.RuralGovId,nativeImage);
         await _repository.AddAsync(native);
         return native.Id; 
              

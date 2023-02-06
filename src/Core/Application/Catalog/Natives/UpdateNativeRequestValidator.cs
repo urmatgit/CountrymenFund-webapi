@@ -13,8 +13,8 @@ public class UpdateNativeRequestValidator: CustomValidator<UpdateNativeRequest>
         RuleFor(p => p.Name)
             .NotEmpty()
             .MaximumLength(100);
-        RuleFor(p => new { p.Name, p.Surname, p.BirthDate, p.RuralGovId })
-             .MustAsync(async (x, ct) => await nativeRep.GetBySpecAsync(new NativeCheckExistSpec(x.Name, x.Surname, x.BirthDate!.Value.ToUniversalTime(), x.RuralGovId), ct) is null)
+        RuleFor(p => new { p.Name, p.Surname, p.BirthDate, p.RuralGovId,p.Image })
+             .MustAsync(async (x, ct) => await nativeRep.GetBySpecAsync(new NativeCheckExistSpec(x.Name, x.Surname, x.BirthDate!.Value.ToUniversalTime(), x.RuralGovId,x.Image!=null), ct) is null)
              .WithMessage((_, x) => T["Native {0} already Exists.", $"{x.Name} {x.Surname} ({x.BirthDate}, {ruralGovRep.GetByIdAsync(x.RuralGovId).Result?.Name})"]);
         RuleFor(p => p.Rate)
             .InclusiveBetween (1, 10)
