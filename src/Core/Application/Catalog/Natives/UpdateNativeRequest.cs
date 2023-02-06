@@ -51,7 +51,7 @@ public class UpdateNativeRequestHandler : IRequestHandler<UpdateNativeRequest, D
         string? nativeImagePath = request.Image is not null
             ? await _file.UploadAsync<Native>(request.Image, FileType.Image, cancellationToken)
             : null;
-        var updateNative = native.Update(request.Name, request.Surname, request.MiddleName, request.BirthDate!.Value.ToUniversalTime(),request.Village,  request.Description, request.Rate, request.RuralGovId);
+        var updateNative = native.Update(request.Name, request.Surname, request.MiddleName, request.BirthDate!.Value.ToUniversalTime(),request.Village,  request.Description, request.Rate, request.RuralGovId, nativeImagePath);
         await _repository.UpdateAsync(updateNative, cancellationToken);
         return request.Id;
     }

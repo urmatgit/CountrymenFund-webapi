@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 namespace FSH.WebApi.Application.Catalog.Natives;
 public class NativeCheckExistSpec: Specification<Native,NativeDto>, ISingleResultSpecification
 {
-    public NativeCheckExistSpec(string name,string surname,DateTime? birchDate,DefaultIdType ruralId)
+    public NativeCheckExistSpec(string name,string surname,DateTime? birchDate,DefaultIdType ruralId,bool hasImage)
     {
         Query.Where(p => p.Name.Equals(name)
             && p.Surname.Equals(surname)
             && p.BirthDate.HasValue && birchDate.HasValue && p.BirthDate == birchDate
-            && p.RuralGovId == ruralId);
+            && p.RuralGovId == ruralId
+            && !hasImage);
             
     }
 }

@@ -14,21 +14,21 @@ public class GetStatsRequestHandler : IRequestHandler<GetStatsRequest, StatsDto>
 {
     private readonly IUserService _userService;
     private readonly IRoleService _roleService;
-    private readonly IReadRepository<Brand> _brandRepo;
+    //private readonly IReadRepository<Brand> _brandRepo;
     private readonly IReadRepository<RuralGov> _ruralGovRepo;
-    private readonly IReadRepository<Product> _productRepo;
+    //private readonly IReadRepository<Product> _productRepo;
     private readonly IReadRepository<Native> _nativeRepo;
     private readonly IReadRepository<Contribution> _contributionRepo;
     private readonly IDapperRepository _dapperRepository;
     private readonly IStringLocalizer _t;
     private readonly GetContributionsSummRequest _sumRequest;
-    public GetStatsRequestHandler(IUserService userService, IRoleService roleService, IReadRepository<Brand> brandRepo, IReadRepository<RuralGov> ruralGovRepo, IReadRepository<Product> productRepo, IStringLocalizer<GetStatsRequestHandler> localizer, IReadRepository<Native> nativeRepo, IReadRepository<Contribution> contributionRepo, IDapperRepository dapperRepository)
+    public GetStatsRequestHandler(IUserService userService, IRoleService roleService,  IReadRepository<RuralGov> ruralGovRepo, IStringLocalizer<GetStatsRequestHandler> localizer, IReadRepository<Native> nativeRepo, IReadRepository<Contribution> contributionRepo, IDapperRepository dapperRepository)
     {
         _userService = userService;
         _roleService = roleService;
-        _brandRepo = brandRepo;
+        //_brandRepo = brandRepo;
         _ruralGovRepo = ruralGovRepo;
-        _productRepo = productRepo;
+        //_productRepo = productRepo;
         _t = localizer;
         _nativeRepo = nativeRepo;
         _contributionRepo = contributionRepo;
@@ -54,8 +54,8 @@ public class GetStatsRequestHandler : IRequestHandler<GetStatsRequest, StatsDto>
     {
         var stats = new StatsDto
         {
-            ProductCount = await _productRepo.CountAsync(cancellationToken),
-            BrandCount = await _brandRepo.CountAsync(cancellationToken),
+            //ProductCount = await _productRepo.CountAsync(cancellationToken),
+            //BrandCount = await _brandRepo.CountAsync(cancellationToken),
             RuralGovCount = await _ruralGovRepo.CountAsync(cancellationToken),
             UserCount = await _userService.GetCountAsync(cancellationToken),
             RoleCount = await _roleService.GetCountAsync(cancellationToken),
@@ -66,8 +66,8 @@ public class GetStatsRequestHandler : IRequestHandler<GetStatsRequest, StatsDto>
         };
 
         int selectedYear = DateTime.UtcNow.Year;
-        double[] productsFigure = new double[13];
-        double[] brandsFigure = new double[13];
+        //double[] productsFigure = new double[13];
+        //double[] brandsFigure = new double[13];
         double[] ruralGovsFigure = new double[13];
         double[] nativeFigure = new double[13];
         double[] contributionFigure = new double[13];
@@ -85,9 +85,10 @@ public class GetStatsRequestHandler : IRequestHandler<GetStatsRequest, StatsDto>
             var nativeSpec = new AuditableEntitiesByCreatedOnBetweenSpec<Native>(filterStartDate, filterEndDate);
             var contributionSpec = new AuditableEntitiesByCreatedOnBetweenSpec<Contribution>(filterStartDate, filterEndDate);
 
-            brandsFigure[i - 1] = await _brandRepo.CountAsync(brandSpec, cancellationToken);
+            //brandsFigure[i - 1] = await _brandRepo.CountAsync(brandSpec, cancellationToken);
+            //productsFigure[i - 1] = await _productRepo.CountAsync(productSpec, cancellationToken);
             ruralGovsFigure[i - 1] = await _ruralGovRepo.CountAsync(ruralGovSpec, cancellationToken);
-            productsFigure[i - 1] = await _productRepo.CountAsync(productSpec, cancellationToken);
+            
             nativeFigure[i - 1] = await _nativeRepo.CountAsync(nativeSpec, cancellationToken);
             contributionFigure[i - 1] = await _contributionRepo.CountAsync(contributionSpec, cancellationToken);
             contributionSumFigure[i - 1] = (double)await GetContributesSumBitween(filterStartDate, filterEndDate, cancellationToken);
@@ -104,8 +105,8 @@ public class GetStatsRequestHandler : IRequestHandler<GetStatsRequest, StatsDto>
                 }
         }
 
-        stats.DataEnterBarChart.Add(new ChartSeries { Name = _t["Products"], Data = productsFigure });
-        stats.DataEnterBarChart.Add(new ChartSeries { Name = _t["Brands"], Data = brandsFigure });
+        //stats.DataEnterBarChart.Add(new ChartSeries { Name = _t["Products"], Data = productsFigure });
+        //stats.DataEnterBarChart.Add(new ChartSeries { Name = _t["Brands"], Data = brandsFigure });
         stats.DataEnterBarChart.Add(new ChartSeries { Name = _t["Rural goverments"], Data = ruralGovsFigure });
         stats.DataEnterBarChart.Add(new ChartSeries { Name = _t["Natives"], Data = nativeFigure });
         stats.DataEnterBarChart.Add(new ChartSeries { Name = _t["Contributions"], Data = contributionFigure });
