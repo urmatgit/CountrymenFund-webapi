@@ -13,6 +13,8 @@ public class UpdateProductRequestValidator : CustomValidator<UpdateProductReques
                 .WithMessage((_, name) => T["Product {0} already Exists.", name]);
 
         RuleFor(p => p.Rate)
+            .InclusiveBetween(1,5)
+            .WithMessage((_) => T["The rating should be from 1 to 5"])
             .GreaterThanOrEqualTo(1);
 
         RuleFor(p => p.Image)
