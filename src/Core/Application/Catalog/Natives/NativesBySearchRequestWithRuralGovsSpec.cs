@@ -11,6 +11,7 @@ public class NativesBySearchRequestWithRuralGovsSpec: EntitiesByPaginationFilter
     public NativesBySearchRequestWithRuralGovsSpec(SearchNativesRequest request) : base(request)
         => Query
         .Include(p => p.RuralGov)
+
         .OrderBy(p => p.Name, !request.HasOrderBy())
         .ThenBy(p => p.Surname, !request.HasOrderBy())
         .ThenBy(p => p.MiddleName, !request.HasOrderBy())

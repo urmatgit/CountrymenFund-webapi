@@ -26,9 +26,10 @@ public class ContributionsBySearchRequestSpec: EntitiesByPaginationFilterSpec<Co
        .Where(p => p.Month == request.Month, request.Month.HasValue)
        .Where(p => p.Date >= request.DateStart!.Value.ToUniversalTime() && p.Date <= request.DateEnd!.Value.ToUniversalTime(), request.DateStart.HasValue && request.DateEnd.HasValue)
        .Where(p => p.Native.Name.Contains(request.FIO) || p.Native.Surname.Contains(request.FIO)
-       || (!string.IsNullOrEmpty(p.Native.MiddleName) && p.Native.MiddleName.Contains(request.FIO)) 
-       || p.Native.RuralGov.Name.Contains(request.FIO)
-       || p.Summa.ToString().Contains(request.FIO)
-       || (p.Description!.Contains(request.FIO) && !string.IsNullOrEmpty(p.Description)),!string.IsNullOrEmpty(request.FIO));
+       || (!string.IsNullOrEmpty(p.Native.MiddleName) && p.Native.MiddleName.Contains(request.FIO)), !string.IsNullOrEmpty(request.FIO))
+       .Where(p => p.Native.Name.Contains(request.Keyword) || p.Native.Surname.Contains(request.Keyword)
+       || (!string.IsNullOrEmpty(p.Native.MiddleName) && p.Native.MiddleName.Contains(request.Keyword)), !string.IsNullOrEmpty(request.Keyword))
+       .Where(p => p.Native.RuralGov.Name.Contains(request.Keyword) || p.Native.RuralGov.Description.Contains(request.Keyword), !string.IsNullOrEmpty(request.Keyword));
+
     }
 }
