@@ -23,6 +23,23 @@ public class SearchNativesRequestHandle : IRequestHandler<SearchNativesRequest, 
 
     public async Task<PaginationResponse<NativeDto>> Handle(SearchNativesRequest request, CancellationToken cancellationToken)
     {
+        if (request.HasOrderBy())
+        {
+            for (int i = 0; i < request.OrderBy.Length; i++)
+            {
+                var orderby = request.OrderBy[i];
+                switch (orderby)
+                {
+                    
+                    case string s when s.StartsWith("RuralGovName"):
+                        orderby = orderby.Replace("RuralGovName", "RuralGov.Name"); break;
+
+
+                }
+                request.OrderBy[i] = orderby;
+
+            }
+        }
         var spec =new NativesBySearchRequestWithRuralGovsSpec(request);
          return await _repository.PaginatedListAsync(spec,request.PageNumber,request.PageSize,cancellationToken);
     }

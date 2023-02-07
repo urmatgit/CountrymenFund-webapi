@@ -29,7 +29,41 @@ public class SearchContributionsRequestHandler: IRequestHandler<SearchContributi
 
     public async Task<PaginationResponse<ContributionDto>> Handle(SearchContributionsRequest request, CancellationToken cancellationToken)
     {
-        var spec = new ContributionsBySearchRequestSpec(request);
+         if (request.HasOrderBy())
+        {
+            for (int i=0;i<request.OrderBy.Length;i++)
+            {
+                var orderby = request.OrderBy[i];
+                switch(orderby)
+                {
+                    case string s when s.StartsWith("Year"):
+                        orderby= orderby.Replace("Year", "Year.year"); break;
+                    case string s when s.StartsWith("NativeFIO"):
+                        orderby = orderby.Replace("NativeFIO", "Native.Name"); break;
+                    case string s when s.StartsWith("Rate"):
+                        orderby = orderby.Replace("Rate", "Native.Rate"); break;
+                    case string s when s.StartsWith("RuralGovName"):
+                        orderby = orderby.Replace("RuralGovName", "Native.RuralGov.Name"); break;
+
+
+                }
+                request.OrderBy[i] = orderby;
+
+            }
+        }
+        // if (!string.IsNullOrEmpty(request.Keyword) && request.AdvancedSearch==null)
+        //{
+        //    Search search = new Search();
+        //    search.Fields.Add("Native.Name");
+        //    search.Fields.Add("Native.Rate");
+        //    search.Fields.Add("Year.year");
+        //    search.Fields.Add("Native.RuralGov.Name");
+        //    search.Keyword = request.Keyword;
+        //    request.AdvancedSearch = search;
+            
+
+        //}
+            var spec = new ContributionsBySearchRequestSpec(request);
         return await _repository.PaginatedListAsync(spec, request.PageNumber, request.PageSize, cancellationToken);
     }
 }
