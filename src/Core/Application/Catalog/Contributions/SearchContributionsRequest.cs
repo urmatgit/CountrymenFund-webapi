@@ -60,9 +60,11 @@ public class SearchContributionsRequestHandler: IRequestHandler<SearchContributi
         //    search.Fields.Add("Native.RuralGov.Name");
         //    search.Keyword = request.Keyword;
         //    request.AdvancedSearch = search;
-            
+
 
         //}
+        request.FIO = request.Keyword;
+        request.Keyword = "";
             var spec = new ContributionsBySearchRequestSpec(request);
         return await _repository.PaginatedListAsync(spec, request.PageNumber, request.PageSize, cancellationToken);
     }
