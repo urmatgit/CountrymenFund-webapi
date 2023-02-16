@@ -19,6 +19,13 @@ public class YearsController : VersionedApiController
     {
         return Mediator.Send(new GetYearRequest(id));
     }
+    [HttpGet("{year:int}")]
+    [MustHavePermission(FSHAction.View, FSHResource.Years)]
+    [OpenApiOperation("Get year details.", "")]
+    public Task<YearDto> GetAsync(int year)
+    {
+        return Mediator.Send(new GetYearByYearRequest(year));
+    }
 
     [HttpPost]
     [MustHavePermission(FSHAction.Create, FSHResource.Years)]

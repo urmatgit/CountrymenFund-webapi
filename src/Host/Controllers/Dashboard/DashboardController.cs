@@ -1,3 +1,5 @@
+using FSH.WebApi.Application.Catalog.Contributions;
+using FSH.WebApi.Application.Catalog.Totals;
 using FSH.WebApi.Application.Dashboard;
 
 namespace FSH.WebApi.Host.Controllers.Dashboard;
@@ -11,4 +13,5 @@ public class DashboardController : VersionedApiController
     {
         return Mediator.Send(new GetStatsRequest());
     }
+   
 }

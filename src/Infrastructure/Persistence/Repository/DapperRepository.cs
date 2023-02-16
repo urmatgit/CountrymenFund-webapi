@@ -60,4 +60,10 @@ public class DapperRepository : IDapperRepository
             }).ToListAsync(cancellationToken);
         return controlbution;
     }
+
+   public IQueryable<T> GetQueryable<T>()
+        where T : class, IEntity
+    {
+        return _dbContext.Set<T>().AsQueryable();
+    }
 }

@@ -44,7 +44,7 @@ public interface IDapperRepository : ITransientService
         where T : class, IEntity;
     Task<IEnumerable<IGroupTotal>> QueryRuralGovSumsValue(DateTime start, DateTime end, CancellationToken cancellationToken = default);
 
-
+    IQueryable<T> GetQueryable<T>() where T : class, IEntity;   
 
 
 }
