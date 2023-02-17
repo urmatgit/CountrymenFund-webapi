@@ -86,6 +86,7 @@ public class GetStateByRuralGovRequestHandler : IRequestHandler<GetStateByRuralG
                 April = x.Where(c => c.Month == Shared.Enums.Months.April).Sum(c => c.Summa),
                 May = x.Where(c => c.Month == Shared.Enums.Months.May).Sum(c => c.Summa),
                 June = x.Where(c => c.Month == Shared.Enums.Months.June).Sum(c => c.Summa),
+                July = x.Where(c => c.Month == Shared.Enums.Months.July).Sum(c => c.Summa),
                 August = x.Where(c => c.Month == Shared.Enums.Months.August).Sum(c => c.Summa),
                 September= x.Where(c => c.Month == Shared.Enums.Months.September).Sum(c => c.Summa),
                 October= x.Where(c => c.Month == Shared.Enums.Months.October).Sum(c => c.Summa),
@@ -111,6 +112,25 @@ public class GetStateByRuralGovRequestHandler : IRequestHandler<GetStateByRuralG
 
         var query = await getSummColMonths(expressein)
             .ToListAsync(cancellationToken);
+        var total = new TotalWithMonths
+        {
+            Year=0,
+            RuralGovName= stringLocalizer.GetString("Total"),
+            January=query.Sum(x=>x.January),
+            February = query.Sum(x => x.February),
+            March = query.Sum(x => x.March),
+            April = query.Sum(x => x.April),
+            May = query.Sum(x => x.May),
+            June = query.Sum(x => x.June),
+            July = query.Sum(x => x.July),
+            August = query.Sum(x => x.August),
+            September = query.Sum(x => x.September),
+            October = query.Sum(x => x.October),
+            November = query.Sum(x => x.November),
+            December = query.Sum(x => x.December),
+            Style= "font-weight: bold;"
+        };
+        query.Add(total);
         return new PaginationResponse<TotalWithMonths>(query, query.Count(), request.PageNumber, request.PageSize);
     }
 }
