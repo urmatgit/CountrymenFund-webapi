@@ -208,3 +208,9 @@ msgctxt "FSH.WebApi.Application.Dashboard.GetStatsRequestHandler"
 msgid "Contribution summa"
 msgstr "Сумма взноса"
 
+#: 
+msgctxt "Total"
+msgid "Total"
+msgstr "Итого\n"
+""
+
