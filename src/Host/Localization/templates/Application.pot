@@ -192,3 +192,12 @@ msgctxt "FSH.WebApi.Application.Multitenancy.CreateTenantRequestValidator"
 msgid "Connection string invalid."
 msgstr ""
 
+#: 
+msgctxt "Total"
+msgid "Total"
+msgstr "Total"
+
+#: 
+msgctxt "Totals"
+msgid "Totals"
+msgstr "Totals"
