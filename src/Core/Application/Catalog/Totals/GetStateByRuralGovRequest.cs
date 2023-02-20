@@ -92,6 +92,7 @@ public class GetStateByRuralGovRequestHandler : IRequestHandler<GetStateByRuralG
                 October= x.Where(c => c.Month == Shared.Enums.Months.October).Sum(c => c.Summa),
                 November= x.Where(c => c.Month == Shared.Enums.Months.November).Sum(c => c.Summa),
                 December= x.Where(c => c.Month == Shared.Enums.Months.December).Sum(c => c.Summa),
+                AllSumm=x.Sum(c=>c.Summa)
 
             });
         return query;
@@ -128,6 +129,7 @@ public class GetStateByRuralGovRequestHandler : IRequestHandler<GetStateByRuralG
             October = query.Sum(x => x.October),
             November = query.Sum(x => x.November),
             December = query.Sum(x => x.December),
+            AllSumm= query.Sum(x => x.AllSumm),
             Style= "font-weight: bold;"
         };
         query.Add(total);

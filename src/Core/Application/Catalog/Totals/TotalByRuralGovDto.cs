@@ -10,7 +10,8 @@ public class TotalDto: IDto
     {
     public int Year { get; set; }
     public string RuralGovName { get; set; }
-    public string Style { get; set; }
+    public string? Style { get; set; }
+    public decimal AllSumm { get; set; }
 }
 public class TotalByRuralGovDto:TotalDto
 {
@@ -18,10 +19,10 @@ public class TotalByRuralGovDto:TotalDto
     public decimal Summa { get; set; }
 
 }
-public class TotalByNative : TotalByRuralGovDto
+public class TotalByNative : TotalWithMonths
 {
     public string FIO { get; set; }
-    public string Vilage { get; set; }
+    public string Village { get; set; }
 }
 public  class TotalWithMonths: TotalDto
 {
