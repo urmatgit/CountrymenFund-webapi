@@ -213,3 +213,7 @@ msgctxt "Total"
 msgid "Total"
 msgstr "Total"
 
+#: 
+msgctxt "Total"
+msgid "Total"
+msgstr "Total"

@@ -211,6 +211,11 @@ msgstr "Сумма взноса"
 #: 
 msgctxt "Total"
 msgid "Total"
-msgstr "Итого\n"
-""
+msgstr "Итого"
+
+#: 
+msgctxt "Totals"
+msgid "Totals"
+msgstr "Итоги"
+
 
