@@ -124,4 +124,30 @@ public class LocalFileStorageService : IFileStorageService
 
         return string.Format(pattern, max);
     }
+
+    public async Task<string> GetStringFileAsync(string name)
+    {
+        string path = Path.Combine(Directory.GetCurrentDirectory(), "Files", name);
+        if (File.Exists(path))
+        {
+            var result = await File.ReadAllTextAsync(path);
+            return result;
+        }
+        return "";
+
+    }
+
+    public async Task<string> SaveStringFileAsync(string name, string text)
+    {
+        string path = Path.Combine(Directory.GetCurrentDirectory(), "Files", name);
+        await File.WriteAllTextAsync(path, text);
+        return name;
+    }
+
+    public string GetRootFilesPath()
+    {
+        return Directory.GetCurrentDirectory();
+    }
+
+
 }
