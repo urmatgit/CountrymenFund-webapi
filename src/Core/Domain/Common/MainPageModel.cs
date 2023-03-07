@@ -7,16 +7,21 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace FSH.WebApi.Shared.Common;
+namespace FSH.WebApi.Domain.Common;
 
 public class MainPageModel
 {
-    public   const string NameJson = "HomePage.json";
-    public CarouselModel CarouselModel { get; set; }
+    public const string NameJson = "HomePage.json";
+    public bool AutoCycle { get; set; }
+    public TimeSpan AutoCycleTime { get; set; } = TimeSpan.FromSeconds(5);
+    public int Height { get; set; } = 200;
+    
     public List<TextBlock> TextBlocs { get; set; }
+    public List<Slide> Slides { get; set; }
     public MainPageModel()
     {
         TextBlocs= new List<TextBlock>();
+        Slides = new List<Slide>();
     }
 }
 public class TextBlock
@@ -27,23 +32,8 @@ public class TextBlock
     public List<string> Images { get; set; } = new List<string>();
         
 }
-public class CarouselModel
-{
-    public bool AutoCycle { get; set; }
-    public TimeSpan AutoCycleTime { get; set; } = TimeSpan.FromSeconds(5);
-    public int Height { get; set; } = 200;
-    
-   public List<Slide> Slides { get; set; }
-    public CarouselModel()
-    {
-        Slides= new List<Slide>();
-    }
-}
 
-public enum SlideType {
-    Text,
-    Image
-}
+
 public class Slide
 {
 

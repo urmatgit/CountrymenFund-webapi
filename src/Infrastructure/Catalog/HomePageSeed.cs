@@ -1,7 +1,8 @@
 ﻿using FSH.WebApi.Application.Common.FileStorage;
 using FSH.WebApi.Application.Common.Interfaces;
+using FSH.WebApi.Domain.Common;
 using FSH.WebApi.Infrastructure.Persistence.Initialization;
-using FSH.WebApi.Shared.Common;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,19 +33,17 @@ public class HomePageSeed : ICustomSeeder
                 Directory.CreateDirectory(sliderimagePath);
             }
 
-            mainPageModel.CarouselModel = new CarouselModel()
-            {
-                AutoCycle = true,
-                AutoCycleTime =TimeSpan.FromSeconds(5),
-                Height = 200,
-                
-                Slides = new List<Slide> {
+
+            mainPageModel.AutoCycle = true;
+            mainPageModel.AutoCycleTime = TimeSpan.FromSeconds(5);
+            mainPageModel.Height = 200;
+            mainPageModel.Slides = new List<Slide> {
                     new Slide() {  Title="One"},
                     new Slide() {  Title="Two"},
                     slider
-                }
+                };
 
-            };
+             
             mainPageModel.TextBlocs.Add(new TextBlock() { Caption = "Text 1", Text = "This is text one." });
             mainPageModel.TextBlocs.Add(new TextBlock() { Caption = "Text 2", Text = "This is text two." });
           var result=   _serializerService.Serialize<MainPageModel>(mainPageModel);
