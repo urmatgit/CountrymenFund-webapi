@@ -13,7 +13,7 @@ public class MainPageModel
 {
     public const string NameJson = "HomePage.json";
     public bool AutoCycle { get; set; }
-    public TimeSpan AutoCycleTime { get; set; } = TimeSpan.FromSeconds(5);
+    public int AutoCycleTime { get; set; } = 5;
     public int Height { get; set; } = 200;
     
     public List<TextBlock> TextBlocs { get; set; }

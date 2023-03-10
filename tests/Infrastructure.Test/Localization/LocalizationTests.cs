@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Localization;
 using Xunit;
 
@@ -11,7 +12,8 @@ public class LocalizationTests
     private const string _testStringInBelgianDutch = "testString in belgian dutch";
     private const string _testString2 = "testString2";
     private const string _testString2InDutch = "testString2 in dutch";
-
+    private const string _Total = "Total";
+    private const string _TestTotal = "Итого";
     private readonly IStringLocalizer _localizer;
 
     public LocalizationTests(IStringLocalizer<LocalizationTests> localizer) => _localizer = localizer;
@@ -21,6 +23,7 @@ public class LocalizationTests
     // "nl/test.po" contains both testString and testString2
     [Theory]
     [InlineData("en-US", _testString, _testString)]
+    [InlineData("ru-Ru", _Total, _TestTotal)]
     [InlineData("nl-NL", _testString, _testStringInDutch)]
     [InlineData("nl-BE", _testString, _testStringInBelgianDutch)]
     [InlineData("nl-NL", _testString2, _testString2InDutch)]

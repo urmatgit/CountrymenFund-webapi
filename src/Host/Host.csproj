@@ -46,6 +46,5 @@
     <ItemGroup>
       <Folder Include="Databases\Host\" />
       <Folder Include="Localization\kg\" />
-      <Folder Include="Localization\ru\" />
     </ItemGroup>
 </Project>

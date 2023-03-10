@@ -54,8 +54,8 @@ public class GetTotalReportByNativesRequestHandler : IRequestHandler<GetTotalRep
         var total = new TotalByNative
         {
             Year = 0,
-            FIO = stringLocalizer.GetString("Total"),
-            RuralGovName= stringLocalizer.GetString("Total"),
+            FIO = stringLocalizer.GetString("Totals"),
+            RuralGovName= stringLocalizer.GetString("Totals"),
             Village="",
 
             January = query.Sum(x => x.January),
