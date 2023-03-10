@@ -209,12 +209,12 @@ msgid "Contribution summa"
 msgstr "Сумма взноса"
 
 #: 
-msgctxt "Total"
+msgctxt "FSH.WebApi.Application.Catalog.Totals.GetStateByRuralGovRequestHandler"
 msgid "Total"
 msgstr "Итого"
 
 #: 
-msgctxt "Totals"
+msgctxt "FSH.WebApi.Application.Catalog.Totals.GetTotalReportByNativesRequestHandler"
 msgid "Totals"
 msgstr "Итоги"
 

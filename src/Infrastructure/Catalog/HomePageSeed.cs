@@ -35,7 +35,7 @@ public class HomePageSeed : ICustomSeeder
 
 
             mainPageModel.AutoCycle = true;
-            mainPageModel.AutoCycleTime = TimeSpan.FromSeconds(5);
+            mainPageModel.AutoCycleTime = 5;
             mainPageModel.Height = 200;
             mainPageModel.Slides = new List<Slide> {
                     new Slide() {  Title="One"},
