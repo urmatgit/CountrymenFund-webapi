@@ -9,29 +9,40 @@ namespace FSH.WebApi.Application.HomePage;
 public class MainPageModelDto : IDto
 {
     public const string NameJson = "HomePage.json";
+    public bool ShowArrows { get; set; } = true;
+    public bool ShowBullets { get; set; } = true;
+    public bool EnableSwapGesture { get; set; } = true;
     public bool AutoCycle { get; set; }
     public int AutoCycleTime { get; set; } = 5;
     public int Height { get; set; } = 200;
 
     public List<TextBlockDto> TextBlocs { get; set; }
-    public List<SlideDto> Slides { get; set; }
+    public List<SliderDto> Sliders { get; set; }
     public MainPageModelDto()
     {
         TextBlocs = new List<TextBlockDto>();
-        Slides = new List<SlideDto>();
+        Sliders = new List<SliderDto>();
     }
 }
 public class TextBlockDto: IDto
 {
+    public Guid Id { get; set; }
     public string Caption { get; set; }
     public string Text { get; set; }
     public string? TitleImage { get; set; } = "";
-    public List<string> Images { get; set; } = new List<string>();
+    public List<BlockImageDto> Images { get; set; } = new List<BlockImageDto>();
+
+}
+public class BlockImageDto
+{
+    public string Name { get; set; }
+    public FileUploadRequest? Image { get; set; }
+    public string? ImageInBytes { get; set; }
+    public string? ImageExtension { get; set; }
 
 }
 
-
-public class SlideDto: IDto
+public class SliderDto: IDto
 {
 
     //If  a slide type is an image, then value contain is a path to file

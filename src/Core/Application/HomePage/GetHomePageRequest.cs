@@ -1,4 +1,5 @@
 ﻿
+using Mapster;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +26,8 @@ public class GetHomePageRequestHandler : IRequestHandler<GetHomePageRequest, Mai
         var mainpage =await  _file.GetStringFileAsync(MainPageModel.NameJson);
         if (!string.IsNullOrEmpty(mainpage))
         {
-            var mainpageModel=_serializerService.Deserialize<MainPageModelDto>(mainpage);
-            return mainpageModel;
+            var mainpageModel=_serializerService.Deserialize<MainPageModel>(mainpage);
+            return mainpageModel.Adapt<MainPageModelDto>();
         }
         return null;
     }

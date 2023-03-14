@@ -28,11 +28,24 @@ public class UpdateHomePageRequestHandler : IRequestHandler<UpdateHomePageReques
     public async Task<MainPageModelDto> Handle(UpdateHomePageRequest request, CancellationToken cancellationToken)
     {
         
-        foreach(var slider in request.Slides)
+        foreach(var slider in request.Sliders)
         {
             if (slider.Image is not null) {
                 
-                slider.ImagePath = await _file.UploadAsync<MainPageModel>(slider.Image, FileType.Image, cancellationToken);
+                slider.ImagePath = await _file.UploadAsync<Slider>(slider.Image, FileType.Image, cancellationToken);
+            }
+        }
+        foreach(var block in request.TextBlocs)
+        {
+            if (block.Images is not null  && block.Images.Count > 0)
+            {
+                foreach(var image in block.Images)
+                {
+                    if (image.Image is not null)
+                    {
+                        image.Name = await _file.UploadAsync<TextBlock>(image.Image, FileType.Image, cancellationToken,block.Id.ToString());
+                    }
+                }
             }
         }
         var mainpageModel = request.Adapt<MainPageModel>();

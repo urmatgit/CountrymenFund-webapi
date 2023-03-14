@@ -8,7 +8,7 @@ namespace FSH.WebApi.Infrastructure.FileStorage;
 
 public class LocalFileStorageService : IFileStorageService
 {
-    public async Task<string> UploadAsync<T>(FileUploadRequest? request, FileType supportedFileType, CancellationToken cancellationToken = default)
+    public async Task<string> UploadAsync<T>(FileUploadRequest? request,  FileType supportedFileType,   CancellationToken cancellationToken = default, string subPath = "")
     where T : class
     {
         if (request == null || request.Data == null)
@@ -31,14 +31,22 @@ public class LocalFileStorageService : IFileStorageService
             {
                 folder = folder.Replace(@"\", "/");
             }
-
+            
             string folderName = supportedFileType switch
             {
                 FileType.Image => Path.Combine("Files", "Images", folder),
                 _ => Path.Combine("Files", "Others", folder),
             };
+            
             string pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
             Directory.CreateDirectory(pathToSave);
+
+            if (!string.IsNullOrEmpty(subPath))
+            {
+                pathToSave=Path.Combine(pathToSave, subPath);
+                folderName = Path.Combine(folderName,subPath);
+                Directory.CreateDirectory(pathToSave);
+            }
 
             string fileName = request.Name.Trim('"');
             fileName = RemoveSpecialCharacters(fileName);
