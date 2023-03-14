@@ -1,5 +1,7 @@
 ﻿using FSH.WebApi.Application.Catalog.Contributions;
+using FSH.WebApi.Application.HomePage;
 using FSH.WebApi.Domain.Catalog.Fund;
+using FSH.WebApi.Domain.Common;
 using Mapster;
 
 namespace FSH.WebApi.Infrastructure.Mapping;
@@ -22,5 +24,9 @@ public class MapsterSettings
 
         TypeAdapterConfig<ContributionDto, Contribution>.NewConfig()
             .Map(d => d.Date, s => s.Date!.Value.ToUniversalTime());
+        //TypeAdapterConfig<BlockImageDto, string>.NewConfig()
+        //     .Map(d => d, s => s.Name);
+        //TypeAdapterConfig<string, BlockImageDto>.NewConfig()
+        //     .Map(d => d, s => new BlockImageDto() { Name=s} );
     }
 }
