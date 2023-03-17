@@ -1,4 +1,5 @@
 ﻿using FSH.WebApi.Application.Catalog.Contributions;
+using FSH.WebApi.Application.Catalog.Natives;
 using MediatR;
 
 namespace FSH.WebApi.Host.Controllers.Catalog;
@@ -52,6 +53,14 @@ public class ContributionsController: VersionedApiController
     {
         return Mediator.Send(new DeleteContributionRequest(id));
     }
+    //ExportContributionRequest
+    [HttpPost("export")]
+    [MustHavePermission(FSHAction.Export, FSHResource.Contributions)]
+    [OpenApiOperation("Export a contributions.", "")]
+    public async Task<FileResult> ExportAsync(ExportContributionsRequest filter)
+    {
+        var result = await Mediator.Send(filter);
+        return File(result, "application/octet-stream", "NativeExports");
+    }
 
-    
 }
