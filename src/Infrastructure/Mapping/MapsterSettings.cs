@@ -1,4 +1,5 @@
 ﻿using FSH.WebApi.Application.Catalog.Contributions;
+using FSH.WebApi.Application.Catalog.Natives;
 using FSH.WebApi.Application.HomePage;
 using FSH.WebApi.Domain.Catalog.Fund;
 using FSH.WebApi.Domain.Common;
@@ -22,8 +23,17 @@ public class MapsterSettings
             .Map(d => d.Village, s => s.Native!.Village)
             .Map(d=>d.RuralGovName,s=>s.Native!.RuralGov!.Name);
 
+        TypeAdapterConfig<Contribution, ContributionExportDto>.NewConfig()
+            .Map(d => d.NativeFIO, s => $"{s.Native!.Name} {s.Native!.Surname} {s.Native!.MiddleName}")
+            .Map(d => d.Year, s => s.Year!.year)
+            .Map(d => d.Village, s => s.Native!.Village)
+            .Map(d => d.RuralGovName, s => s.Native!.RuralGov!.Name);
+
         TypeAdapterConfig<ContributionDto, Contribution>.NewConfig()
             .Map(d => d.Date, s => s.Date!.Value.ToUniversalTime());
+        TypeAdapterConfig<Native, NativeExportDto>.NewConfig()
+            .Map(d => d.RuralGovName, s => s.RuralGov.Name)
+            .Map(d=>d.BirthDate,s=>s.BirthDate.Value.Date);
         //TypeAdapterConfig<BlockImageDto, string>.NewConfig()
         //     .Map(d => d, s => s.Name);
         //TypeAdapterConfig<string, BlockImageDto>.NewConfig()

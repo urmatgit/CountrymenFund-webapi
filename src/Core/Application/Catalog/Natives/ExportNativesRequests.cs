@@ -10,8 +10,7 @@ namespace FSH.WebApi.Application.Catalog.Natives;
 public class ExportNativesRequest : BaseFilter,IRequest<Stream>
 {
     public DefaultIdType? RuralGovId { get; set; }
-    public decimal? MinimumRate { get; set; }
-    public decimal? MaximumRate { get; set; }
+    
 }
 public class ExportNativesRequestHandler: IRequestHandler<ExportNativesRequest, Stream>
 {
@@ -36,7 +35,10 @@ public class ExportNativesWithRuralGovSpecification: EntitiesByBaseFilterSpec<Na
     {
         Query.Include(p => p.RuralGov)
             .Where(p => p.RuralGovId.Equals(request.RuralGovId!.Value), request.RuralGovId.HasValue)
-            .Where(p => p.Rate >= request.MinimumRate!.Value, request.MinimumRate.HasValue)
-            .Where(p => p.Rate <= request.MaximumRate!.Value, request.MaximumRate.HasValue); 
+            .OrderBy(o=>o.RuralGov.Name)
+            .ThenBy(o=>o.Name)
+            .ThenBy(o=>o.Surname);
+            
+             
     }
 }
