@@ -22,6 +22,8 @@ public class ApplicationDbContext : BaseDbContext
     public DbSet<Native> Natives => Set<Native>();
     public DbSet<Year> Years => Set<Year>();
     public DbSet<Contribution> Contributions => Set<Contribution>();
+    public DbSet<FinSupport> FinSupport => Set<FinSupport>();
+    public DbSet<FSContribution> FSContributions => Set<FSContribution>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
