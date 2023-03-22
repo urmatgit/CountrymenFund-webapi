@@ -10,7 +10,9 @@ public class FinSupportsBySearchRequestSpec : EntitiesByPaginationFilterSpec<Fin
 {
     public FinSupportsBySearchRequestSpec(SearchFinSupportsRequest request)
         : base(request) =>
-        Query.OrderBy(c => c.Name, !request.HasOrderBy());
+        Query
+        .OrderByDescending(c => c.Begin, !request.HasOrderBy())
+        .ThenBy(c => c.Name, !request.HasOrderBy());
 }
 
 public class SearchFinSupportsRequestHandler : IRequestHandler<SearchFinSupportsRequest, PaginationResponse<FinSupportDto>>
