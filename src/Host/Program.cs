@@ -4,7 +4,9 @@ using FSH.WebApi.Host.Configurations;
 using FSH.WebApi.Host.Controllers;
 using FSH.WebApi.Infrastructure;
 using FSH.WebApi.Infrastructure.Common;
+using Microsoft.AspNetCore.HttpOverrides;
 using Serilog;
+using System.Net;
 
 [assembly: ApiConventionType(typeof(FSHApiConventions))]
 
@@ -24,13 +26,24 @@ try
     builder.Services.AddControllers().AddFluentValidation();
     builder.Services.AddInfrastructure(builder.Configuration);
     builder.Services.AddApplication();
-
+    builder.Services.Configure<ForwardedHeadersOptions>(options =>
+    {
+        options.KnownProxies.Add(IPAddress.Parse("10.0.0.100"));
+    });
     var app = builder.Build();
-
+    if (!app.Environment.IsDevelopment())
+    {
+        app.UseHttpsRedirection();
+    }
     await app.Services.InitializeDatabasesAsync();
-
+    app.UseForwardedHeaders(new ForwardedHeadersOptions
+    {
+        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+    });
     app.UseInfrastructure(builder.Configuration);
+    
     app.MapEndpoints();
+    
     app.Run();
 }
 catch (Exception ex) when (!ex.GetType().Name.Equals("StopTheHostException", StringComparison.Ordinal))
