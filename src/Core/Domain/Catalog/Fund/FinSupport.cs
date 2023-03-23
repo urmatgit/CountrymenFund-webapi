@@ -16,6 +16,8 @@ public class FinSupport : AuditableEntity, IAggregateRoot
     /// Responsible person, Manager
     /// </summary>
     public virtual Native Native { get; set; }
+    public virtual List<FSContribution> FSContributions { get; set; }
+
     public FinSupport Update(string name,string description,DateTime begin,DateTime? end,DefaultIdType nativeId)
     {
         Name= name;
@@ -34,6 +36,7 @@ public class FinSupport : AuditableEntity, IAggregateRoot
         Begin = begin;
         End = end.HasValue? end.Value.ToUniversalTime(): end;
         NativeId = nativeId;
+        FSContributions = new List<FSContribution>();
     }
 
 }

@@ -1,4 +1,5 @@
 ﻿using FSH.WebApi.Application.Catalog.Contributions;
+using FSH.WebApi.Application.Catalog.FSContributions;
 using FSH.WebApi.Application.Identity.Roles;
 using FSH.WebApi.Application.Identity.Users;
 using FSH.WebApi.Domain.Catalog.Fund;
@@ -19,10 +20,12 @@ public class GetStatsRequestHandler : IRequestHandler<GetStatsRequest, StatsDto>
     //private readonly IReadRepository<Product> _productRepo;
     private readonly IReadRepository<Native> _nativeRepo;
     private readonly IReadRepository<Contribution> _contributionRepo;
+    private readonly IReadRepository<FSContribution> _fscontributionRepo;
     private readonly IDapperRepository _dapperRepository;
     private readonly IStringLocalizer _t;
     private readonly GetContributionsSummRequest _sumRequest;
-    public GetStatsRequestHandler(IUserService userService, IRoleService roleService,  IReadRepository<RuralGov> ruralGovRepo, IStringLocalizer<GetStatsRequestHandler> localizer, IReadRepository<Native> nativeRepo, IReadRepository<Contribution> contributionRepo, IDapperRepository dapperRepository)
+    private readonly GetFSContributionsSummRequest _sumFSRequest;
+    public GetStatsRequestHandler(IUserService userService, IRoleService roleService,  IReadRepository<RuralGov> ruralGovRepo, IStringLocalizer<GetStatsRequestHandler> localizer, IReadRepository<Native> nativeRepo, IReadRepository<Contribution> contributionRepo, IReadRepository<FSContribution> fscontributionRepo, IDapperRepository dapperRepository)
     {
         _userService = userService;
         _roleService = roleService;
@@ -33,18 +36,29 @@ public class GetStatsRequestHandler : IRequestHandler<GetStatsRequest, StatsDto>
         _nativeRepo = nativeRepo;
         _contributionRepo = contributionRepo;
         _dapperRepository = dapperRepository;
+        _fscontributionRepo= fscontributionRepo;
         _sumRequest = new GetContributionsSummRequest(_dapperRepository, _contributionRepo);
+        _sumFSRequest = new GetFSContributionsSummRequest(_dapperRepository, _fscontributionRepo);
     }
     private async Task<decimal> GetContributesSum(CancellationToken cancellationToken)
     {
         //   var request= new GetContributionsSummRequest(_dapperRepository,_contributionRepo);
         return await _sumRequest.GetSumm(cancellationToken);
     }
+    private async Task<decimal> GetFSContributesSum(CancellationToken cancellationToken)
+    {
+        //   var request= new GetContributionsSummRequest(_dapperRepository,_contributionRepo);
+        return await _sumFSRequest.GetSumm(cancellationToken);
+    }
     private async Task<decimal> GetContributesSumBitween(DateTime start, DateTime until, CancellationToken cancellationToken)
     {
         // var request = new GetContributionsSummRequest(_dapperRepository, _contributionRepo);
 
         return await _sumRequest.GetSummBitween(start, until, cancellationToken);
+    }
+    private async Task<decimal> GetFSContributesSumBitween(DateTime start, DateTime until, CancellationToken cancellationToken)
+    {
+        return await _sumFSRequest.GetSummBitween(start, until, cancellationToken);
     }
     private async Task<IEnumerable<GroupTotal>> GetGroupTotals(DateTime start, DateTime until, CancellationToken cancellationToken)
     {
@@ -61,7 +75,8 @@ public class GetStatsRequestHandler : IRequestHandler<GetStatsRequest, StatsDto>
             RoleCount = await _roleService.GetCountAsync(cancellationToken),
             NativeCount = await _nativeRepo.CountAsync(cancellationToken),
             ContributionsCount = await _contributionRepo.CountAsync(cancellationToken),
-            ContributionSumma = await GetContributesSum(cancellationToken)
+            ContributionSumma = await GetContributesSum(cancellationToken),
+            FSContributionSumma = await GetFSContributesSum(cancellationToken)
 
         };
 
@@ -72,6 +87,7 @@ public class GetStatsRequestHandler : IRequestHandler<GetStatsRequest, StatsDto>
         double[] nativeFigure = new double[13];
         double[] contributionFigure = new double[13];
         double[] contributionSumFigure = new double[13];
+        double[] fscontributionSumFigure = new double[13];
         Dictionary<string, double[]> ruralGovsTotals = new Dictionary<string, double[] > ();
         for (int i = 1; i <= 12; i++)
         {
@@ -84,7 +100,7 @@ public class GetStatsRequestHandler : IRequestHandler<GetStatsRequest, StatsDto>
             var productSpec = new AuditableEntitiesByCreatedOnBetweenSpec<Product>(filterStartDate, filterEndDate);
             var nativeSpec = new AuditableEntitiesByCreatedOnBetweenSpec<Native>(filterStartDate, filterEndDate);
             var contributionSpec = new AuditableEntitiesByCreatedOnBetweenSpec<Contribution>(filterStartDate, filterEndDate);
-
+            var fscontributionSpec = new AuditableEntitiesByCreatedOnBetweenSpec<FSContribution>(filterStartDate, filterEndDate);
             //brandsFigure[i - 1] = await _brandRepo.CountAsync(brandSpec, cancellationToken);
             //productsFigure[i - 1] = await _productRepo.CountAsync(productSpec, cancellationToken);
             ruralGovsFigure[i - 1] = await _ruralGovRepo.CountAsync(ruralGovSpec, cancellationToken);
@@ -92,6 +108,7 @@ public class GetStatsRequestHandler : IRequestHandler<GetStatsRequest, StatsDto>
             nativeFigure[i - 1] = await _nativeRepo.CountAsync(nativeSpec, cancellationToken);
             contributionFigure[i - 1] = await _contributionRepo.CountAsync(contributionSpec, cancellationToken);
             contributionSumFigure[i - 1] = (double)await GetContributesSumBitween(filterStartDate, filterEndDate, cancellationToken);
+            fscontributionSumFigure[i - 1] = (double)await GetFSContributesSumBitween(filterStartDate, filterEndDate, cancellationToken);
             foreach (var gt in await GetGroupTotals(filterStartDate, filterEndDate, cancellationToken))
                 if (ruralGovsTotals.ContainsKey(gt.Name))
                 {
@@ -111,6 +128,7 @@ public class GetStatsRequestHandler : IRequestHandler<GetStatsRequest, StatsDto>
         stats.DataEnterBarChart.Add(new ChartSeries { Name = _t["Natives"], Data = nativeFigure });
         stats.DataEnterBarChart.Add(new ChartSeries { Name = _t["Contributions"], Data = contributionFigure });
         stats.DataEnterSumBarChart.Add(new ChartSeries { Name = _t["Contribution summa"], Data = contributionSumFigure });
+        stats.DataEnterSumBarChart.Add(new ChartSeries { Name = _t["FinSupport Contribution summa"], Data = fscontributionSumFigure });
         foreach (var key in ruralGovsTotals)
         {
             stats.DataEnterSumBarChart.Add(new ChartSeries
