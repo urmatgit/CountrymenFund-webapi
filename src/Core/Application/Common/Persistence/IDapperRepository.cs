@@ -43,6 +43,7 @@ public interface IDapperRepository : ITransientService
     Task<decimal> QuerySumValueAsync<T>(Expression<Func<T, bool>> predicate, Expression<Func<T, decimal>> selector, CancellationToken cancellationToken = default)
         where T : class, IEntity;
     Task<IEnumerable<IGroupTotal>> QueryRuralGovSumsValue(DateTime start, DateTime end, CancellationToken cancellationToken = default);
+    Task<IEnumerable<IGroupTotal>> QueryFinSupportSumsValue(DateTime start, DateTime end, CancellationToken cancellationToken = default);
 
     IQueryable<T> GetQueryable<T>() where T : class, IEntity;   
 

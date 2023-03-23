@@ -10,6 +10,7 @@ public class StatsDto
     public int NativeCount { get; set; }
     public int ContributionsCount { get; set; }
     public decimal ContributionSumma { get; set; }
+    public decimal FSContributionSumma { get; set; }
     public List<ChartSeries> DataEnterBarChart { get; set; } = new();
     public List<ChartSeries> DataEnterSumBarChart { get; set; } = new();
     public Dictionary<string, double>? ProductByBrandTypePieChart { get; set; }

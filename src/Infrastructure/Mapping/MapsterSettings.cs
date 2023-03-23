@@ -1,5 +1,6 @@
 ﻿using FSH.WebApi.Application.Catalog.Contributions;
 using FSH.WebApi.Application.Catalog.FinSupports;
+using FSH.WebApi.Application.Catalog.FSContributions;
 using FSH.WebApi.Application.Catalog.Natives;
 using FSH.WebApi.Application.HomePage;
 using FSH.WebApi.Domain.Catalog.Fund;
@@ -23,6 +24,15 @@ public class MapsterSettings
             .Map(d => d.Year, s => s.Year!.year)
             .Map(d => d.Village, s => s.Native!.Village)
             .Map(d=>d.RuralGovName,s=>s.Native!.RuralGov!.Name);
+
+        TypeAdapterConfig<FSContribution, FSContributionDto>.NewConfig()
+            .Map(d => d.NativeFIO, s => $"{s.Native!.Name} {s.Native!.Surname} {s.Native!.MiddleName}")
+            .Map(d => d.FinSuportName, s => s.FinSupport!.Name);
+
+        TypeAdapterConfig<FSContribution, FSContributionExportDto>.NewConfig()
+            .Map(d => d.NativeFIO, s => $"{s.Native!.Name} {s.Native!.Surname} {s.Native!.MiddleName}")
+            .Map(d => d.FinSuportName, s => s.FinSupport!.Name);
+
 
         TypeAdapterConfig<Contribution, ContributionExportDto>.NewConfig()
             .Map(d => d.NativeFIO, s => $"{s.Native!.Name} {s.Native!.Surname} {s.Native!.MiddleName}")

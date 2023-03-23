@@ -1,21 +1,23 @@
-﻿using FSH.WebApi.Shared.Enums;
+﻿using FSH.WebApi.Domain.Catalog.Fund;
+using FSH.WebApi.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FSH.WebApi.Domain.Catalog.Fund;
-public class FSContribution : AuditableEntity, IAggregateRoot
+namespace FSH.WebApi.Application.Catalog.FSContributions;
+public  class FSContributionDto: FSContributionExportDto
 {
-    public decimal Summa { get; set; }
-    public DateTime Date { get; set; }
+    public DefaultIdType Id { get; set; }
+    
     public DefaultIdType NativeId { get; set; }
-    public virtual Native Native { get; set; }
-    public string? Description { get; set; }
     public DefaultIdType FinSupportId { get; set; }
-    public virtual FinSupport FinSupport { get; set; }
-    public FSContribution Update(decimal summa, DateTime? date, DefaultIdType nativeId, string? description ,DefaultIdType finSupportId)
+    public FSContributionDto() :base() 
+    {
+    
+    }
+    public FSContributionDto Update(decimal summa, DateTime? date, DefaultIdType nativeId, string? description, DefaultIdType finSupportId)
     {
         if (!Summa.Equals(summa)) Summa = summa;
         if (!FinSupportId.Equals(finSupportId)) FinSupportId = finSupportId;

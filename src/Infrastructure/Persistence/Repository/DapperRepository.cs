@@ -66,4 +66,18 @@ public class DapperRepository : IDapperRepository
     {
         return _dbContext.Set<T>().AsQueryable();
     }
+
+    public async Task<IEnumerable<IGroupTotal>> QueryFinSupportSumsValue(DateTime start, DateTime end, CancellationToken cancellationToken = default)
+    {
+        var controlbution = await _dbContext.FSContributions
+          .Include(x => x.FinSupport)
+          .Where(x => x.Date >= start && x.Date <= end)
+          .GroupBy(x => x.FinSupport.Name)
+          .Select(x => new GroupTotal
+          {
+              Name = x.Key,
+              Total = x.Sum(y => y.Summa)
+          }).ToListAsync(cancellationToken);
+        return controlbution;
+    }
 }

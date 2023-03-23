@@ -9,4 +9,6 @@ public class FinSupportDto : IDto
     public DateTime? End { get; set; }
     public DefaultIdType NativeId { get; set; }
     public string FIOManager { get; set; }
+    public decimal Total { get; set; }
+
 }

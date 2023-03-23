@@ -4,6 +4,7 @@ namespace FSH.WebApi.Application.Catalog.FinSupports;
 
 public class SearchFinSupportsRequest : PaginationFilter, IRequest<PaginationResponse<FinSupportDto>>
 {
+    public bool? IsCompleted { get; set; }=null;
 }
 
 public class FinSupportsBySearchRequestSpec : EntitiesByPaginationFilterSpec<FinSupport, FinSupportDto>
@@ -12,7 +13,8 @@ public class FinSupportsBySearchRequestSpec : EntitiesByPaginationFilterSpec<Fin
         : base(request) =>
         Query
         .OrderByDescending(c => c.Begin, !request.HasOrderBy())
-        .ThenBy(c => c.Name, !request.HasOrderBy());
+        .ThenBy(c => c.Name, !request.HasOrderBy())
+        .Where(c=>(request.IsCompleted.Value? c.End!=null: c.End==null) ,request.IsCompleted.HasValue);
 }
 
 public class SearchFinSupportsRequestHandler : IRequestHandler<SearchFinSupportsRequest, PaginationResponse<FinSupportDto>>
