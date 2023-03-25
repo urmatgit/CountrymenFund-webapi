@@ -20,8 +20,11 @@
       "WorkerCount": 5
     },
     "Storage": {
-      "StorageProvider": "mssql",
-      "ConnectionString": "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=fullStackHeroDb;Integrated Security=True;MultipleActiveResultSets=True",
+
+      "StorageProvider": "postgresql",
+      "ConnectionString": "Host=localhost;Database=fullStackHeroDb;Username=admin;Password=urmat82;Pooling=true;",
+      //"StorageProvider": "mssql",
+      //"ConnectionString": "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=fullStackHeroDb;Integrated Security=True;MultipleActiveResultSets=True",
       "Options": {
         "CommandBatchMaxTimeout": "00:05:00",
         "QueuePollInterval": "00:00:01",
