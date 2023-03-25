@@ -32,7 +32,7 @@ public class NativeSeed: ICustomSeeder
         if (!_db.Natives.Any())
         {
             var ruralGov = await _ruralGovRepo.GetBySpecAsync(new RuralGovByNameSpec("Кара-Кулжа"), cancellationToken);
-            if (ruralGov == null)
+            if (ruralGov != null)
             {
                 var native = new Native("Урмат", "Эркимбаев", "", new DateTime(1982, 9, 2),"1 май",  "this is for test",10, ruralGov.Id,"");
                 _db.Natives.Add(native);
