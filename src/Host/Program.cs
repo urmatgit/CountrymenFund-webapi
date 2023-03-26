@@ -31,10 +31,10 @@ try
         options.KnownProxies.Add(IPAddress.Parse("10.0.0.100"));
     });
     var app = builder.Build();
-    //if (!app.Environment.IsDevelopment())
-    //{
-    //    app.UseHttpsRedirection();
-    //}
+    if (!app.Environment.IsDevelopment())
+    {
+        app.UseHttpsRedirection();
+    }
     await app.Services.InitializeDatabasesAsync();
     app.UseForwardedHeaders(new ForwardedHeadersOptions
     {
