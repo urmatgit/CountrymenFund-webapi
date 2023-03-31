@@ -1,14 +1,14 @@
 ﻿{
-  "Kestrel": {
-    "Endpoints": {
-      "Http": {
-        "Url": "http://localhost:5000"
-      },
-      "Https": {
-        "Url": "https://localhost:5001"
-      }
-    }
-  },
+  //"Kestrel": {
+  //  "Endpoints": {
+  //    "Http": {
+  //      "Url": "http://localhost:5000"
+  //    },
+  //    "Https": {
+  //      "Url": "https://localhost:5001"
+  //    }
+  //  }
+  //},
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
@@ -24,7 +24,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": false,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:5001;http://localhost:5002",
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "NotDevelopment"
       }
