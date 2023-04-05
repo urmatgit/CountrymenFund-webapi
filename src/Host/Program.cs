@@ -28,7 +28,8 @@ try
     builder.Services.AddApplication();
     builder.Services.Configure<ForwardedHeadersOptions>(options =>
     {
-        //options.KnownProxies.Add(IPAddress.Parse("10.0.0.100"));
+        if (!builder.Environment.IsDevelopment())
+            options.KnownProxies.Add(IPAddress.Parse("10.0.0.100"));
         //options.ForwardedHeaders = ForwardedHeaders.All;
         //options.KnownNetworks.Clear();
         //options.KnownProxies.Clear();
