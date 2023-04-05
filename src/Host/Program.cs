@@ -34,10 +34,10 @@ try
         //options.KnownProxies.Clear();
     });
     var app = builder.Build();
-    if (!app.Environment.IsDevelopment())
-    {
-        app.UseHttpsRedirection();
-    }
+    //if (!app.Environment.IsDevelopment())
+    //{
+    //    app.UseHttpsRedirection();
+    //}
     await app.Services.InitializeDatabasesAsync();
     app.UseForwardedHeaders(new ForwardedHeadersOptions
     {
