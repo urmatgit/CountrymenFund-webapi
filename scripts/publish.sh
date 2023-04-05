@@ -8,4 +8,4 @@ cp -rT /projects/CountrymenFund-webapi/src/Host/published/ /var/www/fundapi/
 cp -rT /projects/CountrymenFund-wasm/src/Host/published/ /var/www/fundwasm/
 systemctl start kestrel-fundWebApi.service
 systemctl start fundWasm.service
-systemctl restart nginxcd
+systemctl restart nginx
