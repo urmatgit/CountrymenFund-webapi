@@ -145,7 +145,7 @@ internal partial class UserService : IUserService
         }
 
         user.IsActive = request.ActivateUser;
-
+        user.EmailConfirmed = request.ActiveEmail;
         await _userManager.UpdateAsync(user);
 
         await _events.PublishAsync(new ApplicationUserUpdatedEvent(user.Id));
