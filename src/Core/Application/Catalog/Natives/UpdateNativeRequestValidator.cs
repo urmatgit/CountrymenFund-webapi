@@ -20,8 +20,8 @@ public class UpdateNativeRequestValidator: CustomValidator<UpdateNativeRequest>
             .InclusiveBetween (1, 5)
             .WithMessage((_) => T["The rating should be from 1 to 5"])
             .GreaterThanOrEqualTo(1);
-        RuleFor(p => p.Image)
-            .InjectValidator();
+        //RuleFor(p => p.Image)
+        //    .InjectValidator();
         RuleFor(p => p.RuralGovId)
             .MustAsync(async (id, ct) => await ruralGovRep.GetByIdAsync(id, ct) is not null)
             .WithMessage((_, id) => T["Rural goverment {0} Not Found.", id]);
