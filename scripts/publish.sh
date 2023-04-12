@@ -1,8 +1,34 @@
 #!/bin/bash
 echo "start publish"
 cd /projects/CountrymenFund-webapi/src/Host
+rm -r bin
+rm -r obj
+rm -r /projects/CountrymenFund-wasm/src/Core/Application/obj
+rm -r /projects/CountrymenFund-wasm/src/Core/Application/bin
+rm -r /projects/CountrymenFund-wasm/src/Core/Domain/obj
+rm -r /projects/CountrymenFund-wasm/src/Core/Domain/bin
+rm -r /projects/CountrymenFund-wasm/src/Core/Shared/obj
+rm -r /projects/CountrymenFund-wasm/src/Core/Shared/bin
+
+rm -r /projects/CountrymenFund-wasm/src/Infrastructure/obj
+rm -r /projects/CountrymenFund-wasm/src/Infrastructure/bin
+
 dotnet publish -c Release -r linux-x64 -o published /projects/CountrymenFund-webapi/src/Host/Host.csproj
+
 cd /projects/CountrymenFund-wasm/src/Host
+rm -r /projects/CountrymenFund-wasm/src/Host/bin
+rm -r /projects/CountrymenFund-wasm/src/Host/obj
+
+rm -r /projects/CountrymenFund-wasm/src/Client/bin
+rm -r /projects/CountrymenFund-wasm/src/Client/obj
+
+rm -r /projects/CountrymenFund-wasm/src/Client.Infrastructure/bin
+rm -r /projects/CountrymenFund-wasm/src/Client.Infrastructure/obj
+
+rm -r /projects/CountrymenFund-wasm/src/Shared/bin
+rm -r /projects/CountrymenFund-wasm/src/Shared/obj
+
+
 dotnet publish -c Release -r linux-x64 -o published /projects/CountrymenFund-wasm/src/Host/Host.csproj
 echo "stop kestrel-fundWebApi.service"
 systemctl stop kestrel-fundWebApi.service
