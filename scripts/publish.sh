@@ -3,6 +3,7 @@ echo "start publish"
 cd /projects/CountrymenFund-webapi/src/Host
 rm -r bin
 rm -r obj
+rm -r published
 rm -r /projects/CountrymenFund-wasm/src/Core/Application/obj
 rm -r /projects/CountrymenFund-wasm/src/Core/Application/bin
 rm -r /projects/CountrymenFund-wasm/src/Core/Domain/obj
@@ -14,10 +15,10 @@ rm -r /projects/CountrymenFund-wasm/src/Infrastructure/obj
 rm -r /projects/CountrymenFund-wasm/src/Infrastructure/bin
 
 dotnet publish -c Release -r linux-x64 -o published /projects/CountrymenFund-webapi/src/Host/Host.csproj
-
 cd /projects/CountrymenFund-wasm/src/Host
 rm -r /projects/CountrymenFund-wasm/src/Host/bin
 rm -r /projects/CountrymenFund-wasm/src/Host/obj
+rm -r /projects/CountrymenFund-wasm/src/Host/published
 
 rm -r /projects/CountrymenFund-wasm/src/Client/bin
 rm -r /projects/CountrymenFund-wasm/src/Client/obj
