@@ -17,10 +17,10 @@ public   class CreateNativeRequestValidator: CustomValidator<CreateNativeRequest
              .MustAsync(async (x, ct) => await nativeRepo.GetBySpecAsync(new NativeCheckExistSpec(x.Name, x.Surname, x.BirthDate!.Value.ToUniversalTime(), x.RuralGovId,x.Image!=null), ct) is null)
              .WithMessage((_, x) => T["Native {0} already Exists.",$"{x.Name} {x.Surname } ({x.BirthDate}, {ruralGovRepo.GetByIdAsync(x.RuralGovId).Result?.Name})"]);
 
-        RuleFor(p => p.Rate)
-            .InclusiveBetween(1,5)
-            .WithMessage((_) => T["The rating should be from 1 to 5"])
-            .GreaterThanOrEqualTo(1);
+        //RuleFor(p => p.Rate)
+        //    .InclusiveBetween(1,5)
+        //    .WithMessage((_) => T["The rating should be from 1 to 5"])
+        //    .GreaterThanOrEqualTo(1);
         
         //RuleFor(p => p.Image)
         //    .InjectValidator();

@@ -16,7 +16,7 @@ public class UpdateNativeRequest : IRequest<DefaultIdType>
     public string? Village { get; set; }
     public string? Description { get; set; }
     //Rating of person
-    public int Rate { get; set; }
+    public int Rate { get; set; } = 5;
     public DefaultIdType RuralGovId { get; set; }
     public bool DeleteCurrentImage { get; set; } = false;
     public FileUploadRequest? Image { get; set; }
