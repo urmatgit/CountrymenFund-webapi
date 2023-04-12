@@ -3,10 +3,11 @@
     "EnableLocalization": true,
     "ResourcesPath": "Localization",
     "SupportedCultures": [
-      "en-US",
-      "en",
       "ru-RU",
-      "ru"
+      "ru",
+      "en-US",
+      "en"
+
     ],
     "DefaultRequestCulture": "ru",
     "FallbackToParent": true

@@ -28,7 +28,7 @@ internal static class Startup
                     options.SupportedUICultures = supportedCultures;
                 }
 
-                options.DefaultRequestCulture = new RequestCulture(localizationSettings.DefaultRequestCulture ?? "en-US");
+                options.DefaultRequestCulture = new RequestCulture(localizationSettings.DefaultRequestCulture ?? "ru-RU");
                 options.FallBackToParentCultures = localizationSettings.FallbackToParent ?? true;
                 options.FallBackToParentUICultures = localizationSettings.FallbackToParent ?? true;
             });
