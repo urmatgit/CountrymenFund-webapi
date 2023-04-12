@@ -8,7 +8,7 @@
     <description>
       Clean Architecture Template for .NET 7.0 WebAPI built with Multitenancy Support.
     </description>
-    <language>en-US</language>
+    <language>ru-RU</language>
     <license type="file">./content/LICENSE</license>
     <copyright>2023</copyright>
     <readme>./content/README.md</readme>
