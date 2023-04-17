@@ -1,12 +1,16 @@
 ﻿using System.ComponentModel;
 using System.Data;
+
+using System.Runtime.InteropServices;
 using ClosedXML.Excel;
+using ClosedXML.Graphics;
 using DocumentFormat.OpenXml.Spreadsheet;
 using FSH.WebApi.Application.Common.Exporters;
 using FSH.WebApi.Application.Common.Interfaces;
 using FSH.WebApi.Application.Common.Models;
 using Microsoft.Extensions.Localization;
 using Org.BouncyCastle.Asn1.BC;
+using SixLabors.Fonts;
 
 namespace FSH.WebApi.Infrastructure.Common.Export;
 
@@ -48,10 +52,27 @@ public class ExcelWriter : IExcelWriter
                     XLBorderStyleValues.Thin;
        
     }
+    private   void UpdateGraphicsEngineFonts()
+    {
+        bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+        if (isWindows) return;
+
+        // https://github.com/ClosedXML/ClosedXML/releases/tag/0.97.0
+        const string preferredFont = "DejaVu Sans";
+        List<string> fonts = SystemFonts.Collection.Families.Select(f => f.Name).ToList();
+
+        // If the preferred font is not available, use the first available font
+        var fontName = fonts.Contains(preferredFont) ? preferredFont : fonts.First();
+
+        // All workbooks created later will use the engine with a fallback font DejaVu Sans
+        // (or the first available font)
+        LoadOptions.DefaultGraphicEngine = new DefaultGraphicEngine(fontName);
+    }
     public async Task<byte[]> ExportAsync<TData>(IEnumerable<TData> data
            , Dictionary<string, Func<TData, object>> mappers
            , string sheetName = "Sheet1")
     {
+        UpdateGraphicsEngineFonts();
         using (var workbook = new XLWorkbook())
         {
             workbook.Properties.Author = "";
