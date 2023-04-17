@@ -218,4 +218,38 @@ msgctxt "FSH.WebApi.Application.Catalog.Totals.GetTotalReportByNativesRequestHan
 msgid "Totals"
 msgstr "Итоги"
 
+#:
+msgctxt  "FSH.WebApi.Application.Catalog.Natives.ExportNativesRequestHandler"
+msgid "Name"
+msgstr "Имя"
+
+#:
+msgctxt  "FSH.WebApi.Application.Catalog.Natives.ExportNativesRequestHandler"
+msgid "Surname"
+msgstr "Фамилия"
+
+#:
+msgctxt  "FSH.WebApi.Application.Catalog.Natives.ExportNativesRequestHandler"
+msgid "MiddleName"
+msgstr "Отчество"
+
+#:
+msgctxt  "FSH.WebApi.Application.Catalog.Natives.ExportNativesRequestHandler"
+msgid "Village"
+msgstr "Село"
+
+#:
+msgctxt  "FSH.WebApi.Application.Catalog.Natives.ExportNativesRequestHandler"
+msgid "BirthDate"
+msgstr "День рождения"
+
+#:
+msgctxt  "FSH.WebApi.Application.Catalog.Natives.ExportNativesRequestHandler"
+msgid "Description"
+msgstr "Комментарий"
+
+#:
+msgctxt  "FSH.WebApi.Application.Catalog.Natives.ExportNativesRequestHandler"
+msgid "RuralGovName"
+msgstr "Сельское самоуправление"
 
