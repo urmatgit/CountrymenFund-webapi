@@ -31,7 +31,7 @@ rm -r /projects/CountrymenFund-wasm/src/Shared/bin
 rm -r /projects/CountrymenFund-wasm/src/Shared/obj
 
 
-dotnet publish -c Release -r linux-x64 -o published /projects/CountrymenFund-wasm/src/Host/Host.csproj
+dotnet publish -c Release -r linux-x64 --no-self-contained -o published /projects/CountrymenFund-wasm/src/Host/Host.csproj
 echo "stop kestrel-fundWebApi.service"
 systemctl stop kestrel-fundWebApi.service
 echo "stop fundWasm.service"
