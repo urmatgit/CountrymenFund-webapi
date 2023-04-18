@@ -41,7 +41,7 @@ internal static class Startup
                     doc.Info.Version = settings.Version;
                     var localizer = serviceProvider.GetService<IStringLocalizer<SwaggerSettings>>();
 
-                    doc.Info.Description = localizer[settings.Description] ;
+                    doc.Info.Description ="lng: "+ localizer[settings.Description] ;
                     doc.Info.Contact = new()
                     {
                         Name = settings.ContactName,
