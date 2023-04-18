@@ -332,3 +332,7 @@ msgctxt "FSH.WebApi.Infrastructure.Multitenancy.TenantService"
 msgid "{0} {1} Not Found."
 msgstr "{0} {1} не найдено."
 
+#: FSH.WebApi.Infrastructure.OpenApi.Startup.cs:42
+msgctxt "FSH.WebApi.Infrastructure.OpenApi.SwaggerSettings"
+msgid "Clean Architecture Template for .NET 7 WebApi built with Multitenancy Support."
+msgstr "Шаблон чистой архитектуры для веб-api .NET 7, созданный с поддержкой нескольких арендаторов."

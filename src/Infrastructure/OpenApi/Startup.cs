@@ -1,7 +1,9 @@
+using FSH.WebApi.Application.Catalog.Natives;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using NJsonSchema.Generation.TypeMappers;
 using NSwag;
@@ -17,6 +19,7 @@ internal static class Startup
     {
         var settings = config.GetSection(nameof(SwaggerSettings)).Get<SwaggerSettings>();
         if (settings == null) return services;
+        
         if (settings.Enable)
         {
             services.AddVersionedApiExplorer(o => o.SubstituteApiVersionInUrl = true);
@@ -36,7 +39,9 @@ internal static class Startup
                 {
                     doc.Info.Title = settings.Title;
                     doc.Info.Version = settings.Version;
-                    doc.Info.Description = settings.Description;
+                    var localizer = serviceProvider.GetService<IStringLocalizer<SwaggerSettings>>();
+
+                    doc.Info.Description = localizer[settings.Description] ;
                     doc.Info.Contact = new()
                     {
                         Name = settings.ContactName,

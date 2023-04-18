@@ -318,3 +318,7 @@ msgctxt "FSH.WebApi.Infrastructure.Multitenancy.TenantService"
 msgid "{0} {1} Not Found."
 msgstr ""
 
+#: FSH.WebApi.Infrastructure.OpenApi.Startup.cs:42
+msgctxt "FSH.WebApi.Infrastructure.OpenApi.SwaggerSettings"
+msgid "Clean Architecture Template for .NET 7 WebApi built with Multitenancy Support."
+msgstr ""
