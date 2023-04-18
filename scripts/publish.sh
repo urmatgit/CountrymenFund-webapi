@@ -4,15 +4,15 @@ cd /projects/CountrymenFund-webapi/src/Host
 rm -r bin
 rm -r obj
 rm -r published
-rm -r /projects/CountrymenFund-wasm/src/Core/Application/obj
-rm -r /projects/CountrymenFund-wasm/src/Core/Application/bin
-rm -r /projects/CountrymenFund-wasm/src/Core/Domain/obj
-rm -r /projects/CountrymenFund-wasm/src/Core/Domain/bin
-rm -r /projects/CountrymenFund-wasm/src/Core/Shared/obj
-rm -r /projects/CountrymenFund-wasm/src/Core/Shared/bin
+rm -r /projects/CountrymenFund-webapi/src/Core/Application/obj
+rm -r /projects/CountrymenFund-webapi/src/Core/Application/bin
+rm -r /projects/CountrymenFund-webapi/src/Core/Domain/obj
+rm -r /projects/CountrymenFund-webapi/src/Core/Domain/bin
+rm -r /projects/CountrymenFund-webapi/src/Core/Shared/obj
+rm -r /projects/CountrymenFund-webapi/src/Core/Shared/bin
 
-rm -r /projects/CountrymenFund-wasm/src/Infrastructure/obj
-rm -r /projects/CountrymenFund-wasm/src/Infrastructure/bin
+rm -r /projects/CountrymenFund-webapi/src/Infrastructure/obj
+rm -r /projects/CountrymenFund-webapi/src/Infrastructure/bin
 
 dotnet publish -c Release -r linux-x64 -o published /projects/CountrymenFund-webapi/src/Host/Host.csproj
 
