@@ -36,6 +36,24 @@
         <None Update="Files\full-stack-hero-logo.png">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+        <None Update="Localization\en\Application.en.po">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="Localization\en\Infrastructure.en.po">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="Localization\ru\Application.ru.po">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="Localization\ru\Infrastructure.ru.po">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="Localization\templates\Application.pot">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="Localization\templates\Infrastructure.pot">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
         <None Include="Email Templates\*.html">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
