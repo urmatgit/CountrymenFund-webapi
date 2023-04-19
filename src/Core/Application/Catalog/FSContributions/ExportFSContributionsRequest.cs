@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FSH.WebApi.Application.Catalog.FSContributions;
-public class ExportFSContributionsRequest: BaseFilter,IRequest<Stream>
+public class ExportFSContributionsRequest: BaseFilter,IRequest<byte[]>
 {
 
     
@@ -21,7 +21,7 @@ public class ExportFSContributionsRequest: BaseFilter,IRequest<Stream>
 
     public string? FIO { get; set; }
 }
-public class ExportFSContributionsRequestHandler : IRequestHandler<ExportFSContributionsRequest, Stream>
+public class ExportFSContributionsRequestHandler : IRequestHandler<ExportFSContributionsRequest, byte[]>
 {
     private readonly IReadRepository<FSContribution> _repository;
     private readonly IExcelWriter _excelWriter;
@@ -33,13 +33,13 @@ public class ExportFSContributionsRequestHandler : IRequestHandler<ExportFSContr
         _localizer = localizer;
     }
 
-    public async Task<Stream> Handle(ExportFSContributionsRequest request, CancellationToken cancellationToken)
+    public async Task<byte[]> Handle(ExportFSContributionsRequest request, CancellationToken cancellationToken)
     {
         var spec = new ExportFSContributionsWithBrandsSpecification(request);
 
         var list = await _repository.ListAsync(spec, cancellationToken);
         
-        var result = await _excelWriter.ExportExcelAsync(list,
+        var result = await _excelWriter.ExportAsync(list,
             new Dictionary<string, Func<FSContributionExportDto, object>>()
             {
                     { _localizer["NativeFIO"], item => item.NativeFIO },

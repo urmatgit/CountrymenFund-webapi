@@ -68,17 +68,9 @@ public class ExcelWriter : IExcelWriter
         // (or the first available font)
         LoadOptions.DefaultGraphicEngine = new DefaultGraphicEngine(fontName);
     }
-    public async Task<Stream> ExportExcelAsync<TData>(IEnumerable<TData> data, Dictionary<string, Func<TData, object>> mappers, string sheetName = "Sheet1")
-    {
-        var stream = await ExportExAsync<TData>(data, mappers, sheetName);
-        return stream;
-    }
+
+
     public async Task<byte[]> ExportAsync<TData>(IEnumerable<TData> data, Dictionary<string, Func<TData, object>> mappers, string sheetName = "Sheet1")
-    {
-        var stream= await ExportExAsync<TData>(data, mappers, sheetName);
-        return stream.ToArray();
-    }
-    private async Task<MemoryStream> ExportExAsync<TData>(IEnumerable<TData> data , Dictionary<string, Func<TData, object>> mappers, string sheetName = "Sheet1")
     {
         UpdateGraphicsEngineFonts();
         using (var workbook = new XLWorkbook())
@@ -86,7 +78,7 @@ public class ExcelWriter : IExcelWriter
             workbook.Properties.Author = "";
 
             var ws = workbook.Worksheets.Add(sheetName);
-          
+
             var colIndex = 1;
             var rowIndex = 1;
             var headers = mappers.Keys.Select(x => x).ToList();
@@ -95,18 +87,18 @@ public class ExcelWriter : IExcelWriter
                 var cell = ws.Cell(rowIndex, colIndex);
                 var fill = cell.Style.Fill;
                 cell.Style.Font.SetBold(true);
-                
+
                 fill.PatternType = XLFillPatternValues.Solid;
-                
+
                 fill.SetBackgroundColor(XLColor.LightBlue);
                 borderAround(cell);
-                
+
 
                 cell.Value = header;
-                
+
                 colIndex++;
             }
-            
+
             var dataList = data.ToList();
             foreach (var item in dataList)
             {
@@ -119,21 +111,22 @@ public class ExcelWriter : IExcelWriter
                 {
                     borderAround(ws.Cell(rowIndex, colIndex));
                     ws.Cell(rowIndex, colIndex++).Value = XLCellValue.FromObject(value);
-                    
-                    
+
+
                 }
             }
             foreach (var item in ws.ColumnsUsed())
             {
                 item.AdjustToContents();
             }
-            using (var stream = new MemoryStream())
-            {
-                workbook.SaveAs(stream);
-                //var base64 = Convert.ToBase64String(stream.ToArray());
-                stream.Seek(0, SeekOrigin.Begin);
-                return await Task.FromResult(stream);
-            }
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    //var base64 = Convert.ToBase64String(stream.ToArray());
+                    stream.Seek(0, SeekOrigin.Begin);
+                    return await Task.FromResult(stream.ToArray());
+                }
+            
         }
     }
 

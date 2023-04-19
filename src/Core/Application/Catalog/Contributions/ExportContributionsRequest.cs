@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FSH.WebApi.Application.Catalog.Contributions;
-public class ExportContributionsRequest: BaseFilter,IRequest<Stream>
+public class ExportContributionsRequest: BaseFilter,IRequest<byte[]>
 {
 
     public DefaultIdType? YearId { get; set; }
@@ -22,24 +22,24 @@ public class ExportContributionsRequest: BaseFilter,IRequest<Stream>
 
     public string? FIO { get; set; }
 }
-public class ExportContributionsRequestHandler : IRequestHandler<ExportContributionsRequest, Stream>
+public class ExportContributionsRequestHandler : IRequestHandler<ExportContributionsRequest, byte[]>
 {
     private readonly IReadRepository<Contribution> _repository;
     private readonly IExcelWriter _excelWriter;
     private readonly IStringLocalizer<ContributionExportDto> _localizer;
-    public ExportContributionsRequestHandler(IReadRepository<Contribution> repository, IExcelWriter excelWriter,IStringLocalizer<ContributionExportDto> stringLocalizer    )
+    public ExportContributionsRequestHandler(IReadRepository<Contribution> repository, IExcelWriter excelWriter, IStringLocalizer<ContributionExportDto> stringLocalizer)
     {
         _repository = repository;
         _excelWriter = excelWriter;
         _localizer = stringLocalizer;
     }
 
-    public async Task<Stream> Handle(ExportContributionsRequest request, CancellationToken cancellationToken)
+    public async Task<byte[]> Handle(ExportContributionsRequest request, CancellationToken cancellationToken)
     {
         var spec = new ExportContributionsWithBrandsSpecification(request);
 
         var list = await _repository.ListAsync(spec, cancellationToken);
-        var result = await _excelWriter.ExportExcelAsync(list,
+        var result = await _excelWriter.ExportAsync(list,
            new Dictionary<string, Func<ContributionExportDto, object>>()
            {
                     { _localizer["Year"], item => item.Year },

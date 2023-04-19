@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FSH.WebApi.Application.Catalog.Totals;
-public class ExportTotalByNativesRequest : BaseFilter, IRequest<Stream>
+public class ExportTotalByNativesRequest : BaseFilter, IRequest<byte[]>
 {
     public DefaultIdType? YearId { get; set; }
     public DefaultIdType? RuralGovId { get; set; }
@@ -30,7 +30,7 @@ public class ExportTotalReportByNativesRequestSpec : EntitiesByBaseFilterSpec<Co
 }
 
 
-public class ExportTotalByNativesRequestHandler : IRequestHandler<ExportTotalByNativesRequest, Stream>
+public class ExportTotalByNativesRequestHandler : IRequestHandler<ExportTotalByNativesRequest, byte[]>
 {
     private readonly IDapperRepository _dapperRepository;
     private readonly IExcelWriter _excelWriter;
@@ -42,14 +42,14 @@ public class ExportTotalByNativesRequestHandler : IRequestHandler<ExportTotalByN
         this._localizer = stringLocalizer;
     }
 
-    public async Task<Stream> Handle(ExportTotalByNativesRequest request, CancellationToken cancellationToken)
+    public async Task<byte[]> Handle(ExportTotalByNativesRequest request, CancellationToken cancellationToken)
     {
         
         var totaByNative = new GetTotalByNativeData(_dapperRepository, _localizer);
         var list = await totaByNative.GetListByNatives(new ExportTotalReportByNativesRequestSpec(request), false, cancellationToken);
 
         //var list = await _repository.ListAsync(spec, cancellationToken);
-        var result = await _excelWriter.ExportExcelAsync(list,
+        var result = await _excelWriter.ExportAsync(list,
           new Dictionary<string, Func<TotalByNative, object>>()
           {
                     { _localizer["Year"], item => item.Year },
