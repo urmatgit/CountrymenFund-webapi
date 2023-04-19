@@ -25,8 +25,8 @@ public class ExportFSContributionsRequestHandler : IRequestHandler<ExportFSContr
 {
     private readonly IReadRepository<FSContribution> _repository;
     private readonly IExcelWriter _excelWriter;
-    private readonly IStringLocalizer<ExportFSContributionsRequestHandler> _localizer;
-    public ExportFSContributionsRequestHandler(IReadRepository<FSContribution> repository, IExcelWriter excelWriter, IStringLocalizer<ExportFSContributionsRequestHandler> localizer)
+    private readonly IStringLocalizer<FSContributionExportDto> _localizer;
+    public ExportFSContributionsRequestHandler(IReadRepository<FSContribution> repository, IExcelWriter excelWriter, IStringLocalizer<FSContributionExportDto> localizer)
     {
         _repository = repository;
         _excelWriter = excelWriter;

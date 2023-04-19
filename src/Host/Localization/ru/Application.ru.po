@@ -253,9 +253,7 @@ msgctxt  "FSH.WebApi.Application.Catalog.Natives.ExportNativesRequestHandler"
 msgid "RuralGovName"
 msgstr "Сельское самоуправление"
 
-msgctxt  "FSH.WebApi.Application.Catalog.FSContributions.FSContributionExportDto"
-msgid "NativeFIO"
-msgstr "Native Name"
+
 
 msgctxt  "FSH.WebApi.Application.Catalog.FSContributions.FSContributionExportDto"
 msgid "NativeFIO"
@@ -295,6 +293,10 @@ msgid "Month"
 msgstr "Месяц"
 
 msgctxt  "FSH.WebApi.Application.Catalog.Contributions.ContributionExportDto"
+msgid "Year"
+msgstr "Год"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Contributions.ContributionExportDto"
 msgid "Summa"
 msgstr "Сумма"
 
@@ -312,7 +314,7 @@ msgid "Village"
 msgstr "Аул"
 
 msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
-msgid "NativeFio"
+msgid "NativeFIO"
 msgstr "ФИО ураженса"
 
 msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
