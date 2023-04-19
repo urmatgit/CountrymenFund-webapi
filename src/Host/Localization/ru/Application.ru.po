@@ -276,3 +276,32 @@ msgstr "Дата"
 msgctxt  "FSH.WebApi.Application.Catalog.FSContributions.FSContributionExportDto"
 msgid "Description"
 msgstr "Комментарий"
+
+#:
+msgctxt  "FSH.WebApi.Application.Catalog.Contributions.ContributionExportDto"
+msgid "Description"
+msgstr "Комментарий"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Contributions.ContributionExportDto"
+msgid "RuralGovName"
+msgstr "Сельское самоуправление"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Contributions.ContributionExportDto"
+msgid "NativeFIO"
+msgstr ""ФИО ураженса"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Contributions.ContributionExportDto"
+msgid "Month"
+msgstr "Месяц"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Contributions.ContributionExportDto"
+msgid "Summa"
+msgstr "Сумма"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Contributions.ContributionExportDto"
+msgid "Date"
+msgstr "Дата"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Contributions.ContributionExportDto"
+msgid "Village"
+msgstr "Аул"

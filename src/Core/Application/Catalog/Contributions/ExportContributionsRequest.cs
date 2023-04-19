@@ -1,4 +1,5 @@
 ﻿using FSH.WebApi.Application.Catalog.Contributions;
+using FSH.WebApi.Application.Catalog.Natives;
 using FSH.WebApi.Application.Common.Exporters;
 using FSH.WebApi.Domain.Catalog.Fund;
 using FSH.WebApi.Shared.Enums;
@@ -25,11 +26,12 @@ public class ExportContributionsRequestHandler : IRequestHandler<ExportContribut
 {
     private readonly IReadRepository<Contribution> _repository;
     private readonly IExcelWriter _excelWriter;
-
-    public ExportContributionsRequestHandler(IReadRepository<Contribution> repository, IExcelWriter excelWriter)
+    private readonly IStringLocalizer<ContributionExportDto> _localizer;
+    public ExportContributionsRequestHandler(IReadRepository<Contribution> repository, IExcelWriter excelWriter,IStringLocalizer<ContributionExportDto> stringLocalizer    )
     {
         _repository = repository;
         _excelWriter = excelWriter;
+        _localizer = stringLocalizer;
     }
 
     public async Task<Stream> Handle(ExportContributionsRequest request, CancellationToken cancellationToken)
@@ -37,8 +39,23 @@ public class ExportContributionsRequestHandler : IRequestHandler<ExportContribut
         var spec = new ExportContributionsWithBrandsSpecification(request);
 
         var list = await _repository.ListAsync(spec, cancellationToken);
+        var result = await _excelWriter.ExportExcelAsync(list,
+           new Dictionary<string, Func<ContributionExportDto, object>>()
+           {
+                    { _localizer["Year"], item => item.Year },
+                    { _localizer["RuralGovName"], item => item.RuralGovName },
+                    { _localizer["NativeFIO"], item => item.NativeFIO },
+                    { _localizer["Month"], item => item.Month },
+                    { _localizer["Summa"], item => item.Summa },
+                    { _localizer["Date"], item => item.Date },
+                    { _localizer["Village"], item => item.Village },
+                    { _localizer["Description"], item => item.Description },
 
-        return _excelWriter.WriteToStream(list);
+           }, _localizer["Natives"]
+           );
+
+        return result;
+        //return _excelWriter.WriteToStream(list);
     }
 }
 

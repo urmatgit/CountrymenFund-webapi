@@ -259,3 +259,32 @@ msgstr "Date"
 msgctxt  "FSH.WebApi.Application.Catalog.FSContributions.FSContributionExportDto"
 msgid "Description"
 msgstr "Description"
+
+#:
+msgctxt  "FSH.WebApi.Application.Catalog.Contributions.ContributionExportDto"
+msgid "Description"
+msgstr "Description"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Contributions.ContributionExportDto"
+msgid "RuralGovName"
+msgstr "Rural Gov Name"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Contributions.ContributionExportDto"
+msgid "NativeFIO"
+msgstr "Native FIO"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Contributions.ContributionExportDto"
+msgid "Month"
+msgstr "Month"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Contributions.ContributionExportDto"
+msgid "Summa"
+msgstr "Summa"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Contributions.ContributionExportDto"
+msgid "Date"
+msgstr "Date"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Contributions.ContributionExportDto"
+msgid "Village"
+msgstr "Village"
