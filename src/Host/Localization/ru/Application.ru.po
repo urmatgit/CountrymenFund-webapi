@@ -305,3 +305,72 @@ msgstr "Дата"
 msgctxt  "FSH.WebApi.Application.Catalog.Contributions.ContributionExportDto"
 msgid "Village"
 msgstr "Аул"
+
+#:
+msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
+msgid "Village"
+msgstr "Аул"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
+msgid "NativeFio"
+msgstr "ФИО ураженса"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
+msgid "RuralGovName"
+msgstr "Сельское самоуправление"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
+msgid "AllSumm"
+msgstr "Итого"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
+msgid "Year"
+msgstr "Год"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
+msgid "January"
+msgstr "Январь"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
+msgid "February"
+msgstr "Февраль"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
+msgid "March"
+msgstr "Март"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
+msgid "April"
+msgstr "Апрель"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
+msgid "May"
+msgstr "Май"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
+msgid "June"
+msgstr "Июнь"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
+msgid "July"
+msgstr "Июль"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
+msgid "August"
+msgstr "Августь"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
+msgid "September"
+msgstr "Сентябрь"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
+msgid "October"
+msgstr "Октябрь"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
+msgid "November"
+msgstr "Ноябрь"
+
+msgctxt  "FSH.WebApi.Application.Catalog.Totals.TotalWithMonths"
+msgid "December"
+msgstr "Декабрь"

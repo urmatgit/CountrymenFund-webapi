@@ -32,22 +32,43 @@ public class ExportTotalByRuralGovsRequestHandler : IRequestHandler<ExportTotalB
 {
     private readonly IDapperRepository _dapperRepository;
     private readonly IExcelWriter _excelWriter;
-    private readonly IStringLocalizer<ExportTotalByRuralGovsRequestHandler> _stringLocalizer;
-    public ExportTotalByRuralGovsRequestHandler(IDapperRepository dapperRepository,IExcelWriter excelWriter, IStringLocalizer<ExportTotalByRuralGovsRequestHandler> stringLocalizer)
+    private readonly IStringLocalizer<TotalWithMonths> _localizer;
+    public ExportTotalByRuralGovsRequestHandler(IDapperRepository dapperRepository,IExcelWriter excelWriter, IStringLocalizer<TotalWithMonths> stringLocalizer)
     {
         _dapperRepository = dapperRepository;
         _excelWriter = excelWriter;
-        this._stringLocalizer = stringLocalizer;
+        this._localizer = stringLocalizer;
     }
 
     public async Task<Stream> Handle(ExportTotalByRuralGovsRequest request, CancellationToken cancellationToken)
     {
         
-        var totaByNative = new GetTotalByNativeData(_dapperRepository, _stringLocalizer);
+        var totaByNative = new GetTotalByNativeData(_dapperRepository, _localizer);
         var list = await totaByNative.GetListByRuralGovs(new ExportTotalReportByRuralGovsRequestSpec(request), false, cancellationToken);
 
-        //var list = await _repository.ListAsync(spec, cancellationToken);
+        var result = await _excelWriter.ExportExcelAsync(list,
+            new Dictionary<string, Func<TotalWithMonths, object>>()
+            {
+                    { _localizer["Year"], item => item.Year },
+                    { _localizer["RuralGovName"], item => item.RuralGovName },
+                    { _localizer["AllSumm"], item => item.AllSumm },
+                    { _localizer["January"], item => item.January },
+                    { _localizer["February"], item => item.February },
+                    { _localizer["March"], item => item.March },
+                    { _localizer["April"], item => item.April },
+                    { _localizer["May"], item => item.May },
+                    { _localizer["June"], item => item.June },
+                    { _localizer["July"], item => item.July },
+                    { _localizer["August"], item => item.August },
+                    { _localizer["September"], item => item.September },
+                    { _localizer["October"], item => item.October },
+                    { _localizer["November"], item => item.November },
+                    { _localizer["December"], item => item.December },
 
-        return _excelWriter.WriteToStream(list);
+            }, _localizer["TotalByNative"]
+            );
+
+        return result;
+        //return _excelWriter.WriteToStream(list);
     }
 }
