@@ -68,9 +68,17 @@ public class ExcelWriter : IExcelWriter
         // (or the first available font)
         LoadOptions.DefaultGraphicEngine = new DefaultGraphicEngine(fontName);
     }
-    public async Task<byte[]> ExportAsync<TData>(IEnumerable<TData> data
-           , Dictionary<string, Func<TData, object>> mappers
-           , string sheetName = "Sheet1")
+    public async Task<Stream> ExportExcelAsync<TData>(IEnumerable<TData> data, Dictionary<string, Func<TData, object>> mappers, string sheetName = "Sheet1")
+    {
+        var stream = await ExportExAsync<TData>(data, mappers, sheetName);
+        return stream;
+    }
+    public async Task<byte[]> ExportAsync<TData>(IEnumerable<TData> data, Dictionary<string, Func<TData, object>> mappers, string sheetName = "Sheet1")
+    {
+        var stream= await ExportExAsync<TData>(data, mappers, sheetName);
+        return stream.ToArray();
+    }
+    private async Task<MemoryStream> ExportExAsync<TData>(IEnumerable<TData> data , Dictionary<string, Func<TData, object>> mappers, string sheetName = "Sheet1")
     {
         UpdateGraphicsEngineFonts();
         using (var workbook = new XLWorkbook())
@@ -124,7 +132,7 @@ public class ExcelWriter : IExcelWriter
                 workbook.SaveAs(stream);
                 //var base64 = Convert.ToBase64String(stream.ToArray());
                 stream.Seek(0, SeekOrigin.Begin);
-                return await Task.FromResult(stream.ToArray());
+                return await Task.FromResult(stream);
             }
         }
     }
@@ -192,4 +200,6 @@ public class ExcelWriter : IExcelWriter
             return await Result<IEnumerable<TEntity>>.SuccessAsync(list);
         }
     }
+
+    
 }

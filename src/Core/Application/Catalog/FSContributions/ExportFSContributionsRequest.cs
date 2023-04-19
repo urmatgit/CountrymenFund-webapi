@@ -1,4 +1,5 @@
 ﻿using FSH.WebApi.Application.Catalog.FSContributions;
+using FSH.WebApi.Application.Catalog.Natives;
 using FSH.WebApi.Application.Common.Exporters;
 using FSH.WebApi.Domain.Catalog.Fund;
 using FSH.WebApi.Shared.Enums;
@@ -24,11 +25,12 @@ public class ExportFSContributionsRequestHandler : IRequestHandler<ExportFSContr
 {
     private readonly IReadRepository<FSContribution> _repository;
     private readonly IExcelWriter _excelWriter;
-
-    public ExportFSContributionsRequestHandler(IReadRepository<FSContribution> repository, IExcelWriter excelWriter)
+    private readonly IStringLocalizer<ExportFSContributionsRequestHandler> _localizer;
+    public ExportFSContributionsRequestHandler(IReadRepository<FSContribution> repository, IExcelWriter excelWriter, IStringLocalizer<ExportFSContributionsRequestHandler> localizer)
     {
         _repository = repository;
         _excelWriter = excelWriter;
+        _localizer = localizer;
     }
 
     public async Task<Stream> Handle(ExportFSContributionsRequest request, CancellationToken cancellationToken)
@@ -36,8 +38,21 @@ public class ExportFSContributionsRequestHandler : IRequestHandler<ExportFSContr
         var spec = new ExportFSContributionsWithBrandsSpecification(request);
 
         var list = await _repository.ListAsync(spec, cancellationToken);
+        
+        var result = await _excelWriter.ExportExcelAsync(list,
+            new Dictionary<string, Func<FSContributionExportDto, object>>()
+            {
+                    { _localizer["NativeFIO"], item => item.NativeFIO },
+                    { _localizer["FinSuportName"], item => item.FinSuportName },
+                    { _localizer["Summa"], item => item.Summa },
+                    { _localizer["Date"], item => item.Date },
+                    { _localizer["Description"], item => item.Description }
 
-        return _excelWriter.WriteToStream(list);
+            }, _localizer["FSContributions"]
+            );
+
+        return result;
+        //return _excelWriter.WriteToStream(list);
     }
 }
 

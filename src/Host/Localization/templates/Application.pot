@@ -235,3 +235,27 @@ msgstr "Комментарий"
 msgctxt  "FSH.WebApi.Application.Catalog.Natives.ExportNativesRequestHandler"
 msgid "RuralGovName"
 msgstr "Сельское самоуправление"
+
+msgctxt  "FSH.WebApi.Application.Catalog.FSContributions.FSContributionExportDto"
+msgid "NativeFIO"
+msgstr "Native Name"
+
+msgctxt  "FSH.WebApi.Application.Catalog.FSContributions.FSContributionExportDto"
+msgid "NativeFIO"
+msgstr "Native Name"
+
+msgctxt  "FSH.WebApi.Application.Catalog.FSContributions.FSContributionExportDto"
+msgid "FinSuportName"
+msgstr "Fin support name"
+
+msgctxt  "FSH.WebApi.Application.Catalog.FSContributions.FSContributionExportDto"
+msgid "Summa"
+msgstr "Summa"
+
+msgctxt  "FSH.WebApi.Application.Catalog.FSContributions.FSContributionExportDto"
+msgid "Date"
+msgstr "Date"
+
+msgctxt  "FSH.WebApi.Application.Catalog.FSContributions.FSContributionExportDto"
+msgid "Description"
+msgstr "Description"
