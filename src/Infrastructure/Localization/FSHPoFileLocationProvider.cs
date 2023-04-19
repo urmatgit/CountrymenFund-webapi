@@ -30,7 +30,10 @@ public class FSHPoFileLocationProvider : ILocalizationFileLocationProvider
         // for example, src\Host\Localization\en-US\FSH.Exceptions.po
         _logger.LogInformation($"Current  culture is  {cultureName} {PathExtensions.Combine(_resourcesContainer, cultureName)}");
         var dirContent = _fileProvider.GetDirectoryContents(PathExtensions.Combine(_resourcesContainer, cultureName));
-        _logger.LogInformation($"GetDirectoryContents count: {dirContent.Count()}");
+        if (dirContent!=null)
+            _logger.LogInformation($"GetDirectoryContents count: {dirContent.Count()}");
+        else
+            _logger.LogInformation($"GetDirectoryContents count: null");
         foreach (var file in _fileProvider.GetDirectoryContents(PathExtensions.Combine(_resourcesContainer, cultureName)))
         {
             _logger.LogInformation($"Culture file {file.Name} {file.PhysicalPath} ");
