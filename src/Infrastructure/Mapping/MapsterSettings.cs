@@ -47,8 +47,10 @@ public class MapsterSettings
             .Map(d=>d.BirthDate,s=>s.BirthDate.Value.Date);
 
         TypeAdapterConfig<FinSupport, FinSupportDto>.NewConfig()
-            .Map(d => d.FIOManager, s => $"{s.Native.Name} {s.Native.Surname} {s.Native.MiddleName}");
-        
+            .Map(d => d.FIOManager, s => $"{s.Native.Name} {s.Native.Surname} {s.Native.MiddleName}")
+            .Map(d => d.Total, s => s.FSContributions.Sum(c=>c.Summa));
+
+
         //TypeAdapterConfig<BlockImageDto, string>.NewConfig()
         //     .Map(d => d, s => s.Name);
         //TypeAdapterConfig<string, BlockImageDto>.NewConfig()
