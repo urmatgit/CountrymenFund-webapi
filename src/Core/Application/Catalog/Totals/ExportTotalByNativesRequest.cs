@@ -2,6 +2,7 @@
 using FSH.WebApi.Application.Common.Exporters;
 using FSH.WebApi.Application.Common.Persistence;
 using FSH.WebApi.Domain.Catalog.Fund;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
@@ -45,8 +46,16 @@ public class ExportTotalByNativesRequestHandler : IRequestHandler<ExportTotalByN
     public async Task<byte[]> Handle(ExportTotalByNativesRequest request, CancellationToken cancellationToken)
     {
         
-        var totaByNative = new GetTotalByNativeData(_dapperRepository, _localizer);
-        var list = await totaByNative.GetListByNatives(new ExportTotalReportByNativesRequestSpec(request), false, cancellationToken);
+        var totaByNative = new GetTotalByNativeData(_dapperRepository, _localizer,null);
+        IQueryable<Contribution> queryable = _dapperRepository.GetQueryable<Contribution>()
+           .Include(p => p.Year)
+      .Include(p => p.Native)
+      .ThenInclude(p => p.RuralGov);
+        if (request.YearId.HasValue)
+            queryable = queryable.Where(p => p.YearId == request.YearId);
+        if (request.RuralGovId.HasValue)
+            queryable = queryable.Where(p => p.Native.RuralGovId == request.RuralGovId);
+        var list = await totaByNative.GetListByNatives(queryable,  cancellationToken);
 
         //var list = await _repository.ListAsync(spec, cancellationToken);
         var result = await _excelWriter.ExportAsync(list,

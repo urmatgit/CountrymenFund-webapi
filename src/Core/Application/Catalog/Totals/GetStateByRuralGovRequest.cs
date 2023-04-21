@@ -45,8 +45,19 @@ public class GetStateByRuralGovRequestHandler : IRequestHandler<GetStateByRuralG
     
     public async Task<PaginationResponse<TotalWithMonths>> Handle(GetStateByRuralGovRequest request, CancellationToken cancellationToken)
     {
-        var totaByNative = new GetTotalByNativeData(dapperRepository, stringLocalizer);
-        var query = await totaByNative.GetListByRuralGovs(new GetStateByRuralGovRequestSpec(request), request.HasOrderBy(), cancellationToken);
+        var totaByNative = new GetTotalByNativeData(dapperRepository, stringLocalizer, (PaginationFilter)request);
+        IQueryable<Contribution> expression = dapperRepository.GetQueryable<Contribution>()
+            .Include(p => p.Year)
+            .Include(p => p.Native)
+            .ThenInclude(p => p.RuralGov)
+            .OrderByDescending(o => o.Year.year)
+            .ThenBy(o => o.Native.RuralGov.Name);
+        if (request.YearId.HasValue)
+        {
+            expression=expression.Where(p => p.YearId == request.YearId);
+        }
+            
+        var query = await totaByNative.GetListByRuralGovs(expression,  cancellationToken);
         return new PaginationResponse<TotalWithMonths>(query, query.Count(), request.PageNumber, request.PageSize);
     }
 }

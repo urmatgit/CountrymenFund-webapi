@@ -34,7 +34,27 @@ public static class SpecificationBuilderExtensions
             .Take(filter.PageSize)
             .OrderBy(filter.OrderBy);
     }
+    public static IQueryable<T> PaginateBy<T>(this IQueryable<T> query, PaginationFilter filter)
+    {
+        if (filter.PageNumber <= 0)
+        {
+            filter.PageNumber = 1;
+        }
 
+        if (filter.PageSize <= 0)
+        {
+            filter.PageSize = 10;
+        }
+
+        if (filter.PageNumber > 1)
+        {
+            query = query.Skip((filter.PageNumber - 1) * filter.PageSize);
+        }
+
+        return query
+            .Take(filter.PageSize);
+            
+    }
     public static IOrderedSpecificationBuilder<T> SearchByKeyword<T>(
         this ISpecificationBuilder<T> specificationBuilder,
         string? keyword) =>

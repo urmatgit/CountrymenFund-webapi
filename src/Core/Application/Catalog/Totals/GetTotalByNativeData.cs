@@ -17,15 +17,17 @@ public class GetTotalByNativeData
 {
     private readonly IDapperRepository _dapperRepository;
     private readonly IStringLocalizer stringLocalizer;
-    public GetTotalByNativeData(IDapperRepository dapperRepository, IStringLocalizer stringLocalizer)
+    PaginationFilter _byNativesRequest;
+    public GetTotalByNativeData(IDapperRepository dapperRepository, IStringLocalizer stringLocalizer, PaginationFilter byNativesRequest)
     {
         _dapperRepository = dapperRepository;
         this.stringLocalizer = stringLocalizer;
+        this._byNativesRequest = byNativesRequest;
     }
-    public async Task<List<TotalWithMonths>> GetListByRuralGovs(ISpecification<Contribution, TotalWithMonths> specification, bool hasOrder, CancellationToken cancellationToken)
+    public async Task<List<TotalWithMonths>> GetListByRuralGovs(IQueryable<Contribution> expressein,  CancellationToken cancellationToken)
     {
-        var expressein = _dapperRepository.GetQueryable<Contribution>()
-           .WithSpecification(specification);
+        //var expressein = _dapperRepository.GetQueryable<Contribution>()
+        //   .WithSpecification(specification);
 
         var query = await getSummColMonthsForRuralGov(expressein)
             .ToListAsync(cancellationToken);
@@ -83,17 +85,20 @@ public class GetTotalByNativeData
                 AllSumm = x.Sum(c => c.Summa)
 
             });
+        if (_byNativesRequest is not null )
+            query = query.PaginateBy(_byNativesRequest);
         return query;
     }
 
-    public async Task<List<TotalByNative>> GetListByNatives( ISpecification<Contribution, TotalByNative> specification,bool hasOrder, CancellationToken cancellationToken)
+    public async Task<List<TotalByNative>> GetListByNatives( IQueryable<Contribution> expressein,  CancellationToken cancellationToken)
     {
-        var expressein = _dapperRepository.GetQueryable<Contribution>()
-            .WithSpecification(specification);
+        
+        //var expressein = _dapperRepository.GetQueryable<Contribution>()
+        //    .WithSpecification(specification);
 
         var query = await getSummColMonths(expressein)
                        .ToListAsync(cancellationToken);
-        if (!hasOrder && query != null)
+        if (!_byNativesRequest.HasOrderBy() && query != null)
         {
             query = query.OrderBy(o => o.Year)
             .ThenBy(o => o.RuralGovName)
@@ -160,6 +165,9 @@ public class GetTotalByNativeData
                 AllSumm = x.Sum(c => c.Summa)
 
             });
+            if (_byNativesRequest is not null)
+             query=query.PaginateBy(_byNativesRequest);
+
 
         return query;
     }

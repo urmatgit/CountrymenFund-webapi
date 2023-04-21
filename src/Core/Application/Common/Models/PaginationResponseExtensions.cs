@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FSH.WebApi.Application.Common.Models;
 
-public static class PaginationResponseExtensions
+public static class PaginationResponseExtensions    
 {
     public static async Task<PaginationResponse<TDestination>> PaginatedListAsync<T, TDestination>(
         this IReadRepositoryBase<T> repository, ISpecification<T, TDestination> spec, int pageNumber, int pageSize, CancellationToken cancellationToken = default)
