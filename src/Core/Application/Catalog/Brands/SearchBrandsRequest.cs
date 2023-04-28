@@ -1,5 +1,4 @@
 namespace FSH.WebApi.Application.Catalog.Brands;
-
 public class SearchBrandsRequest : PaginationFilter, IRequest<PaginationResponse<BrandDto>>
 {
 }

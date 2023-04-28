@@ -57,7 +57,7 @@ public class ExportTotalByRuralGovsRequestHandler : IRequestHandler<ExportTotalB
         }
         var list = await totaByNative.GetListByRuralGovs(expression,  cancellationToken);
 
-        var result = await _excelWriter.ExportAsync(list,
+        var result = await _excelWriter.ExportAsync(list.Data,
             new Dictionary<string, Func<TotalWithMonths, object>>()
             {
                     { _localizer["Year"], item => item.Year },

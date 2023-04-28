@@ -58,7 +58,7 @@ public class ExportTotalByNativesRequestHandler : IRequestHandler<ExportTotalByN
         var list = await totaByNative.GetListByNatives(queryable,  cancellationToken);
 
         //var list = await _repository.ListAsync(spec, cancellationToken);
-        var result = await _excelWriter.ExportAsync(list,
+        var result = await _excelWriter.ExportAsync(list.Data,
           new Dictionary<string, Func<TotalByNative, object>>()
           {
                     { _localizer["Year"], item => item.Year },

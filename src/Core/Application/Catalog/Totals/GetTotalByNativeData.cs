@@ -11,6 +11,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Specialized;
+using System.Reflection.Metadata.Ecma335;
 
 namespace FSH.WebApi.Application.Catalog.Totals;
 public class GetTotalByNativeData
@@ -24,13 +26,13 @@ public class GetTotalByNativeData
         this.stringLocalizer = stringLocalizer;
         this._byNativesRequest = byNativesRequest;
     }
-    public async Task<List<TotalWithMonths>> GetListByRuralGovs(IQueryable<Contribution> expressein,  CancellationToken cancellationToken)
+    public async Task<TotalResult<List<TotalWithMonths>>> GetListByRuralGovs(IQueryable<Contribution> expressein,  CancellationToken cancellationToken)
     {
         //var expressein = _dapperRepository.GetQueryable<Contribution>()
         //   .WithSpecification(specification);
 
-        var query = await getSummColMonthsForRuralGov(expressein)
-            .ToListAsync(cancellationToken);
+        var query1 = await getSummColMonthsForRuralGov(expressein);
+        var query=await ((query1.Data as IQueryable<TotalWithMonths>).ToListAsync(cancellationToken));
         var total = new TotalWithMonths
         {
             Year = 0,
@@ -51,9 +53,13 @@ public class GetTotalByNativeData
             Style = "font-weight: bold;"
         };
         query.Add(total);
-        return query;
+        return new TotalResult<List<TotalWithMonths>>()
+        {
+            Data = query,
+            TotalCount = query1.TotalCount + 1
+        };
     }
-    private IQueryable<TotalWithMonths> getSummColMonthsForRuralGov(IQueryable<Contribution> queryable)
+    private async Task<TotalResult<IQueryable<TotalWithMonths>>> getSummColMonthsForRuralGov(IQueryable<Contribution> queryable)
     {
         //TotalWithMonths
         var query =
@@ -85,19 +91,25 @@ public class GetTotalByNativeData
                 AllSumm = x.Sum(c => c.Summa)
 
             });
+         var count=await  query.CountAsync();
         if (_byNativesRequest is not null )
             query = query.PaginateBy(_byNativesRequest);
-        return query;
+        return new TotalResult<IQueryable<TotalWithMonths>>
+        {
+            Data = query,
+            TotalCount = count
+        };
+        //return query;
     }
 
-    public async Task<List<TotalByNative>> GetListByNatives( IQueryable<Contribution> expressein,  CancellationToken cancellationToken)
+    public async Task<TotalResult<List<TotalByNative>>> GetListByNatives( IQueryable<Contribution> expressein,  CancellationToken cancellationToken)
     {
-        
+
         //var expressein = _dapperRepository.GetQueryable<Contribution>()
         //    .WithSpecification(specification);
 
-        var query = await getSummColMonths(expressein)
-                       .ToListAsync(cancellationToken);
+        var query1 = await getSummColMonths(expressein);
+        var query=await query1.Data.ToListAsync(cancellationToken);
         if (!_byNativesRequest.HasOrderBy() && query != null)
         {
             query = query.OrderBy(o => o.Year)
@@ -128,9 +140,9 @@ public class GetTotalByNativeData
             Style = "font-weight: bold;"
         };
         query.Add(total);
-        return query;
+        return new TotalResult<List<TotalByNative>>() { Data = query, TotalCount = query1.TotalCount };
     }
-    private IQueryable<TotalByNative> getSummColMonths(IQueryable<Contribution> queryable)
+    private async Task<TotalResult<IQueryable<TotalByNative>>> getSummColMonths(IQueryable<Contribution> queryable)
     {
         //TotalWithMonths
         var query =
@@ -165,10 +177,15 @@ public class GetTotalByNativeData
                 AllSumm = x.Sum(c => c.Summa)
 
             });
+            var count=await query.CountAsync();
             if (_byNativesRequest is not null)
              query=query.PaginateBy(_byNativesRequest);
 
 
-        return query;
+        return new TotalResult<IQueryable<TotalByNative>>()
+        {
+            Data = query,
+            TotalCount = count
+        };
     }
 }

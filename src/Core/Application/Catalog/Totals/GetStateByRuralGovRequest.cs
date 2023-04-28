@@ -34,13 +34,15 @@ public class GetStateByRuralGovRequestHandler : IRequestHandler<GetStateByRuralG
 {
     
     private readonly IDapperRepository dapperRepository;
+    private readonly IReadRepository<Contribution> _readRepository;
     private readonly IStringLocalizer<GetStateByRuralGovRequestHandler> stringLocalizer;
 
-    public GetStateByRuralGovRequestHandler( IStringLocalizer<GetStateByRuralGovRequestHandler> stringLocalizer, IDapperRepository dapperRepository)
+    public GetStateByRuralGovRequestHandler( IStringLocalizer<GetStateByRuralGovRequestHandler> stringLocalizer, IDapperRepository dapperRepository,IReadRepository<Contribution> readRepository)
     {
         
         this.stringLocalizer = stringLocalizer;
         this.dapperRepository = dapperRepository;
+        _readRepository= readRepository;
     }
     
     public async Task<PaginationResponse<TotalWithMonths>> Handle(GetStateByRuralGovRequest request, CancellationToken cancellationToken)
@@ -58,6 +60,7 @@ public class GetStateByRuralGovRequestHandler : IRequestHandler<GetStateByRuralG
         }
             
         var query = await totaByNative.GetListByRuralGovs(expression,  cancellationToken);
-        return new PaginationResponse<TotalWithMonths>(query, query.Count(), request.PageNumber, request.PageSize);
+        
+        return new PaginationResponse<TotalWithMonths>(query.Data,query.TotalCount, request.PageNumber, request.PageSize);
     }
 }

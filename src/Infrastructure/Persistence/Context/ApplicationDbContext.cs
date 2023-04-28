@@ -1,3 +1,4 @@
+using Dapper;
 using Finbuckle.MultiTenant;
 using FSH.WebApi.Application.Common.Events;
 using FSH.WebApi.Application.Common.Interfaces;
@@ -24,7 +25,7 @@ public class ApplicationDbContext : BaseDbContext
     public DbSet<Contribution> Contributions => Set<Contribution>();
     public DbSet<FinSupport> FinSupport => Set<FinSupport>();
     public DbSet<FSContribution> FSContributions => Set<FSContribution>();
-    
+    public DbSet<NewsPost> NewsPosts => Set<NewsPost>();
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

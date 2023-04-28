@@ -57,7 +57,7 @@ public class GetTotalReportByNativesRequestHandler : IRequestHandler<GetTotalRep
 
         ;
         var query = await totaByNative.GetListByNatives(queryable,  cancellationToken);             
-        return new PaginationResponse<TotalByNative>(query, query.Count(), request.PageNumber, request.PageSize);
+        return new PaginationResponse<TotalByNative>(query.Data, query.TotalCount, request.PageNumber, request.PageSize);
     }
   
 }
