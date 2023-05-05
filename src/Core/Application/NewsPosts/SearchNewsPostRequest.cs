@@ -1,12 +1,15 @@
-﻿using FSH.WebApi.Domain.Catalog.Fund;
+﻿
+using FSH.WebApi.Domain.Catalog.Fund;
 using FSH.WebApi.Domain.Common.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FSH.WebApi.Domain.Catalog.Fund;
+using FSH.WebApi.Application.HomePage;
 
-namespace FSH.WebApi.Application.HomePage;
+namespace FSH.WebApi.Application.NewsPosts;
 
 public class SearchNewsPostRequest : PaginationFilter, IRequest<PaginationResponse<NewsPostDto>>
 {
@@ -30,7 +33,22 @@ public class SearchNewsPostRequestHandler : IRequestHandler<SearchNewsPostReques
     {
         request.OrderBy = new string[] { };
         var spec = new NewsPostBySearchRequestSpec(request);
-        return await _repository.PaginatedListAsync(spec, request.PageNumber, request.PageSize, cancellationToken);
+        var result = await _repository.PaginatedListAsync(spec, request.PageNumber, request.PageSize, cancellationToken);
+        if (result.Data.Count > 0)
+        {
+            foreach (var item in result.Data)
+            {
+                string[] images = item.Images.Split(';');
+                foreach (var image in images)
+                {
+                    item.ImagesDto.Add(new BlockImageDto()
+                    {
+                        Name = image
+                    });
+                }
+            }
+        }
+        return result;
     }
 }
 

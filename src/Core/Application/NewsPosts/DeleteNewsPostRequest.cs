@@ -6,16 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FSH.WebApi.Application.HomePage;
+namespace FSH.WebApi.Application.NewsPosts;
 
-public class DeleteNewsPostRequest : IRequest<Guid>
+public class DeleteNewsPostRequest : IRequest<DefaultIdType>
 {
-    public Guid Id { get; set; }
+    public DefaultIdType Id { get; set; }
 
-    public DeleteNewsPostRequest(Guid id) => Id = id;
+    public DeleteNewsPostRequest(DefaultIdType id) => Id = id;
 }
 
-public class DeleteNewsPostRequestHandler : IRequestHandler<DeleteNewsPostRequest, Guid>
+public class DeleteNewsPostRequestHandler : IRequestHandler<DeleteNewsPostRequest, DefaultIdType>
 {
     // Add Domain Events automatically by using IRepositoryWithEvents
     private readonly IRepositoryWithEvents<NewsPost> _repository;
@@ -24,7 +24,7 @@ public class DeleteNewsPostRequestHandler : IRequestHandler<DeleteNewsPostReques
     public DeleteNewsPostRequestHandler(IRepositoryWithEvents<NewsPost> repository, IStringLocalizer<DeleteNewsPostRequestHandler> localizer) =>
         (_repository, _t) = (repository, localizer);
 
-    public async Task<Guid> Handle(DeleteNewsPostRequest request, CancellationToken cancellationToken)
+    public async Task<DefaultIdType> Handle(DeleteNewsPostRequest request, CancellationToken cancellationToken)
     {
         var entity = await _repository.GetByIdAsync(request.Id, cancellationToken);
 

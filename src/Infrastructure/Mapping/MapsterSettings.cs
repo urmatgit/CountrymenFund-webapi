@@ -71,8 +71,8 @@ public class MapsterSettings
             .Map(d => d.FIOManager, s => $"{s.Native.Name} {s.Native.Surname} {s.Native.MiddleName}")
             .Map(d => d.Total, s => s.FSContributions.Sum(c=>c.Summa));
 
-        //TypeAdapterConfig<string, List<BlockImageDto>>.NewConfig()
-        //.Map(d => d, s=> getFromString(s));
+        //TypeAdapterConfig<string, IEnumerable<BlockImageDto>>.NewConfig()
+        //.Map(d => d, s => getFromString(s));
         //TypeAdapterConfig<string, BlockImageDto>.NewConfig()
         // .Map(d => d, s => new BlockImageDto() { Name=s});
 
@@ -81,7 +81,8 @@ public class MapsterSettings
 
         //TypeAdapterConfig<BlockImageDto, string>.NewConfig()
         //     .Map(d => d, s => s.Name);
-        TypeAdapterConfig<string, BlockImageDto>.NewConfig()
-             .Map(d => d, s => new BlockImageDto() { Name = s });
+        //TypeAdapterConfig<string, BlockImageDto>.NewConfig()
+        //     .Map(d => d, s => new BlockImageDto() { Name = s });
+        
     }
 }
