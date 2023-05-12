@@ -32,7 +32,7 @@ public class NewsPostSeed : ICustomSeeder
                 {
                     Title = $"This is news post title {i}",
                     Body = $"<h2>This is <strong>test</strong> <i>rich edit text  &nbsp;</i><strong> {i}</strong> </h2><ol><li><i>Test</i></li><li><i>test</i></li></ol>",
-                    Images = "",
+                   
                     Author = "Robot"
                 });
             }

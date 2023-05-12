@@ -26,10 +26,10 @@ public class NewsPostController : VersionNeutralApiController
     }
 
 
-    [HttpPost("createnewspost")]
+    [HttpPost]
     [MustHavePermission(FSHAction.Create, FSHResource.NewsPost)]
     [OpenApiOperation("Create a new news post.", "")]
-    public Task<Guid> CreateNewsPostAsync(CreateNewsPostRequest request)
+    public Task<Guid> CreateAsync(CreateNewsPostRequest request)
     {
         return Mediator.Send(request);
     }

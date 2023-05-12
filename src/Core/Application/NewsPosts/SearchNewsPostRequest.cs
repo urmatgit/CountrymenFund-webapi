@@ -34,20 +34,7 @@ public class SearchNewsPostRequestHandler : IRequestHandler<SearchNewsPostReques
         request.OrderBy = new string[] { };
         var spec = new NewsPostBySearchRequestSpec(request);
         var result = await _repository.PaginatedListAsync(spec, request.PageNumber, request.PageSize, cancellationToken);
-        if (result.Data.Count > 0)
-        {
-            foreach (var item in result.Data)
-            {
-                string[] images = item.Images.Split(';');
-                foreach (var image in images)
-                {
-                    item.ImagesDto.Add(new BlockImageDto()
-                    {
-                        Name = image
-                    });
-                }
-            }
-        }
+       
         return result;
     }
 }

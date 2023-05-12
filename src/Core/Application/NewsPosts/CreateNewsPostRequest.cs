@@ -1,4 +1,5 @@
-﻿using FSH.WebApi.Domain.Catalog.Fund;
+﻿using FSH.WebApi.Application.Common.Interfaces;
+using FSH.WebApi.Domain.Catalog.Fund;
 namespace FSH.WebApi.Application.NewsPosts;
 
 public class CreateNewsPostRequest : NewsPostDto, IRequest<DefaultIdType>
@@ -11,13 +12,17 @@ public class CreateNewsPostRequestHandler : IRequestHandler<CreateNewsPostReques
     // Add Domain Events automatically by using IRepositoryWithEvents
     private readonly IRepositoryWithEvents<NewsPost> _repository;
     private readonly IFileStorageService _file;
-    public CreateNewsPostRequestHandler(IRepositoryWithEvents<NewsPost> repository, IFileStorageService fileStorageService) => (_repository, _file) = (repository, fileStorageService);
+    private readonly ICurrentUser _currentUser;
+    public CreateNewsPostRequestHandler(IRepositoryWithEvents<NewsPost> repository, IFileStorageService fileStorageService,ICurrentUser currentUser) => (_repository, _file,_currentUser) = (repository, fileStorageService,currentUser);
 
     public async Task<DefaultIdType> Handle(CreateNewsPostRequest request, CancellationToken cancellationToken)
     {
         var entity = new NewsPost(request.Title,
                                   request.Author,
                                   request.Body);
+
+                    entity.Author = $"{_currentUser.Name}";
+        
 
         var newspost = await _repository.AddAsync(entity, cancellationToken);
 

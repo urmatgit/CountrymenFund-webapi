@@ -20,8 +20,9 @@ public class UpdateNewsPostRequestHandler : IRequestHandler<UpdateNewsPostReques
     private readonly IRepositoryWithEvents<NewsPost> _repository;
     private readonly IStringLocalizer _t;
     private readonly IFileStorageService _file;
-    public UpdateNewsPostRequestHandler(IRepositoryWithEvents<NewsPost> repository, IStringLocalizer<UpdateNewsPostRequestHandler> localizer, IFileStorageService file) =>
-        (_repository, _t, _file) = (repository, localizer, file);
+    private readonly ICurrentUser _currentUser;
+    public UpdateNewsPostRequestHandler(IRepositoryWithEvents<NewsPost> repository, IStringLocalizer<UpdateNewsPostRequestHandler> localizer, IFileStorageService file,ICurrentUser currentUser) =>
+        (_repository, _t, _file,_currentUser) = (repository, localizer, file,currentUser);
 
     public async Task<DefaultIdType> Handle(UpdateNewsPostRequest request, CancellationToken cancellationToken)
     {
@@ -29,7 +30,10 @@ public class UpdateNewsPostRequestHandler : IRequestHandler<UpdateNewsPostReques
 
         _ = entity
         ?? throw new NotFoundException(_t["Entity {0} Not Found.", request.Id]);
-
+        if (string.IsNullOrEmpty(entity.Author))
+        {
+            entity.Author = $"{_currentUser.Name}";
+        }
         entity.Update(request.Title, request.Author, request.Body);
 
         //List<string> imageList = new List<string>();

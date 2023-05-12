@@ -65,6 +65,7 @@ internal class ExceptionMiddleware : IMiddleware
                 foreach (var error in fluentException.Errors)
                 {
                     errorResult.Messages.Add(error.ErrorMessage);
+                    
                 }
             }
 
