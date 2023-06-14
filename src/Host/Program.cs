@@ -49,7 +49,7 @@ try
     
     app.Run();
 }
-catch (Exception ex) when (!ex.GetType().Name.Equals("StopTheHostException", StringComparison.Ordinal))
+catch (Exception ex) when (!ex.GetType().Name.Equals("HostAbortedException", StringComparison.Ordinal))
 {
     StaticLogger.EnsureInitialized();
     Log.Fatal(ex, "Unhandled exception");
