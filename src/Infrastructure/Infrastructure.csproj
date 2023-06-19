@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
         <RootNamespace>FSH.WebApi.Infrastructure</RootNamespace>
@@ -38,7 +38,7 @@
         </PackageReference>
         <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="7.0.5" />
         <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="7.0.5" />
-        <PackageReference Include="Microsoft.Identity.Web" Version="2.9.0" />
+        <PackageReference Include="Microsoft.Identity.Web" Version="2.12.4" />
         <PackageReference Include="MimeKit" Version="4.0.0" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.3" />
         <PackageReference Include="NSwag.AspNetCore" Version="13.18.2" />
