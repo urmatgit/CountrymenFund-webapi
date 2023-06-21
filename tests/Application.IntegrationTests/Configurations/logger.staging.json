@@ -1,0 +1,7 @@
+{
+  "LoggerSettings": {
+    "AppName": "FSH.WebApi",
+    "WriteToFile": true,
+    "StructuredConsoleLogging": true
+  }
+}

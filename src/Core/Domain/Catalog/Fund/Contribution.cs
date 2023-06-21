@@ -26,5 +26,19 @@ public class Contribution: AuditableEntity,IAggregateRoot
         if (description is not null && Description?.Equals(description) is not true) Description = description;
         return this;
     }
-         
+    public Contribution()
+    {
+        
+    }
+    public Contribution (decimal summa, Months month, DateTime? date, DefaultIdType nativeId, DefaultIdType yearId, string? description)
+    {
+        if (!Summa.Equals(summa)) Summa = summa;
+        if (!Month.Equals(month)) Month = month;
+        if (!Date.Equals(date)) Date = date.Value.ToUniversalTime();
+        if (!NativeId.Equals(nativeId)) NativeId = nativeId;
+        if (!YearId.Equals(yearId)) YearId = yearId;
+        if (description is not null && Description?.Equals(description) is not true) Description = description;
+        
+    }
+
 }

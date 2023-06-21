@@ -11,6 +11,10 @@ public class RuralGov : AuditableEntity, IAggregateRoot
     public string? Description { get; private set; }
     public string? Coordinate { get; set; }
     public Guid? DistrictId { get; private set; }
+    public RuralGov()
+    {
+
+    }
     public RuralGov(string name, string? description)
     {
         Name = name;

@@ -1,5 +1,6 @@
 ﻿using FSH.WebApi.Application.Catalog.Contributions;
 using FSH.WebApi.Application.Catalog.Natives;
+using FSH.WebApi.Application.Catalog.RuralGovs;
 using MediatR;
 
 namespace FSH.WebApi.Host.Controllers.Catalog;
@@ -61,6 +62,14 @@ public class ContributionsController: VersionedApiController
     {
         var result = await Mediator.Send(filter);
         return File(result, "application/octet-stream", "NativeExports");
+    }
+
+    [HttpPost("import")]
+    [MustHavePermission(FSHAction.Import, FSHResource.Contributions)]
+    [OpenApiOperation("Import a datas.", "")]
+    public async Task<ActionResult<int>> ImportAsync(ImportRuralGovReques request)
+    {
+        return Ok(await Mediator.Send(request));
     }
 
 }

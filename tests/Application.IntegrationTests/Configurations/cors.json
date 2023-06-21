@@ -1,0 +1,8 @@
+{
+  "CorsSettings": {
+    "Angular": "http://localhost:4200",
+    "Blazor": "http://localhost:5000;http://193.124.33.204:8081",
+    //"Blazor": "https://localhost:44331;https://www.mydomain.my",
+    "React": "http://localhost:3000"
+  }
+}
