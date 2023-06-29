@@ -67,7 +67,7 @@ public class ContributionsController: VersionedApiController
     [HttpPost("import")]
     [MustHavePermission(FSHAction.Import, FSHResource.Contributions)]
     [OpenApiOperation("Import a datas.", "")]
-    public async Task<ActionResult<int>> ImportAsync(ImportRuralGovReques request)
+    public async Task<ActionResult<int>> ImportAsync(ImportContributionRequest request)
     {
         return Ok(await Mediator.Send(request));
     }

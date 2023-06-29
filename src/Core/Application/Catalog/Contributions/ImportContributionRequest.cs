@@ -2,6 +2,7 @@
 using FSH.WebApi.Application.Catalog.RuralGovs;
 using FSH.WebApi.Application.Catalog.Years;
 using FSH.WebApi.Application.Common.DataIO;
+using FSH.WebApi.Application.Common.Persistence;
 using FSH.WebApi.Shared.Enums;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,21 @@ namespace FSH.WebApi.Application.Catalog.Contributions;
 public class ImportContributionRequest: ImportRequest<int>
 {
     public DefaultIdType RuralGovId { get; set; }
+    public Guid Year { get; set; }=default(Guid);
+         
     
 }
+//public class ImportContributionRequestValidator: CustomValidator<ImportContributionRequest>
+//{
+//    public ImportContributionRequestValidator(IReadRepository<Year> readRepository, IStringLocalizer<CreateYearRequestValidator> T)
+//    {
+//        RuleFor(x => x.Year)
+//        .NotEmpty()
+//        .InclusiveBetween(2000, 2100)
+//        .MustAsync(async (year, ct) => await readRepository.GetBySpecAsync(new YearbyYearSpec(year), ct) is not null)
+//        .WithMessage((_, year) => T["Year {0} already exists.", year]);
+//    }
+//}
 public class ImportContributionRequestHandler : IRequestHandler<ImportContributionRequest, int>
 {
 
@@ -44,10 +58,12 @@ public class ImportContributionRequestHandler : IRequestHandler<ImportContributi
     {
         return (Months)Enum.Parse(typeof(Months), name);
     }
-    private async Task<Contribution> CreateContribution(Guid nativeId,int? year, Months month, decimal summa)
+    private async Task<Contribution> CreateContribution(Guid nativeId,Guid year, Months month, decimal summa)
     {
-        DateTime addDate = DateTime.Parse($"25 {month} {year ?? DateTime.Now.Year}");
-        var yearID = await GetYearId(year);
+        var yearID = await _mediator.Send(new GetYearRequest(year));
+
+        DateTime addDate = DateTime.Parse($"25 {month} {yearID.year}");
+        
         return new Contribution(summa, month, addDate, nativeId, yearID.Id, "Import From Excel");
     }
     private decimal? GetPropertyValue(ImportContributionDto obj, string name)
@@ -98,7 +114,7 @@ public class ImportContributionRequestHandler : IRequestHandler<ImportContributi
                     {
                         decimal summ = GetPropertyValue(item, ((Months)indexMonth).ToString())?? 0m;
                         if (summ == 0) continue;
-                        var contr = await CreateContribution(existsNative.Id, DateTime.Now.Year, (Months)indexMonth,summ);
+                        var contr = await CreateContribution(existsNative.Id, request.Year  , (Months)indexMonth,summ);
                         var finded = await _repository.GetBySpecAsync(new FindContributionByParamSpec(contr), cancellationToken);
                         if (finded is null)
                         {
