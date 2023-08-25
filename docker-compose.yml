@@ -1,4 +1,11 @@
 services:
+  nginx:
+    build:
+      context: './nginx'
+      dockerfile: Dockerfile
+    ports:
+      80:80
+    restart: unless-stopped
   api:
     build:
       context: .
