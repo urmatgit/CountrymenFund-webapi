@@ -2,7 +2,7 @@ version: '3.8'
 services:
   nginx:
     build:
-      context: './nginx'
+      context: '/etc/nginx'
       dockerfile: Dockerfile
     ports:
       - "80:80"
