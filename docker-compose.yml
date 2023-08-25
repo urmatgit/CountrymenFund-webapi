@@ -3,7 +3,6 @@ services:
   nginx:
     build:
       context: '/etc/nginx'
-      dockerfile: Dockerfile
     ports:
       - "80:80"
       - "443:443"
