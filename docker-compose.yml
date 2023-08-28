@@ -1,9 +1,9 @@
-version: '3.8'
+version: '3.9'
 services:
   nginx:
-    image: nginx:stable-alpine
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    build: 
+      context: './nginx'
+      dockerfile: Dockerfile
     ports:
       - 80:80
     restart: unless-stopped
