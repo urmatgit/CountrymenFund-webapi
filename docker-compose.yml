@@ -1,10 +1,23 @@
 version: '3.8'
 services:
   nginx:
-    build:
-      context: '/etc/nginx'
+    image: nginx:stable-alpine
+    volumes:
+      ./nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - "80:80"
-      - "443:443"
     restart: unless-stopped
- 
+    depends_on:
+      - api
+    networks:
+      - nginx-networks
+  api:
+    build: 
+      context: './dotnet'  
+      dockerfile: Dockerfile
+    expose:
+      - 5050
+    restart : unless-stopped
+networks:
+  nginx-networks: 
+    driver: bridge 
