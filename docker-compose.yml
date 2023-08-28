@@ -13,7 +13,6 @@ services:
       - nginx-networks
   api:
     build: 
-      context: './dotnet'  
       dockerfile: Dockerfile
     expose:
       - 5050
