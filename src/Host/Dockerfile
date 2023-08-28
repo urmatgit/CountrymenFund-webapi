@@ -2,9 +2,10 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
-EXPOSE 5000
-EXPOSE 443
-ENV ASPNETCORE_URLS=http://+:5000
+ENV ASPNETCORE_URLS=https://+:5050;http://+:5060
+EXPOSE 5050
+EXPOSE 5060
+
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["src/Host/Host.csproj", "src/Host/"]
@@ -19,7 +20,7 @@ COPY ["src/Migrators/Migrators.MSSQL/Migrators.MSSQL.csproj", "src/Migrators/Mig
 COPY ["src/Migrators/Migrators.SqLite/Migrators.SqLite.csproj", "src/Migrators/Migrators.SqLite/"]
 RUN dotnet restore "src/Host/Host.csproj"
 COPY . .
-WORKDIR "/src/src/Host"
+WORKDIR "/src/Host"
 RUN dotnet build "Host.csproj" -c Release -o /app/build
 
 FROM build AS publish
