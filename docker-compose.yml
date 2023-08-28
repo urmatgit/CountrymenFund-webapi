@@ -3,7 +3,7 @@ services:
   nginx:
     build: 
       context: './nginx'
-      dockerfile: Dokerfile
+      dockerfile: Dockerfile
     ports:
       -80:80
     restart: unless-stopped
