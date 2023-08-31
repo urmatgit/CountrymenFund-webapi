@@ -42,7 +42,7 @@ public class RuralGovSeed : ICustomSeeder
 
             if (ruralGovs != null)
             {
-                foreach (var rutalgov in ruralGovs)
+                foreach (var rutalgov in ruralGovs.Where(r=>!string.IsNullOrEmpty(r.Name)))
                 {
                     await _db.RuralGovs.AddAsync(rutalgov, cancellationToken);
                 }
