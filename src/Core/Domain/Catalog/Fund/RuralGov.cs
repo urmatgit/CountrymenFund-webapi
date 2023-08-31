@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace FSH.WebApi.Domain.Catalog.Fund;
 public class RuralGov : AuditableEntity, IAggregateRoot
 {
-    public string Name { get; private set; }
-    public string? Description { get; private set; }
+    public string Name { get;  set; }
+    public string? Description { get;  set; }
     public string? Coordinate { get; set; }
-    public Guid? DistrictId { get; private set; }
+    public Guid? DistrictId { get;  set; }
     public RuralGov()
     {
 
