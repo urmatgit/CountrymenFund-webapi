@@ -14,7 +14,9 @@ public class ApplicationDbRepository<T> : RepositoryBase<T>, IReadRepository<T>,
     public ApplicationDbRepository(ApplicationDbContext dbContext)
         : base(dbContext)
     {
+        
     }
+
 
     // We override the default behavior when mapping to a dto.
     // We're using Mapster's ProjectToType here to immediately map the result from the database.

@@ -4,6 +4,10 @@
     "DBProvider": "postgresql",
     // "ConnectionString": "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=fullStackHeroDb;Integrated Security=True;MultipleActiveResultSets=True",
     //"ConnectionString":"Data Source=SQL8002.site4now.net;Initial Catalog=db_a95039_karakulja1;User Id=db_a95039_karakulja1_admin;Password=Urmatbek82
+<<<<<<< Updated upstream
     "ConnectionString": "Host=localhost;Database=fullStackHeroDb;Username=admin;Password=urmat82;Pooling=true;"
+=======
+    "ConnectionString": "Host=localhost;Database=fullStackHeroDb;Username=postgres;Password=urmat82;Pooling=true;"
+>>>>>>> Stashed changes
   }
 }

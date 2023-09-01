@@ -34,7 +34,11 @@ public class NativeSeed: ICustomSeeder
             var ruralGov = await _ruralGovRepo.GetBySpecAsync(new RuralGovByNameSpec("Кара-Кулжа"), cancellationToken);
             if (ruralGov != null)
             {
+<<<<<<< Updated upstream
                 var native = new Native("Урмат", "Эркимбаев", "", new DateTime(1982, 9, 2).ToUniversalTime(),"1 май",  "this is for test",10, ruralGov.Id,"");
+=======
+                var native = new Native("Урмат", "Эркимбаев", "", new  DateTime(1982, 9, 2).ToUniversalTime(),"1 май",  "this is for test",10, ruralGov.Id,"");
+>>>>>>> Stashed changes
                 _db.Natives.Add(native);
                 await _db.SaveChangesAsync(cancellationToken);
                 _logger.LogInformation("Seeded native");

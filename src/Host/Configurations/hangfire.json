@@ -20,10 +20,16 @@
       "WorkerCount": 5
     },
     "Storage": {
+<<<<<<< Updated upstream
 
       "StorageProvider": "postgresql",
       "ConnectionString": "Host=localhost;Database=fullStackHeroDb;Username=admin;Password=urmat82;Pooling=true;",
       //"StorageProvider": "mssql",
+=======
+      //"StorageProvider": "mssql",
+      "StorageProvider": "postgresql",
+      "ConnectionString": "Host=localhost;Database=fullStackHeroDb;Username=postgres;Password=urmat82;Pooling=true;",
+>>>>>>> Stashed changes
       //"ConnectionString": "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=fullStackHeroDb;Integrated Security=True;MultipleActiveResultSets=True",
       "Options": {
         "CommandBatchMaxTimeout": "00:05:00",
