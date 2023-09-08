@@ -16,9 +16,9 @@ services:
     build: 
       dockerfile: Dockerfile
     expose:
-      - 5050
-      - 5060
+      - "80:5050"
     depends_on:
+      - nginx
       - postgres
     environment:
       - DatabaseSettings__ConnectionString=Server=postgres;Port=5433;Database=fshdb;User Id=posgresqladmin;Password=posgresqladmin
@@ -34,11 +34,12 @@ services:
     networks:
       - nginx-networks
     environment:
-      - POSTGRES_USER=posgresqladmin
-      - POSTGRES_PASSWORD=posgresqladmin
-      - PGPORT=5433
+       POSTGRES_USER: posgresqladmin
+       POSTGRES_PASSWORD: posgresqladmin
+       POSTGRES_DB: fshdb
+       PGPORT: 5433
     ports:
-      - 5433:5433
+      - "5433:5433"
     volumes:
       - postgres-data:/data/db
     healthcheck:
