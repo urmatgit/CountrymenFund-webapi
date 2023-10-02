@@ -22,8 +22,8 @@ services:
     volumes:
       - ~/.aspnet/https:/https:ro
     ports:
-      - 5100:5100
-      - 5010:5010
+      - 443:5100
+      - 80:5010
     depends_on:
       - postgres
     restart: on-failure
