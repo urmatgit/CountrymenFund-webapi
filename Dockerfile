@@ -20,7 +20,7 @@ COPY ["src/Migrators/Migrators.MSSQL/Migrators.MSSQL.csproj", "src/Migrators/Mig
 COPY ["src/Migrators/Migrators.SqLite/Migrators.SqLite.csproj", "src/Migrators/Migrators.SqLite/"]
 RUN dotnet restore "src/Host/Host.csproj"
 COPY . .
-WORKDIR "/src/Host"
+WORKDIR "/src/src/Host"
 RUN dotnet build "Host.csproj" -c Release -o /app/build
 
 FROM build AS publish
