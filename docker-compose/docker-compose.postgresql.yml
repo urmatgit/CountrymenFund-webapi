@@ -5,7 +5,7 @@ services:
     #image: iammukeshm/dotnet-webapi:latest
     container_name: dotnet-webapi
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile
     networks:
       - fullstackhero
