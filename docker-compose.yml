@@ -40,11 +40,11 @@ services:
       - 5433:5433
     volumes:
       - postgres-data:/data/db
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    # healthcheck:
+    #   test: ["CMD-SHELL", "pg_isready -U admin"]
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 5
   # elk:
   #     container_name:  elasticsearch-kibana
   #     image: sebp/elk:oss-8.5.3
