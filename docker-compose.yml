@@ -29,7 +29,7 @@ services:
     restart: on-failure
   postgres:
     container_name: postgres
-    image: postgres:15-alpine
+    image: postgres:latest
     networks:
       - fullstackhero
     environment:
