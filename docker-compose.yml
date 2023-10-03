@@ -62,4 +62,4 @@ volumes:
   # sebp-elk-data:
 networks:
   fullstackhero:
-    name:  fullstackhero
+    driver:bridge
