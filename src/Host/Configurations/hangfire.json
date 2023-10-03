@@ -23,7 +23,7 @@
 
       "StorageProvider": "postgresql",
       //"ConnectionString": "Host=localhost;Database=fshdb;Username=posgresqladmin;Password=posgresqladmin;Pooling=true;",
-      "ConnectionString": "Server=postgres;Database=fshdb;Port=5433;Username=posgresqladmin;Password=posgresqladmin;",
+      "ConnectionString": "Server=postgres;Database=fshdb;Port=5432;Username=posgresqladmin;Password=posgresqladmin;",
 
       //"StorageProvider": "mssql",
       //"ConnectionString": "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=fullStackHeroDb;Integrated Security=True;MultipleActiveResultSets=True",
