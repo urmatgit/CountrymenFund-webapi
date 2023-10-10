@@ -22,7 +22,7 @@ internal class DatabaseInitializer : IDatabaseInitializer
 
     public async Task InitializeDatabasesAsync(CancellationToken cancellationToken)
     {
-      //  await InitializeTenantDbAsync(cancellationToken);
+        await InitializeTenantDbAsync(cancellationToken);
 
         foreach (var tenant in await _tenantDbContext.TenantInfo.ToListAsync(cancellationToken))
         {

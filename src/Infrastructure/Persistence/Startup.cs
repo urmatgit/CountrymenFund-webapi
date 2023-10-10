@@ -20,14 +20,7 @@ internal static class Startup
 
     internal static IServiceCollection AddPersistence(this IServiceCollection services)
     {
-        services.AddOptions<DatabaseSettings>()
-            .BindConfiguration(nameof(DatabaseSettings))
-            .PostConfigure(databaseSettings =>
-            {
-                _logger.Information("Current DB Provider: {dbProvider}", databaseSettings.DBProvider);
-            })
-            .ValidateDataAnnotations()
-            .ValidateOnStart();
+      
 
         return services
             .AddDbContext<ApplicationDbContext>((p, m) =>

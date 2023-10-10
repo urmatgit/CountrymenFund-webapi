@@ -8,13 +8,23 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
+using Serilog;
 
 namespace FSH.WebApi.Infrastructure.Multitenancy;
 
 internal static class Startup
 {
+    private static readonly ILogger _logger = Log.ForContext(typeof(Startup));
     internal static IServiceCollection AddMultitenancy(this IServiceCollection services)
     {
+        services.AddOptions<DatabaseSettings>()
+          .BindConfiguration(nameof(DatabaseSettings))
+          .PostConfigure(databaseSettings =>
+          {
+              _logger.Information("Current DB Provider: {dbProvider}", databaseSettings.DBProvider);
+          })
+          .ValidateDataAnnotations()
+          .ValidateOnStart();
         return services
             .AddDbContext<TenantDbContext>((p, m) =>
             {
