@@ -39,10 +39,10 @@ try
     //    app.UseHttpsRedirection();
     //}
     await app.Services.InitializeDatabasesAsync();
-    app.UseForwardedHeaders(new ForwardedHeadersOptions
-    {
-        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-    });
+    //app.UseForwardedHeaders(new ForwardedHeadersOptions
+    //{
+    //    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+    //});
     app.UseInfrastructure(builder.Configuration);
     
     app.MapEndpoints();
