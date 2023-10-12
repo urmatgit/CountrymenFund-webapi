@@ -43,16 +43,15 @@ services:
       - fullstackhero
     environment:
      # - ASPNETCORE_ENVIRONMENT=docker
-      - ASPNETCORE_URLS=http://+:80;http://+:443
-      - ASPNETCORE_URLS=http://+:5010;https://+:5011
+      - ASPNETCORE_URLS=http://+:5002;https://+:5003
       - ASPNETCORE_Kestrel__Certificates__Default__Password=Urmatbek82
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
       
     volumes:
       - ~/.aspnet/https:/https:ro
     ports:
-      - "80:80"
-      - "443:443"
+      - "80:5002"
+      - "443:5003"
     depends_on:
       - dotnet-webapi
     restart: on-failure
