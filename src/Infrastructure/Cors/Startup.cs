@@ -25,8 +25,8 @@ internal static class Startup
             opt.AddPolicy(CorsPolicy, policy =>
                 policy.AllowAnyHeader()
                     .AllowAnyMethod()
-                    .AllowCredentials()
-                    ));
+                    .SetIsOriginAllowed(_=>true)
+                    .AllowCredentials()));
                     //.WithOrigins(origins.ToArray()))) ;
     }
 
