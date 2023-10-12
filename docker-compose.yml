@@ -17,7 +17,7 @@ services:
       - fullstackhero
     environment:
      # - ASPNETCORE_ENVIRONMENT=docker
-      - ASPNETCORE_URLS=http://+:5010;https://+:5011
+      - ASPNETCORE_URLS=http://+:8080;https://+:8081
       - ASPNETCORE_Kestrel__Certificates__Default__Password=Urmatbek82
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
       - DatabaseSettings__ConnectionString=Server=postgres;Port=5432;Database=fshdb;User Id=postgres;Password=postgres; IntegratedSecurity=true; Pooling=true;
@@ -27,8 +27,8 @@ services:
     volumes:
       - ~/.aspnet/https:/https:ro
     ports:
-      - "8080:5010"
-      - "8081:5011"
+      - "8080:8080"
+      - "8081:8081"
     depends_on:
       - postgres
     restart: on-failure
@@ -43,15 +43,15 @@ services:
       - fullstackhero
     environment:
      # - ASPNETCORE_ENVIRONMENT=docker
-      - ASPNETCORE_URLS=http://+:5002;https://+:5003
+      - ASPNETCORE_URLS=http://+:80;https://+:443
       - ASPNETCORE_Kestrel__Certificates__Default__Password=Urmatbek82
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
       
     volumes:
       - ~/.aspnet/https:/https:ro
     ports:
-      - "80:5002"
-      - "443:5003"
+      - "80:80"
+      - "443:443"
     depends_on:
       - dotnet-webapi
     restart: on-failure
