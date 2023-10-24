@@ -2,7 +2,7 @@ version: '3.8'
 name: fullstackhero
 volumes:
   postgres-data:
-    external:true
+   external:true
   # sebp-elk-data:
 networks:
   fullstackhero:
