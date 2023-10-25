@@ -2,14 +2,15 @@ version: '3.8'
 name: fullstackhero
 volumes:
   postgres-data:
+  pgadmin-data:
   # sebp-elk-data:
 networks:
   fullstackhero:
     driver: bridge
 services:
-  dotnet-webapi:
+  webapi:
     #image: iammukeshm/dotnet-webapi:latest
-    container_name: dotnet-webapi
+    container_name: webapi
     build:
       context: .
       dockerfile: Dockerfile
@@ -33,9 +34,9 @@ services:
       - postgres
     restart: on-failure
     #----------------------
-  dotnet-wasm:
+  wasm:
     #image: iammukeshm/dotnet-webapi:latest
-    container_name: dotnet-wasm
+    container_name: wasm
     build:
       context: ../CountrymenFund-wasm/.
       dockerfile: Dockerfile
@@ -53,7 +54,7 @@ services:
       - "80:80"
       - "443:443"
     depends_on:
-      - dotnet-webapi
+      - webapi
     restart: on-failure
     #-----------
   postgres:
@@ -66,11 +67,31 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=fshdb
       - PGPORT=5432
+      - PGDATA=/data/db
     ports:
       - "5433:5432"
     restart: always
     volumes:
       - postgres-data:/data/db
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:7.2
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "postgres@habr.com"
+      PGADMIN_DEFAULT_PASSWORD: "postgres"
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    ports:
+      - "8082:80"
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+    networks:
+      - fullstackhero
     # healthcheck:
     #   test: ["CMD-SHELL", "pg_isready -U admin"]
     #   interval: 10s
