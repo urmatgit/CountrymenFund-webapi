@@ -27,7 +27,7 @@ services:
       - HangfireSettings__Storage__StorageProvider=postgresql
     volumes:
       - ~/.aspnet/https:/https:ro
-      - /files:/Files
+      - /files:/app/Files
     ports:
       - "8080:8080"
       - "8081:8081"
@@ -76,7 +76,7 @@ services:
       - postgres-data:/data/db
   pgadmin:
     container_name: pgadmin
-    image: dpage/pgadmin4:7.2
+    image: dpage/pgadmin4:7.8
     environment:
       PGADMIN_DEFAULT_EMAIL: "postgres@habr.com"
       PGADMIN_DEFAULT_PASSWORD: "postgres"
