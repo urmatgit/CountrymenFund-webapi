@@ -11,3 +11,8 @@ public class RuralGovByNameSpec:Specification<RuralGov>, ISingleResultSpecificat
     public RuralGovByNameSpec(string name)
     => Query.Where(r => r.Name == name);
 }
+public class RuralGovAllSpec : Specification<RuralGov,RuralGovDto>
+{
+    public RuralGovAllSpec()
+    => Query.Where(r => r.DeletedOn ==null);
+}

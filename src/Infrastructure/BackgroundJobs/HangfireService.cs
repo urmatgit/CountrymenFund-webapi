@@ -1,12 +1,33 @@
 using System.Linq.Expressions;
+using System.Text.Json;
 using FSH.WebApi.Application.Common.Interfaces;
+using FSH.WebApi.Infrastructure.Multitenancy;
 using Hangfire;
+using MediatR;
 
 namespace FSH.WebApi.Infrastructure.BackgroundJobs;
 
 public class HangfireService : IJobService
 {
-    public bool Delete(string jobId) =>
+    private readonly FSHTenantInfo _currentTenant;
+    private readonly ICurrentUser _currentUser;
+
+    public HangfireService(FSHTenantInfo currentTenant, ICurrentUser currentUser) =>
+        (_currentTenant, _currentUser) = (currentTenant, currentUser);
+
+    public string Enqueue(IRequest request) =>
+        BackgroundJob.Enqueue<HangfireMediatorBridge>(bridge => bridge.Send(GetDisplayName(request), request, default));
+    public void AddOrUpdate(string recurringJobId, IRequest request, string cronExpression, TimeZoneInfo? timeZone = null, string queue = "default") =>
+        RecurringJob.AddOrUpdate<HangfireMediatorBridge>(
+            recurringJobId,
+            bridge => bridge.Send(GetDisplayName(request), _currentTenant.Id, _currentUser.GetUserId().ToString(), request, default),
+            cronExpression,
+            timeZone,
+            queue);
+
+    private static string GetDisplayName(IRequest request) => $"{request.GetType().Name} {JsonSerializer.Serialize(request, request.GetType())}";
+
+    public bool Delete(string jobId) => 
         BackgroundJob.Delete(jobId);
 
     public bool Delete(string jobId, string fromState) =>
@@ -53,4 +74,6 @@ public class HangfireService : IJobService
 
     public string Schedule<T>(Expression<Func<T, Task>> methodCall, DateTimeOffset enqueueAt) =>
         BackgroundJob.Schedule(methodCall, enqueueAt);
+
+    public void Recurring<T>(Expression<Action<T>> methodCall, string cron) => RecurringJob.AddOrUpdate(methodCall, cron);
 }

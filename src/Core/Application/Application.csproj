@@ -11,6 +11,9 @@
 
 
         <PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="6.1.0" />
+
+
+        <PackageReference Include="Hangfire.Core" Version="1.7.34" />
         <PackageReference Include="Mapster" Version="7.3.0" />
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
         <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="7.0.0" />

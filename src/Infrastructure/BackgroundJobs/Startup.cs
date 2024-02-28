@@ -9,6 +9,7 @@ using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using Serilog;
 
 namespace FSH.WebApi.Infrastructure.BackgroundJobs;
@@ -36,7 +37,9 @@ internal static class Startup
             .UseDatabase(storageSettings.StorageProvider, storageSettings.ConnectionString, config)
             .UseFilter(new FSHJobFilter(provider))
             .UseFilter(new LogJobFilter())
-            .UseConsole());
+            .UseConsole()
+            .UseSerializerSettings(new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All })); // necessary for MediatorHangfireBridge
+
 
         return services;
     }

@@ -19,6 +19,10 @@ public class FSHJobActivator : JobActivator
     public override JobActivatorScope BeginScope(PerformContext context) =>
         new Scope(context, _scopeFactory.CreateScope());
 
+    public override object ActivateJob(Type jobType)
+    {
+        return base.ActivateJob(jobType);
+    }
     private class Scope : JobActivatorScope, IServiceProvider
     {
         private readonly PerformContext _context;
@@ -34,18 +38,29 @@ public class FSHJobActivator : JobActivator
 
         private void ReceiveParameters()
         {
-            var tenantInfo = _context.GetJobParameter<FSHTenantInfo>(MultitenancyConstants.TenantIdName);
-            if (tenantInfo is not null)
+            //var tenantInfo = _context.GetJobParameter<FSHTenantInfo>(MultitenancyConstants.TenantIdName);
+            //if (tenantInfo is not null)
+            string? tenantId = _context.GetJobParameter<string>(MultitenancyConstants.TenantIdName);
+            if (!string.IsNullOrWhiteSpace(tenantId))
             {
-                _scope.ServiceProvider.GetRequiredService<IMultiTenantContextAccessor>()
-                    .MultiTenantContext = new MultiTenantContext<FSHTenantInfo>
-                    {
-                        TenantInfo = tenantInfo
-                    };
+                //_scope.ServiceProvider.GetRequiredService<IMultiTenantContextAccessor>()
+                //    .MultiTenantContext = new MultiTenantContext<FSHTenantInfo>
+                //    {
+                //        TenantInfo = tenantInfo
+                //    };
+                var tenantInfo = _scope.ServiceProvider.GetRequiredService<TenantDbContext>()
+                    .TenantInfo.FirstOrDefault(t => t.Identifier == tenantId);
+                if (tenantInfo is not null)
+                {
+                    _scope.ServiceProvider.GetRequiredService<IMultiTenantContextAccessor>()
+                        .MultiTenantContext =
+                            new MultiTenantContext<FSHTenantInfo> { TenantInfo = tenantInfo };
+                }
             }
 
             string userId = _context.GetJobParameter<string>(QueryStringKeys.UserId);
-            if (!string.IsNullOrEmpty(userId))
+            //  if (!string.IsNullOrEmpty(userId))
+            if (!string.IsNullOrWhiteSpace(userId))
             {
                 _scope.ServiceProvider.GetRequiredService<ICurrentUserInitializer>()
                     .SetCurrentUserId(userId);

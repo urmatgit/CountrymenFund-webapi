@@ -1,3 +1,4 @@
+using System;
 using System.Linq.Expressions;
 
 namespace FSH.WebApi.Application.Common.Interfaces;
@@ -35,4 +36,7 @@ public interface IJobService : ITransientService
     bool Requeue(string jobId);
 
     bool Requeue(string jobId, string fromState);
+    void Recurring<T>(Expression<Action<T>> methodCall,string cron);
+    string Enqueue(IRequest request);
+    void AddOrUpdate(string recurringJobId, IRequest request, string cronExpression, TimeZoneInfo? timeZone = null, string queue = "default");
 }
