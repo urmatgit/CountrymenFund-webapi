@@ -80,7 +80,7 @@ public class ContributionRandomGeneratorJob : IRequestHandler<GenerateRandomCont
         if (natives == null || natives.Count == 0) { return Unit.Value; }
         var nativeIndex = rnd.Next(natives.Count);
         var summaRnd = rnd.Next(250, 1000);
-        var month = rnd.Next(1, 12);
+        var month = rnd.Next(1, 13);
 
         await _mediator.Send(
             new CreateContributionRequest
