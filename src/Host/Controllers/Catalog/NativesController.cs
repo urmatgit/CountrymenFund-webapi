@@ -1,4 +1,5 @@
-﻿using FSH.WebApi.Application.Catalog.Natives;
+﻿using FSH.WebApi.Application.Catalog.Brands;
+using FSH.WebApi.Application.Catalog.Natives;
 using FSH.WebApi.Application.Catalog.Natives;
 
 namespace FSH.WebApi.Host.Controllers.Catalog;
@@ -61,5 +62,17 @@ public class NativesController : VersionedApiController
     {
         var result = await Mediator.Send(filter);
         return File(result, "application/octet-stream", "NativeExports");
+    }
+
+    [HttpGet("generate/{nseed:int}")]
+    [MustHavePermission(FSHAction.Generate, FSHResource.Natives)]
+    [OpenApiOperation("Generate a number of random brands.", "")]
+    public Task<string> GenerateRandomAsync(int nseed)
+    {
+        var request = new GenereateRandomNativeRequest()
+        {
+            NSeed = nseed
+        };
+        return Mediator.Send(request);
     }
 }
