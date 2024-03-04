@@ -5,5 +5,5 @@ git pull origin
 cd /home/ubuntuuser/projects/CountrymenFund-webapi/
 git pull origin
 docker-compose down
-docker-compose up
+docker-compose up --build
 
