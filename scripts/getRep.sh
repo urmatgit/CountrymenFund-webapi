@@ -1,8 +1,8 @@
 #!/bin/bash
 echo "start get from git"
-cd ~/projects/CountymenFund-wasm/
+cd /home/ubuntuuser/projects/CountrymenFund-wasm/
 git pull origin
-cd ~/projects/CountrymenFund-webapi/
+cd /home/ubuntuuser/projects/CountrymenFund-webapi/
 git pull origin
 docker-compose down
 docker-compose up
