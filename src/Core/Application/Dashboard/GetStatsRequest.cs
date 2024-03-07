@@ -95,19 +95,19 @@ public class GetStatsRequestHandler : IRequestHandler<GetStatsRequest, StatsDto>
             var filterStartDate = new DateTime(selectedYear, month, 01).ToUniversalTime();
             var filterEndDate = new DateTime(selectedYear, month, DateTime.DaysInMonth(selectedYear, month), 23, 59, 59).ToUniversalTime(); // Monthly Based
 
-            var brandSpec = new AuditableEntitiesByCreatedOnBetweenSpec<Brand>(filterStartDate, filterEndDate);
+           // var brandSpec = new AuditableEntitiesByCreatedOnBetweenSpec<Brand>(filterStartDate, filterEndDate);
             var ruralGovSpec = new AuditableEntitiesByCreatedOnBetweenSpec<RuralGov>(filterStartDate, filterEndDate);
-            var productSpec = new AuditableEntitiesByCreatedOnBetweenSpec<Product>(filterStartDate, filterEndDate);
+            //var productSpec = new AuditableEntitiesByCreatedOnBetweenSpec<Product>(filterStartDate, filterEndDate);
             var nativeSpec = new AuditableEntitiesByCreatedOnBetweenSpec<Native>(filterStartDate, filterEndDate);
             var contributionSpec = new AuditableEntitiesByCreatedOnBetweenSpec<Contribution>(filterStartDate, filterEndDate);
-            var fscontributionSpec = new AuditableEntitiesByCreatedOnBetweenSpec<FSContribution>(filterStartDate, filterEndDate);
+           // var fscontributionSpec = new AuditableEntitiesByCreatedOnBetweenSpec<FSContribution>(filterStartDate, filterEndDate);
             //brandsFigure[i - 1] = await _brandRepo.CountAsync(brandSpec, cancellationToken);
             //productsFigure[i - 1] = await _productRepo.CountAsync(productSpec, cancellationToken);
             ruralGovsFigure[i - 1] = await _ruralGovRepo.CountAsync(ruralGovSpec, cancellationToken);
             
             nativeFigure[i - 1] = await _nativeRepo.CountAsync(nativeSpec, cancellationToken);
             contributionFigure[i - 1] = await _contributionRepo.CountAsync(contributionSpec, cancellationToken);
-            contributionSumFigure[i - 1] = (double)await GetContributesSumBitween(filterStartDate, filterEndDate, cancellationToken);
+          //  contributionSumFigure[i - 1] = (double)await GetContributesSumBitween(filterStartDate, filterEndDate, cancellationToken);
             fscontributionSumFigure[i - 1] = (double)await GetFSContributesSumBitween(filterStartDate, filterEndDate, cancellationToken);
             foreach (var gt in await GetGroupTotals(filterStartDate, filterEndDate, cancellationToken))
                 if (ruralGovsTotals.ContainsKey(gt.Name))
@@ -117,7 +117,7 @@ public class GetStatsRequestHandler : IRequestHandler<GetStatsRequest, StatsDto>
                 else
                 {
                     var totalList = new double[13];
-                    totalList[i-1]=(double)gt.Total;
+                    totalList[i - 1] = (double)gt.Total;
                     ruralGovsTotals.Add(gt.Name, totalList);
                 }
         }
@@ -127,8 +127,8 @@ public class GetStatsRequestHandler : IRequestHandler<GetStatsRequest, StatsDto>
         stats.DataEnterBarChart.Add(new ChartSeries { Name = _t["Rural goverments"], Data = ruralGovsFigure });
         stats.DataEnterBarChart.Add(new ChartSeries { Name = _t["Natives"], Data = nativeFigure });
         stats.DataEnterBarChart.Add(new ChartSeries { Name = _t["Contributions"], Data = contributionFigure });
-        stats.DataEnterSumBarChart.Add(new ChartSeries { Name = _t["Contribution summa"], Data = contributionSumFigure });
-        stats.DataEnterSumBarChart.Add(new ChartSeries { Name = _t["FinSupport Contribution summa"], Data = fscontributionSumFigure });
+       // stats.DataEnterSumBarChart.Add(new ChartSeries { Name = _t["Contribution summa"], Data = contributionSumFigure });
+        stats.DataEnterSumBarFinSupportChart.Add(new ChartSeries { Name = _t["FinSupport Contribution summa"], Data = fscontributionSumFigure });
         foreach (var key in ruralGovsTotals)
         {
             stats.DataEnterSumBarChart.Add(new ChartSeries
